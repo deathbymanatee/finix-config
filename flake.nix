@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    finix.url = "github:finix-community/finix?tag=finit-4.16";
+    finix.url = "github:finix-community/finix?ref=b7a33ff6b856c85fb13c7e9dc03fd41c824299ba";
   };
 
   outputs = inputs@{
