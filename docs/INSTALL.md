@@ -12,6 +12,14 @@ git clone https://codeberg.org/vitrial/finix-config <path>
 ```
 where `<path>` is your desired file directory name, can leave blank for the default repo name.
 
+If you want a basic graphical setup with a simple login manager, try this instead:
+
+```bash
+git clone -b graphical https://codeberg.org/vitrial/finix-config <path>
+```
+
+This will get the branch that includes `labwc` and `greetd`.
+
 Enter the directory you just cloned, and make the following edits to files inside of it:
 
 ### `flake.nix`
