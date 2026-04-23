@@ -28,9 +28,9 @@ Enter the directory you just cloned, and make the following edits to files insid
 
 ### `finix/configuration.nix`
 
-- Line 66: `networking.hostName = "finixos" -> networking.hostName = "<desired host name>"`
-- Line 90: `users.users.vitrial = { -> users.users.<desired username> = {`
-- Line 94: `password = "<hash of 'vitrial'>" -> password = "<hash of desired password>"`
+- Line 57: `networking.hostName = "finixos" -> networking.hostName = "<desired host name>"`
+- Line 63: `users.users.vitrial = { -> users.users.<desired username> = {`
+- Line 97: `password = "<hash of 'vitrial'>" -> password = "<hash of desired password>"`
     - `<hash of desired password>` can be generated with the command `mkpasswd -m sha-512 '<desired password>'`
     - NOTE: This is not really recommended for long term use but lets just get into the system first
 
@@ -38,7 +38,7 @@ NOTE: This config includes vim as the only editor. If you want nano, replace `vi
 
 ### `finix/hardware-configuration.nix`
 
-This is probably the most annoying one/easiest one. Copy over your `hardware-configuration.nix` found in `/mnt/etc/nixos/` and strip it down to only include the options in the version of the file from this repo.
+This is probably the most annoying one. Copy over your `hardware-configuration.nix` found in `/mnt/etc/nixos/` and strip it down to only include the options in the version of the file from this repo.
 
 Additionally, you likely need to add `hardware.firmware = [ pkgs.linux-firmware ]` or something similar to guarantee hardware is functioning.
 
