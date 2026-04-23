@@ -22,6 +22,8 @@ This will get the branch that includes `labwc` and `greetd`.
 
 Enter the directory you just cloned, and make the following edits to files inside of it:
 
+NOTE: Line numbers depend on which branch you cloned, if you don't see them where they are listed here, scroll down a bit in the file
+
 ### `flake.nix`
 
 - Line 21: `nixosConfigurations.finixos -> nixosConfigurations.<desired profile name>`
