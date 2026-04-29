@@ -42,6 +42,16 @@ NOTE: This config includes vim as the only editor. If you want nano, replace `vi
 
 This is probably the most annoying one. Copy over your `hardware-configuration.nix` found in `/mnt/etc/nixos/` and strip it down to only include the options in the version of the file from this repo.
 
+The Exception: If you're on QEMU, make sure to either add back or not delete the line at the top of the file:
+
+```nix
+imports = 
+  [ (modulePath + "/profiles/qemu-guest.nix")
+  ];
+```
+
+This is required for networking with `udev` and likely other things, and this profile is fully compatible with `finix` so better safe than sorry.
+
 Additionally, you likely need to add `hardware.firmware = [ pkgs.linux-firmware ]` or something similar to guarantee hardware is functioning.
 
 Lastly, if using `mdevd`, replace each `/dev/disk/by-uuid` with the corresponding `/dev/sdX#`.
