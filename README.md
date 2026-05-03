@@ -8,7 +8,7 @@ So far, I've been able to install finix using this configuration on the followin
 
 This config provides a few helper scripts to automate some routine maintenance, accessible using the following commands: 
 
--`rebuild`
+- `rebuild`
     - activates a full system rebuild
 - `maintenance`
     - collects garbage in nix store and deletes old generations
