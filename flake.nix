@@ -20,7 +20,7 @@
       };
     in
     {
-      nixosConfigurations.finixos = finix.lib.finixSystem {
+      nixosConfigurations.home-desktop = finix.lib.finixSystem {
         inherit (pkgs) lib;
 
         modules = with finix.nixosModules; [
@@ -28,7 +28,7 @@
             nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
           }
 
-          (./finix/configuration.nix)
+          (./finix/hosts/home-desktop/configuration.nix)
 
           nix-daemon
           openssh
@@ -39,8 +39,6 @@
           getty
           bash
           dhcpcd
-          elogind
-          udev
           lemurs
           flatpak
         ];
