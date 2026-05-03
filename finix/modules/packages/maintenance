@@ -1,0 +1,7 @@
+sudo nix-collect-garbage -d 
+sudo nix store verify --all
+sudo nix store repair --all
+cd ~/.config/finix/
+hostname=$HOSTNAME
+nix flake update
+sudo nixos-rebuild switch --flake .#$hostname --upgrade

@@ -1,17 +1,24 @@
-# Minimal Finix
-This is my minimal configuration for finix. It installs absolutely nothing but the things needed to work on and expand a finix configuration.
+# finix-config
 
-I am not promising you a perfect system that will work exactly how you want with services you want. I am promising you a system that boots and is self sufficient enough to get it where you want eventually.
+Personal flake-based configuration for [finix](https://github.com/finix-community/finix). Currently a hotbed for experimentation. The end goal is to try and replicate my current [nixos configuration](https://github.com/deathbymanatee/nixos-dotfiles). My current use cases consist of development work, gaming, and audio production. Since finix is currently in an experimental state, so too is this configuration. I will write more documentation when I'm able to, or when the nix code isn't enough to explain why I did certain things the way I did them. 
 
-# Notes
+So far, I've been able to install finix using this configuration on the following: 
 
-Make sure that the NixOS installation boots using UEFI, legacy booting was causing issues with `limine` not being detected. If you have a fix please let me know.
+- `qemu` (currently only non-graphical, as `qemu` or `finix` are missing required components for graphical sessions)
 
-I try not to inject any opinions into this configuration. The only choice I have made is between `mdevd` and `udev`. I chose `mdevd` simply because that is what the other members of the finix community suggested and use.
+This config provides a few helper scripts to automate some routine maintenance, accessible using the following commands: 
 
-Because of issues with `mdevd`, drives must be identified by their ID, eg `/dev/sda1`. This causes multidrive systems to be basically unusable. If you want to try this out, just replace `programs.mdevd.enable` with `programs.udev.enable` and add the `udev` module.
+-`rebuild`
+    - activates a full system rebuild
+- `maintenance`
+    - collects garbage in nix store and deletes old generations
+    - verifies and repairs store paths
+    - updates flake inputs
+    - rebuilds system
 
-Some users get errors from `efibootmgr` after running `nixos-install`. If the error code is 8, this can be ignored. It's caused by non-existant boot options trying to be added by `efibootmgr`, it fails to add them and returns an error, but existing boot entries are added without issue.
+# Credits
+
+This configuration was scaffolded from [vitrial's minimal config / install guide](https://codeberg.org/vitrial/finix-config/src/branch/main). Their repository contains an excellent guide for starting your own minimal finix config if you don't want to copy my stuff.
 
 # Requirements
 
@@ -21,6 +28,15 @@ Some users get errors from `efibootmgr` after running `nixos-install`. If the er
 # Installing
 
 [Installation Instructions](./docs/INSTALL.md)
+
+# TODOs
+
+- [x] install in qemu
+- [ ] install on desktop
+    - [ ] set up steam
+    - [ ] set up audio prod
+- [ ] convert laptop to finix
+- [ ] convert server to finix
 
 # Helpful links
 
