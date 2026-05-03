@@ -46,7 +46,12 @@
     dbus.enable = true;
     udev.enable = true;
     dhcpcd.enable = true;
-    flatpak.enable = true;
+
+    flatpak = {
+      enable = true;
+      extraGroups = [ ];
+    };
+
     cups.enable = true;
 
     lemurs = {
@@ -115,6 +120,7 @@
     steam.run
     protonup-qt
     librewolf
+    gpu-screen-recorder-gtk
 
     # audio
     pipewire
