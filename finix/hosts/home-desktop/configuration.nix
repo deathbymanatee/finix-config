@@ -48,6 +48,14 @@
     dhcpcd.enable = true;
     flatpak.enable = true;
     cups.enable = true;
+
+    lemurs = {
+      enable = true;
+      settings = {
+        wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
+      };
+    };
+
   };
 
   networking.hostName = "home-desktop"; # Define your hostname.
@@ -66,19 +74,12 @@
     sudo.enable = true;
     bash.enable = true;
 
-    lemurs = {
-      enable = true;
-      settings = {
-        wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
-      };
-    };
-
     # TODO: keep an eye on https://github.com/finix-community/finix/tree/modules/plasma
     plasma.enable = true;
   };
 
   # enable custom packages in modules/packages
-  packages.enable = true;
+  modules.packages.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";

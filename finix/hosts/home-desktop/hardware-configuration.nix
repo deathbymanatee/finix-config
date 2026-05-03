@@ -23,8 +23,6 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.supportedFilesystems.luks.enable = true;
-
   fileSystems."/" = {
     device = "/dev/mapper/crypted";
     fsType = "ext4";
