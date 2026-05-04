@@ -5,13 +5,13 @@
   ...
 }:
 let
-  cfg = config.programs.plasma;
+  cfg = config.modules.plasma;
 
   inherit (pkgs) kdePackages;
 
   sessionFile = pkgs.writeTextDir "share/wayland-sessions/plasma.desktop" ''
     [Desktop Entry]
-    Name=Plasma (Wayland)
+    Name=Plasma
     Comment=KDE Plasma Desktop
     Exec=${pkgs.dbus}/bin/dbus-run-session -- ${kdePackages.plasma-workspace}/bin/startplasma-wayland
     Type=Application
@@ -19,7 +19,7 @@ let
   '';
 in
 {
-  options.programs.plasma = {
+  options.modules.plasma = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -38,7 +38,7 @@ in
       qtwayland
       qtsvg
 
-      # compositor
+      #compositor
       kwin
 
       # core plasma
@@ -83,6 +83,7 @@ in
       plasma-integration
 
       drkonqi
+      pkgs.foot
     ];
 
     environment.pathsToLink = [
@@ -119,5 +120,8 @@ in
       pkgs.kdePackages.xdg-desktop-portal-kde
       pkgs.xdg-desktop-portal-gtk
     ];
+
+    services.elogind.enable = true;
+    services.udev.enable = true;
   };
 }

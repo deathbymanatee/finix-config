@@ -3,7 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    finix.url = "github:deathbymanatee/finix";
+    finix.url = "github:finix-community/finix";
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -22,6 +27,9 @@
     {
       nixosConfigurations.home-desktop = finix.lib.finixSystem {
         inherit (pkgs) lib;
+        specialArgs = {
+          modulesPath = toString nixpkgs + "/nixos/modules";
+        };
 
         modules = with finix.nixosModules; [
           {
@@ -41,12 +49,45 @@
           dhcpcd
           lemurs
           flatpak
-	  sway
+          sway
         ];
+      };
+
+      nixosConfigurations.virt-manager = finix.lib.finixSystem {
+        inherit (pkgs) lib;
 
         specialArgs = {
           modulesPath = toString nixpkgs + "/nixos/modules";
+          inherit inputs;
         };
+
+        modules = with finix.nixosModules; [
+          {
+            nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
+          }
+
+          (./finix/hosts/virt-manager/configuration.nix)
+
+          # (./noctalia.nix)
+
+          (./finix/modules)
+
+          # TODO modules/shared?
+          nix-daemon
+          openssh
+          sysklogd
+          limine
+          sudo
+          polkit
+          getty
+          bash
+          dhcpcd
+          lemurs
+          flatpak
+          sway
+          gvfs
+          udisks2
+        ];
       };
     };
 }

@@ -1,0 +1,122 @@
+{
+	"layer": "top",
+	"position": "top",
+    "reload_style_on_change": true,
+
+	"modules-left": [
+		"sway/workspaces",
+		"custom/right-arrow-dark"
+	],
+	"modules-center": [
+		"custom/left-arrow-dark",
+		"clock#1",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"clock#2",
+		"custom/right-arrow-dark",
+		"custom/right-arrow-light",
+		"clock#3",
+		"custom/right-arrow-dark"
+	],
+	"modules-right": [
+		"custom/left-arrow-dark",
+		"wireplumber",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"battery",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"network",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
+		"tray"
+	],
+
+	"custom/left-arrow-dark": {
+		//"format": "",
+		"format": "",
+		"tooltip": false
+	},
+	"custom/left-arrow-light": {
+		//"format": "",
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-dark": {
+		//"format": "",
+		"format": "",
+		"tooltip": false
+	},
+	"custom/right-arrow-light": {
+		//"format": "",
+		"format": "",
+		"tooltip": false
+	},
+
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"format": "{name}"
+	},
+	
+	"clock#1": {
+		"format": "{:%a}",
+        "justify": "right",
+        "tooltip-format": "{:%I:%M %p ~  %a. %d.%m }",
+        "timezones": [
+            "America/Chicago"
+        ]
+	},
+	"clock#2": {
+        "format": "{:%I:%M %p}",
+        "justify": "right",
+        "tooltip-format": "{:%I:%M %p ~  %a. %d.%m }",
+        "timezones": [
+            "America/Chicago"
+        ]
+    },
+    
+	"clock#3": {
+		"format": "{:%m/%d}",
+        "justify": "right",
+        "tooltip-format": "{:%I:%M %p ~  %a. %d.%m }",
+        "timezones": [
+            "America/Chicago"
+        ]
+	},
+
+    "wireplumber": {
+        "format": "vol: {volume}%",
+		"format-muted": "󰝟",
+		"format-icons": ["󰖀", "󰕾"],        
+        "max-volume": 100,
+        "scroll-step": 5,
+        "tooltip-format": "{icon} {volume}%"
+	},
+
+    "battery": {
+        "interval": 60,
+        "format": "bat: {capacity}% {icon}",
+        "format-icons":
+		{
+			"default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+			"charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
+		},
+        "tooltip-format": "{capacity}%"
+    },
+    
+    "network": {
+        "format": "",
+        "format-ethernet": "",
+        "format-wifi": "net: {signalStrength}% {icon}",
+        "format-disconnected": "net: no signal",
+        "format-icons": ["󰢿", "󰢼", "󰢽", "󰢾"],
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-ethernet": "{ifname}",
+        "tooltip-format-disconnected": "Disconnected"
+    },
+    
+	"tray": {
+		"icon-size": 20,
+		"spacing": 25
+	}
+}

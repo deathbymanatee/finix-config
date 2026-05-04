@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.services.cups;
+  cfg = config.modules.cups;
 
   format = pkgs.formats.keyValue {
     listsAsDuplicateKeys = true;
@@ -62,7 +62,7 @@ let
   '';
 in
 {
-  options.services.cups = {
+  options.modules.cups = {
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -168,7 +168,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    services.cups.settings = {
+    modules.cups.settings = {
       SetEnv.PATH = "${bindir}/lib/cups/filter:${bindir}/bin";
 
       User = lib.mkForce cfg.user;

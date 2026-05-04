@@ -1,0 +1,13 @@
+@define-color foreground #d4be98;
+@define-color red #ea6962;
+@define-color orange #e78a4e;
+@define-color yellow #d8a657;
+@define-color green #a9b665;
+@define-color cyan #89b482;
+@define-color blue #7daea3;
+@define-color purple #d3869b;
+@define-color magenta #928374;
+@define-color foreground-inactive #32302f;
+@define-color background-dark #181818;
+@define-color background-alt #282828;
+@define-color background-alpha rgba(27, 27, 27, 0.6);
