@@ -41,10 +41,10 @@
     };
 
     polkit.enable = true;
-    elogind.enable = true;
+    seatd.enable = true;
     sysklogd.enable = true;
     dbus.enable = true;
-    udev.enable = true;
+    mdevd.enable = true;
     dhcpcd.enable = true;
 
     flatpak = {
@@ -80,7 +80,9 @@
     bash.enable = true;
 
     # TODO: keep an eye on https://github.com/finix-community/finix/tree/modules/plasma
-    plasma.enable = true;
+    # plasma.enable = true;
+
+    sway.enable = true;
   };
 
   # enable custom packages in modules/packages
@@ -98,7 +100,12 @@
       "input"
       "audio"
       "video"
+      "network"
+      "tty"
+      config.services.seatd.group
     ];
+    password = "$6$bbod64ceqgIIkDw.$vL9X/wD8e5pqYhuCG8vY7MhjMPvnLdKfuL/fUmEBogjq3M7PsMLr13qIb/E5y1l36RaEZqJP40BqSw2rpihNk.";
+
   };
 
   # List packages installed in system profile. To search, run:
@@ -123,11 +130,15 @@
     gpu-screen-recorder-gtk
 
     # audio
-    pipewire
-    wireplumber
-    qpwgraph
-    reaper
-    winePackages.yabridge
+    # pipewire
+    # wireplumber
+    # qpwgraph
+    # reaper
+    # winePackages.yabridge
+
+    #lagniappe
+    fastfetch
+    btop-rocm
   ];
 
 }

@@ -18,27 +18,41 @@
     "usb_storage"
     "usbhid"
     "sd_mod"
+    "dm_mod"
+    "dm_crypt"
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  hardware.firmware = with pkgs; [ 
+    linux-firmware
+    ipw2200-firmware
+    rtl8192su-firmware
+    rt5677-firmware
+    rtl8761b-firmware
+    zd1211fw
+    alsa-firmware
+    sof-firmware
+    libreelec-dvb-firmware
+  ];
+
   boot.supportedFilesystems.luks.enable = true;
-  boot.initrd.supportedFilesystems.luks.enable = true;
+
+  fileSystems."crypted" = {
+    device = "/dev/nvme1n1p1";
+    fsType = "luks";
+    neededForBoot = true;
+    options = [ "--allow-discards" ];
+  };
 
   fileSystems."/" = {
     device = "/dev/mapper/crypted";
     fsType = "ext4";
   };
 
-  fileSystems."crypted" = {
-    device = "/dev/nvme1n1p1";
-    fsType = "luks";
-    neededForBoot = true;
-  };
-
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/386D-8504";
+    device = "/dev/nvme1n1p2";
     fsType = "vfat";
     options = [
       "fmask=0077"

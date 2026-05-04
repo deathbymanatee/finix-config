@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    finix.url = "github:finix-community/finix?ref=568a8da1536f97cadef6d5e81fa41a63930d4d70";
+    finix.url = "github:deathbymanatee/finix";
   };
 
   outputs =
@@ -41,6 +41,7 @@
           dhcpcd
           lemurs
           flatpak
+	  sway
         ];
 
         specialArgs = {

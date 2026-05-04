@@ -1,4 +1,4 @@
 hostname=$HOSTNAME
-cd ~/.config/finix
+cd ~/.config/finix-config
 git add .
 sudo nixos-rebuild switch --flake .#$hostname
