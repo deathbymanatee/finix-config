@@ -4,7 +4,8 @@ Personal flake-based configuration for [finix](https://github.com/finix-communit
 
 So far, I've been able to install finix using this configuration on the following: 
 
-- `qemu` (currently only non-graphical, as `qemu` or `finix` are missing required components for graphical sessions)
+- `qemu` (sway graphics don't work properly)
+- bare metal
 
 This config provides a few helper scripts to automate some routine maintenance, accessible using the following commands: 
 
@@ -32,7 +33,7 @@ This configuration was scaffolded from [vitrial's minimal config / install guide
 # TODOs
 
 - [x] install in qemu
-- [ ] install on desktop
+- [x] install on desktop
     - [ ] set up steam
     - [ ] set up audio prod
 - [ ] convert laptop to finix

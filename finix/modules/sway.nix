@@ -14,7 +14,6 @@ in
 {
   imports = [
     ./soteria.nix
-    ./thunar.nix
   ];
   options.modules.sway = {
     enable = mkEnableOption "sway";
@@ -63,20 +62,13 @@ in
 
     security.pam = {
       environment = {
-        QT_QPA_PLATFORMTHEME.default = [ "gtk2" ];
+        QT_QPA_PLATFORMTHEME.default = [ "gtk3" ];
       };
     };
 
     programs = {
       sway.enable = true;
       # from ./thunar.nix
-      thunar = {
-        enable = true;
-        plugins = with pkgs; [
-          thunar-archive-plugin
-          thunar-volman
-        ];
-      };
     };
 
     fonts = {
@@ -144,6 +136,11 @@ in
       tumbler
       foot
       dconf
+      xfconf
+      thunar
+      thunar-volman
+      thunar-archive-plugin
+      xdg-utils
 
       # gui
       keepassxc
@@ -156,7 +153,18 @@ in
     services.dbus.packages = with pkgs; [
       tumbler
       dconf
+      xfconf
     ];
+
+    xdg = {
+      portal.portals = [
+        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-gtk
+      ];
+      mime.enable = true;
+      icons.enable = true;
+      autostart.enable = true;
+    };
 
     # hacky and bad but only here because of no hjem / home-manager :(
     system.activation.scripts = mkIf (cfg.user != "") {
