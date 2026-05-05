@@ -29,6 +29,7 @@
         inherit (pkgs) lib;
         specialArgs = {
           modulesPath = toString nixpkgs + "/nixos/modules";
+          inherit inputs;
         };
 
         modules = with finix.nixosModules; [
@@ -37,6 +38,8 @@
           }
 
           (./finix/hosts/home-desktop/configuration.nix)
+
+          (./finix/modules)
 
           nix-daemon
           openssh
@@ -50,6 +53,8 @@
           lemurs
           flatpak
           sway
+          gvfs
+          udisks2
         ];
       };
 

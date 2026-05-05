@@ -12,62 +12,30 @@
     ../../modules
   ];
 
-  boot = {
-    # Use latest kernel.
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader.efi.canTouchEfiVariables = true;
+  # Use latest kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  finit.runlevel = 3;
+
+  finit.services.nix-daemon = {
+    environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
   };
 
-  finit = {
-    runlevel = 3;
-    services.nix-daemon = {
-      environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
+  services.nix-daemon = {
+    enable = true;
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
     };
   };
 
-  services = {
-    nix-daemon = {
-      enable = true;
-      settings = {
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        trusted-users = [
-          "root"
-          "@wheel"
-        ];
-      };
-    };
-
-    polkit.enable = true;
-    seatd.enable = true;
-    sysklogd.enable = true;
-    dbus.enable = true;
-    mdevd.enable = true;
-    dhcpcd.enable = true;
-
-    flatpak = {
-      enable = true;
-      extraGroups = [ ];
-    };
-
-    cups.enable = true;
-
-    lemurs = {
-      enable = true;
-      settings = {
-        wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
-      };
-    };
-
-  };
-
-  networking.hostName = "home-desktop"; # Define your hostname.
-
-  # install graphics stuff
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   programs = {
     limine = {
@@ -78,20 +46,41 @@
 
     sudo.enable = true;
     bash.enable = true;
-
-    # TODO: keep an eye on https://github.com/finix-community/finix/tree/modules/plasma
-    # plasma.enable = true;
-
-    sway.enable = true;
   };
 
-  # enable custom packages in modules/packages
-  modules.packages.enable = true;
+  services = {
+    polkit.enable = true;
+    sysklogd.enable = true;
+    dbus.enable = true;
+    dhcpcd.enable = true;
+    openssh.enable = true;
+
+    # udev broke :(
+    mdevd.enable = true;
+
+    lemurs = {
+      enable = true;
+      # TODO make pr that codes this path as the default
+      settings = {
+        wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
+      };
+    };
+  };
+
+  networking.hostName = "home-desktop"; # Define your hostname.
+
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # trying to do nixos-enter 'passwd' will result in 'command passwd not found' so we need to do something different for initial account setup.
+  # you will need to include a password hash here on first setup. example:
+  # `password = "some password hash";`
+  # generate this hash with: `mkpasswd -m sha-512 password`
+  # don't share the password hash with git for the love of god
+  # this will probably be fixed later
   users.users.ryan = {
     isNormalUser = true;
     description = "test user";
@@ -100,18 +89,22 @@
       "input"
       "audio"
       "video"
-      "network"
-      "tty"
       config.services.seatd.group
     ];
-    password = "$6$bbod64ceqgIIkDw.$vL9X/wD8e5pqYhuCG8vY7MhjMPvnLdKfuL/fUmEBogjq3M7PsMLr13qIb/E5y1l36RaEZqJP40BqSw2rpihNk.";
-
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # custom modules
+  modules = {
+    packages.enable = true;
+    sway = {
+      enable = true;
+      user = "ryan";
+    };
+  };
+
+  # base packages
   environment.systemPackages = with pkgs; [
-    # base packages
+    # base
     neovim
     wget
     git
@@ -120,25 +113,11 @@
     iproute2
     cargo
     gcc
+    man
 
-    # gui
-    keepassxc
-    steam
-    steam.run
-    protonup-qt
-    librewolf
-    gpu-screen-recorder-gtk
-
-    # audio
-    # pipewire
-    # wireplumber
-    # qpwgraph
-    # reaper
-    # winePackages.yabridge
-
-    #lagniappe
+    # lagniappe
     fastfetch
-    btop-rocm
+    ripgrep
+    btop
   ];
-
 }
