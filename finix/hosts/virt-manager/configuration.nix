@@ -38,7 +38,8 @@
     openssh.enable = true;
 
     # udev doesn't work for luks... or anything else really
-    mdevd.enable = true;
+    # mdevd.enable = true;
+    udev.enable = true;
 
     lemurs = {
       enable = true;
@@ -94,17 +95,18 @@
       "video"
       "power"
       # remove if using elogind
-      config.services.seatd.group
+      # config.services.seatd.group
     ];
   };
 
   # custom modules
   modules = {
     packages.enable = true;
-    sway = {
-      enable = true;
-      user = "ryan";
-    };
+    # sway = {
+    #   enable = true;
+    #   user = "ryan";
+    # };
+    plasma.enable = true;
   };
 
   # base packages

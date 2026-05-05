@@ -30,12 +30,6 @@ in
     services = {
       gvfs.enable = true;
       seatd.enable = true;
-      lemurs = {
-        enable = true;
-        settings = {
-          wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
-        };
-      };
       polkit = {
         enable = true;
         # sudoless power commands allegedly

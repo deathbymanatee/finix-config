@@ -15,13 +15,21 @@ let
     cd ~/.config/finix-config
     hostname=$HOSTNAME
     nix flake update
-    sudo nixos-rebuild switch --flake .#$hostname --upgrade
+    if [[ "$1" == "boot" ]]; then
+      sudo nixos-rebuild boot --flake .#$hostname
+    else
+      sudo nixos-rebuild switch --flake .#$hostname
+    fi
   '';
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     hostname=$HOSTNAME
     cd ~/.config/finix-config
     git add .
-    sudo nixos-rebuild switch --flake .#$hostname
+    if [[ "$1" == "boot" ]]; then
+      sudo nixos-rebuild boot --flake .#$hostname
+    else
+      sudo nixos-rebuild switch --flake .#$hostname
+    fi
   '';
 
 in

@@ -122,6 +122,5 @@ in
     ];
 
     services.elogind.enable = true;
-    services.udev.enable = true;
   };
 }
