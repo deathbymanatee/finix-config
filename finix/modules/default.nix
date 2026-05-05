@@ -5,5 +5,6 @@
     ./sway.nix
     ./packages.nix
     ./plasma.nix
+    ./thunar.nix
   ];
 }

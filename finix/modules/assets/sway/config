@@ -24,7 +24,7 @@ exec_always nm-applet
 exec_always dunst
 exec_always soteria
 exec_always blueman-applet
-exec_always noctalia-shell
+exec_always waybar
 
 gaps inner 3
 gaps outer 3

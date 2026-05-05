@@ -13,31 +13,58 @@
   ];
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  finit.runlevel = 3;
-
-  finit.services.nix-daemon = {
-    environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader.efi.canTouchEfiVariables = true;
   };
 
-  services.nix-daemon = {
-    enable = true;
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      trusted-users = [
-        "root"
-        "@wheel"
-      ];
+  finit = {
+    runlevel = 3;
+    services.nix-daemon = {
+      environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
     };
   };
 
-  boot.loader.efi.canTouchEfiVariables = true;
+  networking.hostName = "virt-manager"; # Define your hostname.
+
+  hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
+
+  services = {
+    polkit.enable = true;
+    sysklogd.enable = true;
+    dbus.enable = true;
+    dhcpcd.enable = true;
+    openssh.enable = true;
+
+    # udev doesn't work for luks... or anything else really
+    mdevd.enable = true;
+
+    lemurs = {
+      enable = true;
+      # TODO make pr that codes this path as the default since this is where all the other WMs dump their desktop entries
+      settings = {
+        wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
+      };
+    };
+    nix-daemon = {
+      enable = true;
+      settings = {
+
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+        trusted-users = [
+          "root"
+          "@wheel"
+        ];
+      };
+    };
+  };
 
   programs = {
+    # boot loader
     limine = {
       enable = true;
       settings.editor_enabled = true; # Disable on systems that need security
@@ -48,30 +75,6 @@
     bash.enable = true;
   };
 
-  services = {
-    polkit.enable = true;
-    sysklogd.enable = true;
-    dbus.enable = true;
-    dhcpcd.enable = true;
-    openssh.enable = true;
-
-    # udev broke :(
-    mdevd.enable = true;
-
-    lemurs = {
-      enable = true;
-      # TODO make pr that codes this path as the default
-      settings = {
-        wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
-      };
-    };
-  };
-
-  networking.hostName = "virt-manager"; # Define your hostname.
-
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -79,8 +82,8 @@
   # you will need to include a password hash here on first setup. example:
   # `password = "some password hash";`
   # generate this hash with: `mkpasswd -m sha-512 password`
-  # don't share the password hash with git for the love of god
-  # this will probably be fixed later
+  # don't commit the password hash to git for the love of god
+  # this issue will probably be fixed later
   users.users.ryan = {
     isNormalUser = true;
     description = "test user";
@@ -89,6 +92,8 @@
       "input"
       "audio"
       "video"
+      "power"
+      # remove if using elogind
       config.services.seatd.group
     ];
   };

@@ -12,14 +12,17 @@ let
 
 in
 {
-  imports = [ ./soteria.nix ];
+  imports = [
+    ./soteria.nix
+    ./thunar.nix
+  ];
   options.modules.sway = {
     enable = mkEnableOption "sway";
     user = mkOption {
       type = types.str;
       default = "";
       description = ''
-        User for home directory dotfile syncing.
+        User for home directory dotfile symlinking
       '';
     };
   };
@@ -36,6 +39,7 @@ in
       };
       polkit = {
         enable = true;
+        # sudoless power commands allegedly
         extraConfig = ''
           polkit.addRule(function (action, subject) {
             if (
@@ -55,28 +59,53 @@ in
       soteria.enable = true;
     };
 
+    users.groups.power = { };
+
+    security.pam = {
+      environment = {
+        QT_QPA_PLATFORMTHEME.default = [ "gtk2" ];
+      };
+    };
+
     programs = {
       sway.enable = true;
+      # from ./thunar.nix
+      thunar = {
+        enable = true;
+        plugins = with pkgs; [
+          thunar-archive-plugin
+          thunar-volman
+        ];
+      };
     };
 
     fonts = {
+      fontconfig.enable = true;
+      enableDefaultPackages = true;
       packages = with pkgs; [
         noto-fonts
         noto-fonts-color-emoji
         font-awesome
         source-han-sans
         source-han-serif
+        nerd-fonts.jetbrains-mono
       ];
-      fontconfig.defaultFonts = {
-        serif = [
-          "Noto Serif"
-          "Source Han Serif"
-        ];
-        sansSerif = [
-          "Noto Sans"
-          "Source Han Sans"
-        ];
-      };
+      # fontconfig.defaultFonts = {
+      #   serif = [
+      #     "Noto Serif"
+      #     "Source Han Serif"
+      #   ];
+      #   sansSerif = [
+      #     "Noto Sans"
+      #     "Source Han Sans"
+      #   ];
+      #   monospace = [
+      #     "Jetbrains Mono Nerd Font"
+      #   ];
+      #   emoji = [
+      #     "Noto Color Emoji"
+      #   ];
+      # };
     };
 
     environment.systemPackages = with pkgs; [
@@ -114,22 +143,20 @@ in
       papirus-icon-theme
       tumbler
       foot
+      dconf
 
       # gui
       keepassxc
       librewolf
-      thunar
-      thunar-volman
-      thunar-archive-plugin
-
-      # theming
-      inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # displays
       way-displays
     ];
 
-    services.dbus.packages = with pkgs; [ tumbler ];
+    services.dbus.packages = with pkgs; [
+      tumbler
+      dconf
+    ];
 
     # hacky and bad but only here because of no hjem / home-manager :(
     system.activation.scripts = mkIf (cfg.user != "") {
@@ -151,6 +178,10 @@ in
         if [ ! -e "$home_dir/Pictures/Wallpapers/Forest_For_The_Trees.jpg" ]; then
           ln -s -r $assets_dir/wallpapers/Forest_For_The_Trees.jpg $home_dir/Pictures/Wallpapers/
           chown ${cfg.user} $home_dir/Pictures/Wallpapers/Forest_For_The_Trees.jpg -R
+        fi
+        if [ ! -d "$home_dir/.config/way-displays" ]; then
+          ln -s -r $assets_dir/way-displays/ $home_dir/.config
+          chown ${cfg.user} $home_dir/.config/way-displays/ -R
         fi
       '';
     };
