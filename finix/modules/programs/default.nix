@@ -1,0 +1,6 @@
+{ config, ... }:
+{
+  imports = [
+    ./lxqt.nix
+  ];
+}

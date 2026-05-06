@@ -37,9 +37,12 @@
     dhcpcd.enable = true;
     openssh.enable = true;
 
+    # elogind.enable = true;
+    seatd.enable = true;
+
     # udev doesn't work for luks... or anything else really
-    # mdevd.enable = true;
-    udev.enable = true;
+    mdevd.enable = true;
+    # udev.enable = true;
 
     lemurs = {
       enable = true;
@@ -94,8 +97,8 @@
       "audio"
       "video"
       "power"
-      # remove if using elogind
-      # config.services.seatd.group
+      # comment out if using elogind
+      config.services.seatd.group
     ];
   };
 
@@ -106,7 +109,7 @@
     #   enable = true;
     #   user = "ryan";
     # };
-    plasma.enable = true;
+    lxqt.enable = true;
   };
 
   # base packages
