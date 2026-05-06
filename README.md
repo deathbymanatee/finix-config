@@ -11,11 +11,13 @@ This config provides a few helper scripts to automate some routine maintenance, 
 
 - `rebuild`
     - activates a full system rebuild
+    - pass the `boot` parameter to switch to build on next reboot
 - `maintenance`
     - collects garbage in nix store and deletes old generations
     - verifies and repairs store paths
     - updates flake inputs
     - rebuilds system
+    - pass the `boot` parameter to switch to build on next reboot
 
 # Credits
 
