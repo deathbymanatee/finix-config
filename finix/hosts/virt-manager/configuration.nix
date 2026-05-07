@@ -49,6 +49,7 @@
       # TODO make pr that codes this path as the default since this is where all the other WMs dump their desktop entries
       settings = {
         wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
+        x11.xsessions_path = lib.mkForce "/run/current-system/sw/share/xsessions";
       };
     };
     nix-daemon = {
@@ -96,7 +97,7 @@
       "input"
       "audio"
       "video"
-      "power"
+      "render"
       # comment out if using elogind
       config.services.seatd.group
     ];

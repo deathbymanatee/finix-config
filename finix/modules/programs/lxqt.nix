@@ -11,18 +11,18 @@ let
   inherit (pkgs) kdePackages;
 
   # TODO: x11?
-  # xSessionFile = pkgs.writeTextDir "share/xsessions/lxqt.desktop" ''
-  #   [Desktop Entry]
-  #   Name=LXQt (X11)
-  #   Comment=LXQT Desktop
-  #   Exec=${lxqt.lxqt}/bin/lxqt-session
-  #   Type=Application
-  #   DesktopNames=LXQt
-  # '';
+  xSessionFile = pkgs.writeTextDir "share/xsessions/lxqt.desktop" ''
+    [Desktop Entry]
+    Name=LXQt (X11)
+    Comment=LXQT Desktop
+    Exec=${pkgs.lxqt.lxqt-session}/bin/startlxqt    
+    Type=Application
+    DesktopNames=LXQt
+  '';
 
   sessionFile = pkgs.writeTextDir "share/wayland-sessions/lxqt-wayland.desktop" ''
     [Desktop Entry]
-    Name=wLXQt
+    Name=LXQt (Wayland)
     Comment=LXQt Wayland Desktop
     Exec=${pkgs.dbus}/bin/dbus-run-session -- ${pkgs.lxqt.lxqt-wayland-session}/bin/startlxqtwayland
     Type=Application
@@ -43,8 +43,9 @@ let
       pkgs.libfm
       pkgs.libfm-extra
       pkgs.menu-cache
-      # pkgs.openbox
+      pkgs.openbox
       kdePackages.qtsvg # provides QT plugins for svg icons
+      pkgs.libxcb-cursor
     ];
 
     corePackages = [
@@ -128,7 +129,7 @@ in
       default = [ ];
     };
 
-    compositor = {
+    waylandCompositor = {
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.labwc.override {
@@ -146,7 +147,8 @@ in
       ++ [
         # session entry point
         (lib.hiPrio sessionFile)
-        cfg.compositor.package
+        (lib.hiPrio xSessionFile)
+        cfg.waylandCompositor.package
       ];
 
     environment.pathsToLink = [
@@ -171,7 +173,7 @@ in
     ];
 
     environment.etc."xdg/lxqt/session.conf".text = ''
-      COMPOSITOR=${cfg.compositor.package.pname}
+      COMPOSITOR=${cfg.waylandCompositor.package.pname}
     '';
   };
 }

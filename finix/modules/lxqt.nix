@@ -3,12 +3,18 @@
   pkgs,
   config,
   lib,
-  inputs,
   ...
 }:
 with lib;
 let
   cfg = config.modules.lxqt;
+
+  libinput = pkgs.libinput.override (
+    lib.optionalAttrs config.services.mdevd.enable {
+      udev = pkgs.libudev-zero;
+      wacomSupport = false;
+    }
+  );
 
 in
 {
@@ -23,8 +29,14 @@ in
     #   };
     # };
 
+    services.xserver.enable = true;
+
     programs = {
       lxqt.enable = true;
+      # needs more testing outside of a vm
+      # lxqt.compositor.package = pkgs.kdePackages.kwin.override {
+      #   inherit libinput;
+      # };
     };
 
     fonts = {

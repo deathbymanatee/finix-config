@@ -90,7 +90,6 @@
           sway
           gvfs
           udisks2
-          labwc
         ];
       };
     };

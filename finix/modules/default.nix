@@ -7,5 +7,6 @@
     ./plasma.nix
     ./lxqt.nix
     ./programs
+    ./ratpoison.nix
   ];
 }
