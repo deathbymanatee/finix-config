@@ -29,19 +29,15 @@ in
   config = lib.mkIf cfg.enable {
     services = {
       gvfs.enable = true;
-      seatd.enable = true;
       polkit = {
-        enable = true;
         # sudoless power commands allegedly
         extraConfig = ''
           polkit.addRule(function (action, subject) {
             if (
-              subject.isInGroup("power") &&
+              subject.isInGroup("seat") &&
               [
-                "org.freedesktop.login1.reboot",
-                "org.freedesktop.login1.reboot-multiple-sessions",
-                "org.freedesktop.login1.power-off",
-                "org.freedesktop.login1.power-off-multiple-sessions",
+                "/run/current-system/sw/bin/reboot",
+                "/run/current-system/sw/bin/poweroff",
               ].indexOf(action.id) !== -1
             ) {
               return polkit.Result.YES;

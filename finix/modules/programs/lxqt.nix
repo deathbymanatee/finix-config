@@ -37,6 +37,7 @@ let
   );
 
   packages = {
+    # TODO very opinionated set, some aren't needed
     preRequisitePackages = [
       kdePackages.kwindowsystem # provides some QT plugins needed by lxqt-panel
       kdePackages.libkscreen # provides plugins for screen management software
@@ -155,6 +156,7 @@ in
     environment.pathsToLink = [
       "/share"
       "/share/icons"
+      "/share/pixmaps"
     ];
 
     security.pam.environment = {

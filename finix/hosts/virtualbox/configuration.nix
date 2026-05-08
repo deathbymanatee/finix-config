@@ -15,6 +15,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     loader.efi.canTouchEfiVariables = true;
+    kernelParams = [ "loglevel=1" ];
   };
 
   finit = {
@@ -35,13 +36,11 @@
     dbus.enable = true;
     dhcpcd.enable = true;
     openssh.enable = true;
-
-    # elogind.enable = true;
     seatd.enable = true;
-
-    # udev doesn't work for luks... or anything else really
-    mdevd.enable = true;
-    # udev.enable = true;
+    mdevd = {
+      enable = true;
+      nlgroups = 4;
+    };
 
     lemurs = {
       enable = true;
@@ -54,7 +53,6 @@
     nix-daemon = {
       enable = true;
       settings = {
-
         experimental-features = [
           "nix-command"
           "flakes"
@@ -98,10 +96,22 @@
       "audio"
       "video"
       "render"
-      # comment out if using elogind
       config.services.seatd.group
     ];
   };
+
+  providers.privileges.rules = lib.optionals config.services.mdevd.enable [
+    {
+      command = "/run/current-system/sw/bin/poweroff";
+      groups = [ config.services.seatd.group ];
+      requirePassword = false;
+    }
+    {
+      command = "/run/current-system/sw/bin/reboot";
+      groups = [ config.services.seatd.group ];
+      requirePassword = false;
+    }
+  ];
 
   # custom modules
   modules = {

@@ -124,6 +124,7 @@
           sway
           gvfs
           udisks2
+          xwayland-satellite
         ];
       };
     };

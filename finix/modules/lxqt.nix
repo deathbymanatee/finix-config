@@ -1,4 +1,5 @@
 # base configuration for my lxqt desktop
+# wrapper module
 {
   pkgs,
   config,
@@ -20,23 +21,27 @@ in
 {
   options.modules.lxqt = {
     enable = mkEnableOption "lxqt";
+    user = mkOption {
+      type = types.str;
+      default = "";
+      description = ''
+        User for home directory dotfile symlinking
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
+    # needed???
     # security.pam = {
     #   environment = {
     #     QT_QPA_PLATFORMTHEME.default = [ "gtk3" ];
     #   };
     # };
 
-    services.xserver.enable = true;
+    programs.xwayland-satellite.enable = true;
 
     programs = {
       lxqt.enable = true;
-      # needs more testing outside of a vm
-      # lxqt.waylandCompositor.package = pkgs.kdePackages.kwin.override {
-      #   inherit libinput;
-      # };
     };
 
     fonts = {
@@ -50,22 +55,22 @@ in
         source-han-serif
         nerd-fonts.jetbrains-mono
       ];
-      # fontconfig.defaultFonts = {
-      #   serif = [
-      #     "Noto Serif"
-      #     "Source Han Serif"
-      #   ];
-      #   sansSerif = [
-      #     "Noto Sans"
-      #     "Source Han Sans"
-      #   ];
-      #   monospace = [
-      #     "Jetbrains Mono Nerd Font"
-      #   ];
-      #   emoji = [
-      #     "Noto Color Emoji"
-      #   ];
-      # };
+      fontconfig.defaultFonts = {
+        serif = [
+          "Noto Serif"
+          "Source Han Serif"
+        ];
+        sansSerif = [
+          "Noto Sans"
+          "Source Han Sans"
+        ];
+        monospace = [
+          "Jetbrains Mono Nerd Font"
+        ];
+        emoji = [
+          "Noto Color Emoji"
+        ];
+      };
     };
 
     environment.systemPackages = with pkgs; [
@@ -87,6 +92,5 @@ in
       icons.enable = true;
       autostart.enable = true;
     };
-
   };
 }
