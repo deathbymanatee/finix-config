@@ -34,7 +34,7 @@ in
     programs = {
       lxqt.enable = true;
       # needs more testing outside of a vm
-      # lxqt.compositor.package = pkgs.kdePackages.kwin.override {
+      # lxqt.waylandCompositor.package = pkgs.kdePackages.kwin.override {
       #   inherit libinput;
       # };
     };
@@ -69,10 +69,11 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      # gui
       keepassxc
       librewolf
       thunar
+      foot
+      labwc-tweaks
     ];
 
     services.dbus.packages = with pkgs; [

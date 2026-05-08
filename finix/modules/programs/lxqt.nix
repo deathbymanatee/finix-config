@@ -144,6 +144,7 @@ in
     environment.systemPackages =
       packages.preRequisitePackages
       ++ packages.corePackages
+      ++ packages.optionalPackages
       ++ [
         # session entry point
         (lib.hiPrio sessionFile)
@@ -153,6 +154,7 @@ in
 
     environment.pathsToLink = [
       "/share"
+      "/share/icons"
     ];
 
     security.pam.environment = {
