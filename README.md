@@ -5,6 +5,7 @@ Personal flake-based configuration for [finix](https://github.com/finix-communit
 So far, I've been able to install finix using this configuration on the following: 
 
 - `qemu` (sway graphics don't work properly)
+- `virtualbox` (some graphics require special configuration)
 - bare metal
 
 This config provides a few helper scripts to automate some routine maintenance, accessible using the following commands: 
