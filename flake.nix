@@ -55,6 +55,8 @@
           sway
           gvfs
           udisks2
+          xwayland-satellite
+          rtkit
         ];
       };
 
@@ -90,6 +92,7 @@
           sway
           gvfs
           udisks2
+          xwayland-satellite
         ];
       };
       nixosConfigurations.virtualbox = finix.lib.finixSystem {

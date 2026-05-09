@@ -42,6 +42,9 @@ in
 
     programs = {
       lxqt.enable = true;
+      # lxqt.waylandCompositor.package = pkgs.kdePackages.kwin.override {
+      #   inherit libinput;
+      # };
     };
 
     fonts = {
@@ -79,6 +82,8 @@ in
       thunar
       foot
       labwc-tweaks
+      way-displays
+      gammastep
     ];
 
     services.dbus.packages = with pkgs; [
@@ -91,6 +96,24 @@ in
       mime.enable = true;
       icons.enable = true;
       autostart.enable = true;
+    };
+    system.activation.scripts = mkIf (cfg.user != "") {
+      dotfiles = pkgs.lib.stringAfter [ "users" ] ''
+        home_dir=/home/${cfg.user}
+        assets_dir=$home_dir/.config/finix-config/finix/modules/assets
+        if [ ! -d "$home_dir/.config/lxqt/" ]; then
+          ln -s -r $assets_dir/sway/ $home_dir/.config
+          chown ${cfg.user} $home_dir/.config/sway/ -R
+        fi
+        if [ ! -d "$home_dir/.config/labwc/" ]; then
+          ln -s -r $assets_dir/labwc/ $home_dir/.config
+          chown ${cfg.user} $home_dir/.config/labwc/ -R
+        fi
+        if [ ! -d "$home_dir/.config/way-displays" ]; then
+          ln -s -r $assets_dir/way-displays/ $home_dir/.config
+          chown ${cfg.user} $home_dir/.config/way-displays/ -R
+        fi
+      '';
     };
   };
 }
