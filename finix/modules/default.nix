@@ -9,5 +9,6 @@
     ./programs
     ./ratpoison.nix
     ./pipewire.nix
+    ./steam.nix
   ];
 }

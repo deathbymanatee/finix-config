@@ -2,11 +2,11 @@
   "nodes": {
     "finix": {
       "locked": {
-        "lastModified": 1778254537,
-        "narHash": "sha256-rwiLpp2M8c7Za058EDCvYRdfSMpntllFyug2tNdNvmY=",
+        "lastModified": 1778435726,
+        "narHash": "sha256-3a+ILCeqsr65GCHbFPCyaxLJeq1EM3Ofm/BMXe3jLaE=",
         "owner": "deathbymanatee",
         "repo": "finix",
-        "rev": "0e04711af065eae7f6a16b4aef82c99a66a9e110",
+        "rev": "0eff87587da0563602e35ba27cd3a395c7ebfa07",
         "type": "github"
       },
       "original": {

@@ -34,22 +34,22 @@ in
         source-han-serif
         nerd-fonts.jetbrains-mono
       ];
-      # fontconfig.defaultFonts = {
-      #   serif = [
-      #     "Noto Serif"
-      #     "Source Han Serif"
-      #   ];
-      #   sansSerif = [
-      #     "Noto Sans"
-      #     "Source Han Sans"
-      #   ];
-      #   monospace = [
-      #     "Jetbrains Mono Nerd Font"
-      #   ];
-      #   emoji = [
-      #     "Noto Color Emoji"
-      #   ];
-      # };
+      fontconfig.defaultFonts = {
+        serif = [
+          "Noto Serif"
+          "Source Han Serif"
+        ];
+        sansSerif = [
+          "Noto Sans"
+          "Source Han Sans"
+        ];
+        monospace = [
+          "Jetbrains Mono Nerd Font"
+        ];
+        emoji = [
+          "Noto Color Emoji"
+        ];
+      };
     };
 
     environment.systemPackages = with pkgs; [

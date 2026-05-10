@@ -21,6 +21,8 @@ in
 {
   options.modules.lxqt = {
     enable = mkEnableOption "lxqt";
+
+    # keep an eye on https://github.com/feel-co/hjem/pull/130
     user = mkOption {
       type = types.str;
       default = "";
@@ -31,20 +33,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # needed???
-    # security.pam = {
-    #   environment = {
-    #     QT_QPA_PLATFORMTHEME.default = [ "gtk3" ];
-    #   };
-    # };
-
     programs.xwayland-satellite.enable = true;
+    services.xserver.enable = true;
 
     programs = {
       lxqt.enable = true;
-      # lxqt.waylandCompositor.package = pkgs.kdePackages.kwin.override {
-      #   inherit libinput;
-      # };
+      lxqt.extraPackages = with pkgs; [
+        # core breeze qt theme
+        kdePackages.breeze
+      ];
+      lxqt.xsession.enable = true;
     };
 
     fonts = {
@@ -84,6 +82,7 @@ in
       labwc-tweaks
       way-displays
       gammastep
+      kdePackages.breeze-gtk
     ];
 
     services.dbus.packages = with pkgs; [
@@ -97,6 +96,7 @@ in
       icons.enable = true;
       autostart.enable = true;
     };
+
     system.activation.scripts = mkIf (cfg.user != "") {
       dotfiles = pkgs.lib.stringAfter [ "users" ] ''
         home_dir=/home/${cfg.user}

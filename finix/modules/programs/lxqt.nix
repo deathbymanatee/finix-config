@@ -10,7 +10,6 @@ let
   inherit (pkgs) lxqt;
   inherit (pkgs) kdePackages;
 
-  # TODO: x11?
   xSessionFile = pkgs.writeTextDir "share/xsessions/lxqt.desktop" ''
     [Desktop Entry]
     Name=LXQt (X11)
@@ -20,7 +19,7 @@ let
     DesktopNames=LXQt
   '';
 
-  sessionFile = pkgs.writeTextDir "share/wayland-sessions/lxqt-wayland.desktop" ''
+  waylandSessionFile = pkgs.writeTextDir "share/wayland-sessions/lxqt-wayland.desktop" ''
     [Desktop Entry]
     Name=LXQt (Wayland)
     Comment=LXQt Wayland Desktop
@@ -36,17 +35,22 @@ let
     }
   );
 
+  removePackagesByName =
+    packages: packagesToRemove:
+    let
+      namesToRemove = map lib.getName packagesToRemove;
+    in
+    lib.filter (x: !(lib.elem (lib.getName x) namesToRemove)) packages;
+
   packages = {
-    # TODO very opinionated set, some aren't needed
+    # TODO opinionated package set
     preRequisitePackages = [
       kdePackages.kwindowsystem # provides some QT plugins needed by lxqt-panel
       kdePackages.libkscreen # provides plugins for screen management software
       pkgs.libfm
       pkgs.libfm-extra
       pkgs.menu-cache
-      pkgs.openbox
       kdePackages.qtsvg # provides QT plugins for svg icons
-      pkgs.libxcb-cursor
     ];
 
     corePackages = [
@@ -69,10 +73,17 @@ let
       lxqt.lxqt-policykit
       lxqt.lxqt-powermanagement
       lxqt.lxqt-qtplugin
-      lxqt.lxqt-session
+
+      # x11 session
+      # pkgs.lxqt-session
+
+      # wayland session
+      # pkgs.lxqt-wayland-session
+
       lxqt.lxqt-sudo
       lxqt.lxqt-themes
-      lxqt.lxqt-wayland-session
+
+      # TODO
       lxqt.pavucontrol-qt
 
       ### CORE 2
@@ -80,6 +91,7 @@ let
       lxqt.lxqt-runner
       lxqt.pcmanfm-qt
       pkgs.xdg-utils
+      pkgs.libnotify
     ];
 
     optionalPackages = [
@@ -130,13 +142,40 @@ in
       default = [ ];
     };
 
-    waylandCompositor = {
-      package = lib.mkOption {
+    wayland = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = ''
+          Whether to enable the LXQt desktop environment's Wayland session.
+        '';
+      };
+      compositor = lib.mkOption {
         type = lib.types.package;
         default = pkgs.labwc.override {
           inherit libinput;
           wlroots_0_19 = pkgs.wlroots_0_19.override { inherit libinput; };
         };
+        description = ''
+          The default Wayland compositor package to use.
+        '';
+      };
+    };
+
+    xsession = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = ''
+          Whether to enable the LXQt desktop environment's X11 session.
+        '';
+      };
+      windowManager = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.openbox;
+        description = ''
+          The default X11 window manager package to use.
+        '';
       };
     };
   };
@@ -146,12 +185,33 @@ in
       packages.preRequisitePackages
       ++ packages.corePackages
       ++ packages.optionalPackages
-      ++ [
-        # session entry point
-        (lib.hiPrio sessionFile)
-        (lib.hiPrio xSessionFile)
-        cfg.waylandCompositor.package
-      ];
+      ++ [ cfg.iconThemePackage ]
+      ++ (removePackagesByName packages.optionalPackages cfg.excludePackages)
+      ++ cfg.extraPackages
+
+      # little messy, is there a better way to do this? lib.optional cfg.wayland.enable [...] results in a typeerror
+      ++ (
+        if cfg.wayland.enable then
+          [
+            (lib.hiPrio waylandSessionFile)
+            cfg.wayland.compositor
+            pkgs.lxqt.lxqt-wayland-session
+          ]
+        else
+          (
+            if cfg.xsession.enable then
+              [
+                (lib.hiPrio xSessionFile)
+                cfg.xsession.windowManager
+                pkgs.lxqt.lxqt-session
+
+                # had issues without this package
+                pkgs.libxcb-cursor
+              ]
+            else
+              [ ]
+          )
+      );
 
     environment.pathsToLink = [
       "/share"
@@ -163,21 +223,25 @@ in
       XDG_CONFIG_DIRS.default = [ "/run/current-system/sw/share" ];
     };
 
-    security.wrappers = {
-      kwin_wayland = {
-        owner = "root";
-        group = "root";
-        capabilities = "cap_sys_nice+ep";
-        source = "${lib.getBin pkgs.kdePackages.kwin}/bin/kwin_wayland";
-      };
-    };
+    # probably not needed since default compositor is not kwin
+    # security.wrappers = {
+    #   kwin_wayland = {
+    #     owner = "root";
+    #     group = "root";
+    #     capabilities = "cap_sys_nice+ep";
+    #     source = "${lib.getBin pkgs.kdePackages.kwin}/bin/kwin_wayland";
+    #   };
+    # };
 
     xdg.portal.portals = [
       pkgs.lxqt.xdg-desktop-portal-lxqt
     ];
 
-    environment.etc."xdg/lxqt/session.conf".text = ''
-      COMPOSITOR=${cfg.waylandCompositor.package.pname}
-    '';
+    # this is also kind of messy
+    environment.etc."xdg/lxqt/session.conf".text =
+      if cfg.wayland.enable then
+        "COMPOSITOR=${cfg.wayland.compositor.pname}"
+      else
+        (if cfg.xsession.enable then "WINDOW_MANAGER=${cfg.xsession.windowManager.pname}" else "");
   };
 }

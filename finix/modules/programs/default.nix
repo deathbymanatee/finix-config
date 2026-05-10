@@ -1,7 +1,6 @@
 { config, ... }:
 {
   imports = [
-    ./lxqt.nix
-    ./xserver.nix
+    # ./lxqt.nix
   ];
 }

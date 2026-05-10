@@ -27,8 +27,12 @@
 
   networking.hostName = "home-desktop"; # Define your hostname.
 
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+  };
 
   services = {
     polkit.enable = true;
@@ -130,6 +134,7 @@
       user = "ryan";
     };
     pipewire.enable = true;
+    steam.enable = true;
   };
 
   # base packages
@@ -148,6 +153,9 @@
     # lagniappe
     fastfetch
     ripgrep
-    btop
+    btop-rocm
+    ncdu
+    vulkan-tools
+    lswt
   ];
 }

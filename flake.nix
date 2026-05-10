@@ -57,6 +57,9 @@
           udisks2
           xwayland-satellite
           rtkit
+          fwupd
+          lxqt
+          xserver
         ];
       };
 

@@ -10,7 +10,7 @@
 -->
 <labwc_config>
   <core>
-    <decoration>server</decoration>
+    <decoration>client</decoration>
     <gap>0</gap>
     <adaptiveSync>no</adaptiveSync>
     <allowTearing>no</allowTearing>
@@ -263,7 +263,7 @@
       <action name="Execute" command="pcmanfm-qt"/>
     </keybind>
     <keybind key="W-Return">
-      <action name="Execute" command="lxqt-qdbus run qterminal"/>
+      <action name="Execute" command="lxqt-qdbus run foot"/>
     </keybind>
     <keybind key="W-f">
       <action name="Execute" command="lxqt-qdbus run featherpad"/>
