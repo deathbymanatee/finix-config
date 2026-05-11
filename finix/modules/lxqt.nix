@@ -34,7 +34,6 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.xwayland-satellite.enable = true;
-    services.xserver.enable = true;
 
     programs = {
       lxqt.enable = true;
@@ -43,6 +42,7 @@ in
         kdePackages.breeze
       ];
       lxqt.xsession.enable = true;
+      lxqt.iconThemePackage = pkgs.papirus-icon-theme;
     };
 
     fonts = {

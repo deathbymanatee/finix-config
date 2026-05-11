@@ -157,5 +157,7 @@
     ncdu
     vulkan-tools
     lswt
+    easyeffects
+    calf
   ];
 }

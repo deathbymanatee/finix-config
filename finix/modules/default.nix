@@ -6,7 +6,6 @@
     ./packages.nix
     ./plasma.nix
     ./lxqt.nix
-    ./programs
     ./ratpoison.nix
     ./pipewire.nix
     ./steam.nix
