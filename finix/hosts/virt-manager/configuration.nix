@@ -61,5 +61,6 @@
     fastfetch
     ripgrep
     btop
+    inxi
   ];
 }
