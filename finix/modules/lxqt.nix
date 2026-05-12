@@ -30,11 +30,21 @@ in
         User for home directory dotfile symlinking
       '';
     };
+
+    enableXorg = lib.mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Enable lxqt xorg session
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
     programs.xwayland-satellite.enable = true;
     programs.lxqt.enable = true;
+    programs.lxqt.xsession.enable = cfg.enableXorg;
+    services.xserver.enable = cfg.enableXorg;
     programs.lxqt.extraPackages =
       with pkgs;
       [

@@ -44,24 +44,12 @@
     packages.enable = true;
     lxqt.enable = true;
     lxqt.user = "ryan";
+    lxqt.enableXorg = true;
   };
 
   # base packages
   environment.systemPackages = with pkgs; [
-    # base
-    neovim
-    wget
-    git
-    nixos-rebuild-ng
-    iputils
-    iproute2
-    cargo
-    gcc
-    man
-
     # lagniappe
-    fastfetch
-    ripgrep
     btop
     inxi
   ];

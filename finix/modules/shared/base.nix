@@ -91,7 +91,6 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    # base
     neovim
     wget
     git
