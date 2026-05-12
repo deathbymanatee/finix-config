@@ -36,6 +36,20 @@
   finit.services = {
     nix-daemon.environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
   };
+  finit.services.ead = {
+    description = "ethernet service";
+    conditions = "service/iwd/ready";
+    command = "${pkgs.iwd}/libexec/ead -d";
+    nohup = true;
+    log = true;
+
+    path = lib.optionals config.programs.resolvconf.enable [
+      config.programs.resolvconf.package
+    ];
+  };
+  finit.tmpfiles.rules = [
+    "d /var/lib/ewd 0700"
+  ];
 
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
@@ -45,7 +59,7 @@
   services.polkit.enable = true;
   services.dbus.enable = true;
   services.iwd.enable = true;
-  services.dhcpcd.enable = true;
+  # services.dhcpcd.enable = true;
   services.openssh.enable = true;
   services.upower.enable = true;
   services.rtkit.enable = true;

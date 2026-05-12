@@ -303,6 +303,9 @@
     <keybind key="W-f">
       <action name="ToggleMaximize"/>
     </keybind>
+    <keybind key="W-m">
+      <action name="Iconify"/>
+    </keybind>
     <keybind key="W-Left">
       <action name="SnapToEdge" direction="left" combine="yes"/>
     </keybind>
