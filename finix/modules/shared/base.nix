@@ -36,20 +36,6 @@
   finit.services = {
     nix-daemon.environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
   };
-  finit.services.ead = {
-    description = "ethernet service";
-    conditions = "service/iwd/ready";
-    command = "${pkgs.iwd}/libexec/ead -d";
-    nohup = true;
-    log = true;
-
-    path = lib.optionals config.programs.resolvconf.enable [
-      config.programs.resolvconf.package
-    ];
-  };
-  finit.tmpfiles.rules = [
-    "d /var/lib/ead 0700"
-  ];
 
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
