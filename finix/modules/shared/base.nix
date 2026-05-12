@@ -48,7 +48,7 @@
     ];
   };
   finit.tmpfiles.rules = [
-    "d /var/lib/ewd 0700"
+    "d /var/lib/ead 0700"
   ];
 
   hardware.graphics.enable = true;
@@ -59,7 +59,7 @@
   services.polkit.enable = true;
   services.dbus.enable = true;
   services.iwd.enable = true;
-  # services.dhcpcd.enable = true;
+  services.dhcpcd.enable = true;
   services.openssh.enable = true;
   services.upower.enable = true;
   services.rtkit.enable = true;
