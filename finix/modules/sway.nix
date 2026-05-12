@@ -28,7 +28,6 @@ in
 
   config = lib.mkIf cfg.enable {
     services = {
-      gvfs.enable = true;
       polkit = {
         # sudoless power commands allegedly
         extraConfig = ''

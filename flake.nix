@@ -4,11 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     finix.url = "github:deathbymanatee/finix";
-
-    # noctalia = {
-    #   url = "github:noctalia-dev/noctalia-shell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs =
@@ -71,31 +66,13 @@
           inherit inputs;
         };
 
-        modules = with finix.nixosModules; [
+        modules = [
           {
             nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
           }
-
-          (./finix/hosts/virt-manager/configuration.nix)
-
+          (./finix/modules/shared/base.nix)
           (./finix/modules)
-
-          # TODO modules/shared?
-          nix-daemon
-          openssh
-          sysklogd
-          limine
-          sudo
-          polkit
-          getty
-          bash
-          dhcpcd
-          lemurs
-          flatpak
-          sway
-          gvfs
-          udisks2
-          xwayland-satellite
+          (./finix/hosts/virt-manager/configuration.nix)
         ];
       };
       nixosConfigurations.virtualbox = finix.lib.finixSystem {

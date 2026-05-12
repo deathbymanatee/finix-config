@@ -2,12 +2,13 @@
   config,
   pkgs,
   lib,
-  modules,
+  inputs,
   ...
 }:
 {
-  imports = with modules; [
+  imports = with inputs.finix.nixosModules; [
     nix-daemon
+    upower
     openssh
     sysklogd
     limine
@@ -15,14 +16,16 @@
     getty
     bash
     iwd
-    resolvconf
+    dhcpcd
     lemurs
     flatpak
+    polkit
     sway
     xwayland-satellite
     rtkit
     lxqt
     zzz
+    fwupd
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -42,17 +45,12 @@
   services.polkit.enable = true;
   services.dbus.enable = true;
   services.iwd.enable = true;
+  services.dhcpcd.enable = true;
   services.openssh.enable = true;
   services.upower.enable = true;
   services.rtkit.enable = true;
+  services.seatd.enable = true;
   services.rtkit.extraGroups = [ config.services.seatd.group ];
-  services.lemurs = {
-    enable = true;
-    settings = {
-      wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
-      x11.xsessions_path = lib.mkForce "/run/current-system/sw/share/xsessions";
-    };
-  };
   services.nix-daemon = {
     enable = true;
     settings = {

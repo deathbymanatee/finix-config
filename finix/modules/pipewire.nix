@@ -36,6 +36,9 @@ in
     environment.systemPackages = [
       pipewire'
       wireplumber'
+      pkgs.easyeffects
+      pkgs.calf
+      pkgs.qpwgraph
     ];
     environment.etc."security/limits.conf".text = ''
       @audio   -   rtprio     95

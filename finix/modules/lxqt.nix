@@ -34,57 +34,53 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.xwayland-satellite.enable = true;
-
-    programs = {
-      lxqt.enable = true;
-      lxqt.extraPackages = with pkgs; [
+    programs.lxqt.enable = true;
+    programs.lxqt.extraPackages =
+      with pkgs;
+      [
         # core breeze qt theme
         kdePackages.breeze
+        kdePackages.breeze-gtk
         kdePackages.qttools
+        papirus-icon-theme
+        keepassxc
+        librewolf
+        thunar
+        foot
+        labwc-tweaks
+        way-displays
+        gammastep
+      ]
+      ++ lib.optionals config.services.iwd.enable [
+        pkgs.impala
       ];
-      lxqt.xsession.enable = true;
-      lxqt.iconThemePackage = pkgs.papirus-icon-theme;
-    };
 
-    fonts = {
-      fontconfig.enable = true;
-      enableDefaultPackages = true;
-      packages = with pkgs; [
-        noto-fonts
-        noto-fonts-color-emoji
-        font-awesome
-        source-han-sans
-        source-han-serif
-        nerd-fonts.jetbrains-mono
-      ];
-      fontconfig.defaultFonts = {
-        serif = [
-          "Noto Serif"
-          "Source Han Serif"
-        ];
-        sansSerif = [
-          "Noto Sans"
-          "Source Han Sans"
-        ];
-        monospace = [
-          "Jetbrains Mono Nerd Font"
-        ];
-        emoji = [
-          "Noto Color Emoji"
-        ];
-      };
-    };
-
-    environment.systemPackages = with pkgs; [
-      keepassxc
-      librewolf
-      thunar
-      foot
-      labwc-tweaks
-      way-displays
-      gammastep
-      kdePackages.breeze-gtk
+    fonts.fontconfig.enable = true;
+    fonts.enableDefaultPackages = true;
+    fonts.packages = with pkgs; [
+      noto-fonts
+      noto-fonts-color-emoji
+      font-awesome
+      source-han-sans
+      source-han-serif
+      nerd-fonts.jetbrains-mono
     ];
+    fonts.fontconfig.defaultFonts = {
+      serif = [
+        "Noto Serif"
+        "Source Han Serif"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Source Han Sans"
+      ];
+      monospace = [
+        "Jetbrains Mono Nerd Font"
+      ];
+      emoji = [
+        "Noto Color Emoji"
+      ];
+    };
 
     services.dbus.packages = with pkgs; [
       tumbler
@@ -92,21 +88,17 @@ in
       xfconf
     ];
 
-    xdg = {
-      portal.portals = [
-        pkgs.xdg-desktop-portal-wlr
-      ];
-      mime.enable = true;
-      icons.enable = true;
-      autostart.enable = true;
-    };
+    xdg.mime.enable = true;
+    xdg.icons.enable = true;
+    xdg.autostart.enable = true;
+    xdg.portal.portals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
 
     system.activation.scripts = mkIf (cfg.user != "") {
       dotfiles = pkgs.lib.stringAfter [ "users" ] ''
         home_dir=/home/${cfg.user}
         assets_dir=$home_dir/.config/finix-config/finix/modules/assets
         if [ ! -d "$home_dir/.config/lxqt/" ]; then
-          ln -s -r $assets_dir/sway/ $home_dir/.config
+          ln -s -r $assets_dir/lxqt/ $home_dir/.config
           chown ${cfg.user} $home_dir/.config/sway/ -R
         fi
         if [ ! -d "$home_dir/.config/labwc/" ]; then

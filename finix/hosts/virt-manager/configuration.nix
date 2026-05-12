@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -9,76 +8,11 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules
   ];
-
-  # Use latest kernel.
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    loader.efi.canTouchEfiVariables = true;
-  };
-
-  finit = {
-    runlevel = 3;
-    services.nix-daemon = {
-      environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
-    };
-  };
 
   networking.hostName = "virt-manager"; # Define your hostname.
 
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
-
-  services = {
-    polkit.enable = true;
-    sysklogd.enable = true;
-    dbus.enable = true;
-    dhcpcd.enable = true;
-    openssh.enable = true;
-
-    # elogind.enable = true;
-    seatd.enable = true;
-
-    # udev doesn't work for luks... or anything else really
-    mdevd.enable = true;
-    # udev.enable = true;
-
-    lemurs = {
-      enable = true;
-      # TODO make pr that codes this path as the default since this is where all the other WMs dump their desktop entries
-      settings = {
-        wayland.wayland_sessions_path = lib.mkForce "/run/current-system/sw/share/wayland-sessions";
-        x11.xsessions_path = lib.mkForce "/run/current-system/sw/share/xsessions";
-      };
-    };
-    nix-daemon = {
-      enable = true;
-      settings = {
-
-        experimental-features = [
-          "nix-command"
-          "flakes"
-        ];
-        trusted-users = [
-          "root"
-          "@wheel"
-        ];
-      };
-    };
-  };
-
-  programs = {
-    # boot loader
-    limine = {
-      enable = true;
-      settings.editor_enabled = true; # Disable on systems that need security
-      force = true;
-    };
-
-    sudo.enable = true;
-    bash.enable = true;
-  };
+  services.lemurs.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -106,11 +40,8 @@
   # custom modules
   modules = {
     packages.enable = true;
-    # sway = {
-    #   enable = true;
-    #   user = "ryan";
-    # };
     lxqt.enable = true;
+    lxqt.user = "ryan";
   };
 
   # base packages

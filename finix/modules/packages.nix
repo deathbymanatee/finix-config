@@ -9,6 +9,7 @@ with lib;
 let
   cfg = config.modules.packages;
   maintenance = pkgs.writeShellScriptBin "maintenance" ''
+    nix-collect-garbage -d
     sudo nix-collect-garbage -d 
     sudo nix store verify --all
     sudo nix store repair --all
