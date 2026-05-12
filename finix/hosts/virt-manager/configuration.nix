@@ -13,6 +13,8 @@
   networking.hostName = "virt-manager"; # Define your hostname.
 
   services.lemurs.enable = true;
+  services.iwd.enable = true;
+  services.iwd.enableEad = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";

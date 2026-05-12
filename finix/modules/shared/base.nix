@@ -44,7 +44,6 @@
   services.sysklogd.enable = true;
   services.polkit.enable = true;
   services.dbus.enable = true;
-  services.iwd.enable = true;
   services.dhcpcd.enable = true;
   services.openssh.enable = true;
   services.upower.enable = true;
