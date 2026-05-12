@@ -159,5 +159,6 @@
     lswt
     easyeffects
     calf
+    xsettingsd
   ];
 }

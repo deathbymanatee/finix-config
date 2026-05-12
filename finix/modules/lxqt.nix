@@ -40,6 +40,7 @@ in
       lxqt.extraPackages = with pkgs; [
         # core breeze qt theme
         kdePackages.breeze
+        kdePackages.qttools
       ];
       lxqt.xsession.enable = true;
       lxqt.iconThemePackage = pkgs.papirus-icon-theme;
@@ -92,6 +93,9 @@ in
     ];
 
     xdg = {
+      portal.portals = [
+        pkgs.xdg-desktop-portal-wlr
+      ];
       mime.enable = true;
       icons.enable = true;
       autostart.enable = true;
