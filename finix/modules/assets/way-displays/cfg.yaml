@@ -45,10 +45,10 @@ SCALING: TRUE
 
 ## The default is to scale each display by DPI.
 ## This may be disabled and scale 1 will be used, unless a SCALE has been specified.
-AUTO_SCALE: TRUE
+AUTO_SCALE: FALSE
 
 ## Set an allowed range for auto scale.
-AUTO_SCALE_MIN: 1.0
+# AUTO_SCALE_MIN: 1.0
 # AUTO_SCALE_MAX: 2.0
 
 ## Auto scale may be overridden for each display.
@@ -82,6 +82,17 @@ MODE:
     WIDTH: 1280
     HEIGHT: 768
     HZ: 60
+  - NAME_DESC: 'Lenovo Group Limited 0x40A9 (eDP-1)'
+    WIDTH: 1920
+    HEIGHT: 1080
+    HZ: 60
+
+VRR_OFF:
+  - '0x40A9'
+
+SCALE: 
+  - NAME_DESC: 'Lenovo Group Limited 0x40A9 (eDP-1)'
+    SCALE: 1.25
 
 ## Rotate or translate the display.
 ## 90, 180, 270, FLIPPED, FLIPPED-90, FLIPPED-180, FLIPPED-270

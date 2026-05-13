@@ -17,6 +17,21 @@ let
     }
   );
 
+  pipewire' =
+    (pkgs.pipewire.override (
+      lib.optionalAttrs config.services.mdevd.enable {
+        enableSystemd = false;
+        udev = pkgs.libudev-zero;
+      }
+    )).overrideAttrs
+      (o: {
+        # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2398#note_2967898
+        patches =
+          o.patches or [ ] ++ lib.optionals config.services.mdevd.enable [ ./assets/pipewire/pipewire.patch ];
+      });
+
+  xdg-desktop-portal-wlr' = pkgs.xdg-desktop-portal-wlr.override ({ pipewire = pipewire'; });
+
 in
 {
   options.modules.lxqt = {
@@ -62,6 +77,8 @@ in
         gammastep
         slurp
         grim
+        nwg-look
+        xsettingsd
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
@@ -103,25 +120,28 @@ in
     xdg.mime.enable = true;
     xdg.icons.enable = true;
     xdg.autostart.enable = true;
-    xdg.portal.portals = [ pkgs.xdg-desktop-portal-wlr ];
+    xdg.portal.portals = [
+      xdg-desktop-portal-wlr'
+    ];
 
-    system.activation.scripts = mkIf (cfg.user != "") {
-      dotfiles = pkgs.lib.stringAfter [ "users" ] ''
-        home_dir=/home/${cfg.user}
-        assets_dir=$home_dir/.config/finix-config/finix/modules/assets
-        if [ ! -d "$home_dir/.config/lxqt/" ]; then
-          ln -s -r $assets_dir/lxqt/ $home_dir/.config
-          chown ${cfg.user} $home_dir/.config/sway/ -R
-        fi
-        if [ ! -d "$home_dir/.config/labwc/" ]; then
-          ln -s -r $assets_dir/labwc/ $home_dir/.config
-          chown ${cfg.user} $home_dir/.config/labwc/ -R
-        fi
-        if [ ! -d "$home_dir/.config/way-displays" ]; then
-          ln -s -r $assets_dir/way-displays/ $home_dir/.config
-          chown ${cfg.user} $home_dir/.config/way-displays/ -R
-        fi
-      '';
-    };
+    # doesn't work on fresh system install because .config doesn't exist yet
+    # system.activation.scripts = mkIf (cfg.user != "") {
+    #   dotfiles = pkgs.lib.stringAfter [ "users" ] ''
+    #     home_dir=/home/${cfg.user}
+    #     assets_dir=$home_dir/.config/finix-config/finix/modules/assets
+    #     if [ ! -d "$home_dir/.config/lxqt/" ]; then
+    #       ln -s -r $assets_dir/lxqt/ $home_dir/.config
+    #       chown ${cfg.user} $home_dir/.config/lxqt/ -R
+    #     fi
+    #     if [ ! -d "$home_dir/.config/labwc/" ]; then
+    #       ln -s -r $assets_dir/labwc/ $home_dir/.config
+    #       chown ${cfg.user} $home_dir/.config/labwc/ -R
+    #     fi
+    #     if [ ! -d "$home_dir/.config/way-displays" ]; then
+    #       ln -s -r $assets_dir/way-displays/ $home_dir/.config
+    #       chown ${cfg.user} $home_dir/.config/way-displays/ -R
+    #     fi
+    #   '';
+    # };
   };
 }

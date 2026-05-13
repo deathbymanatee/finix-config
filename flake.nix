@@ -54,6 +54,23 @@
           (./finix/hosts/virt-manager/configuration.nix)
         ];
       };
+      nixosConfigurations.thinkpad-e14 = finix.lib.finixSystem {
+        inherit (pkgs) lib;
+
+        specialArgs = {
+          modulesPath = toString nixpkgs + "/nixos/modules";
+          inherit inputs;
+        };
+
+        modules = [
+          {
+            nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
+          }
+          (./finix/hosts/thinkpad-e14/configuration.nix)
+          (./finix/modules/shared/base.nix)
+          (./finix/modules)
+        ];
+      };
       nixosConfigurations.virtualbox = finix.lib.finixSystem {
         inherit (pkgs) lib;
 
