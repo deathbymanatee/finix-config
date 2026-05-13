@@ -31,30 +31,9 @@
           {
             nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
           }
-
+          (./finix/modules/shared/base.nix)
           (./finix/hosts/home-desktop/configuration.nix)
-
           (./finix/modules)
-
-          nix-daemon
-          openssh
-          sysklogd
-          limine
-          sudo
-          polkit
-          getty
-          bash
-          dhcpcd
-          lemurs
-          flatpak
-          sway
-          gvfs
-          udisks2
-          xwayland-satellite
-          rtkit
-          fwupd
-          lxqt
-          xserver
         ];
       };
 

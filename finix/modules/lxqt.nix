@@ -60,6 +60,8 @@ in
         labwc-tweaks
         way-displays
         gammastep
+        slurp
+        grim
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
@@ -101,7 +103,7 @@ in
     xdg.mime.enable = true;
     xdg.icons.enable = true;
     xdg.autostart.enable = true;
-    xdg.portal.portals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    xdg.portal.portals = [ pkgs.xdg-desktop-portal-wlr ];
 
     system.activation.scripts = mkIf (cfg.user != "") {
       dotfiles = pkgs.lib.stringAfter [ "users" ] ''

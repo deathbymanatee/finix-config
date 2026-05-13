@@ -26,6 +26,7 @@
     lxqt
     zzz
     fwupd
+    xserver
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
