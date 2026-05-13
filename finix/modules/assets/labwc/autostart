@@ -21,4 +21,4 @@ sleep 0.5; pipewire-pulse >/dev/null 2>&1 &
 sleep 0.5; easyeffects &
 sleep 0.5; qpwgraph &
 way-displays >/dev/null 2>&1 &
-sleep 3; gammastep -O 3725 >/dev/null 2>&1 &
+gammastep -O 3725 >/dev/null 2>&1 &

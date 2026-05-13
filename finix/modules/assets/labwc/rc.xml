@@ -10,7 +10,7 @@
 -->
 <labwc_config>
   <core>
-    <decoration>server</decoration>
+    <decoration>client</decoration>
     <gap>0</gap>
     <adaptiveSync>no</adaptiveSync>
     <allowTearing>no</allowTearing>
@@ -40,7 +40,7 @@
       <layout>icon:iconify,max,close</layout>
       <showTitle>yes</showTitle>
     </titlebar>
-    <cornerRadius>10</cornerRadius>
+    <cornerRadius>5</cornerRadius>
     <keepBorder>yes</keepBorder>
     <maximizedDecoration>titlebar</maximizedDecoration>
     <dropShadows>yes</dropShadows>

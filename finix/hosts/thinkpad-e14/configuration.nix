@@ -54,5 +54,6 @@
     # lagniappe
     btop-rocm
     inxi
+    vesktop
   ];
 }

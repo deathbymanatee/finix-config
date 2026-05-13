@@ -31,8 +31,8 @@
           {
             nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
           }
-          (./finix/modules/shared/base.nix)
           (./finix/hosts/home-desktop/configuration.nix)
+          (./finix/modules/shared/base.nix)
           (./finix/modules)
         ];
       };
@@ -49,9 +49,9 @@
           {
             nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
           }
+          (./finix/hosts/virt-manager/configuration.nix)
           (./finix/modules/shared/base.nix)
           (./finix/modules)
-          (./finix/hosts/virt-manager/configuration.nix)
         ];
       };
       nixosConfigurations.thinkpad-e14 = finix.lib.finixSystem {
@@ -83,27 +83,9 @@
           {
             nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
           }
-
           (./finix/hosts/virtualbox/configuration.nix)
-
+          (./finix/modules/shared/base.nix)
           (./finix/modules)
-
-          # TODO modules/shared?
-          nix-daemon
-          openssh
-          sysklogd
-          limine
-          sudo
-          polkit
-          getty
-          bash
-          dhcpcd
-          lemurs
-          flatpak
-          sway
-          gvfs
-          udisks2
-          xwayland-satellite
         ];
       };
     };

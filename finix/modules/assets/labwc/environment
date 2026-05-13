@@ -36,7 +36,7 @@
 ##
 
 # XDG_CURRENT_DESKTOP=LXQt:labwc:wlroots
-QT_LOGGING_RULES="*.debug=false;lxqt-session.debug=true;lxqt-panel.debug=true;lxqt-runner.debug=true"
+QT_LOGGING_RULES="*.debug
 
 ##
 ## This causes a virtual output to be created automatically whenever there
