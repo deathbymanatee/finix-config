@@ -10,7 +10,7 @@
 -->
 <labwc_config>
   <core>
-    <decoration>client</decoration>
+    <decoration>server</decoration>
     <gap>0</gap>
     <adaptiveSync>no</adaptiveSync>
     <allowTearing>no</allowTearing>

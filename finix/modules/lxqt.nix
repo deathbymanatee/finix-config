@@ -79,6 +79,7 @@ in
         grim
         nwg-look
         xsettingsd
+        lswt
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala

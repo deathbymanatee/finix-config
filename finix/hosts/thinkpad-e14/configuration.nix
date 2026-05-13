@@ -30,7 +30,6 @@
   users.users.ryan = {
     isNormalUser = true;
     description = "test user";
-    password = "$6$ngczIvXSmPJM8QvC$1SAzUXaGCu8L/R/rgIeIiSCQUrkMPWcLgyEO0n5mCl9oBwYNeKTOEZp8eSQ3Cfa7uPBtetKmMGMDyrCaecqo20";
     extraGroups = [
       "wheel"
       "input"
