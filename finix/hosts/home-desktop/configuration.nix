@@ -13,8 +13,6 @@
   networking.hostName = "home-desktop"; # Define your hostname.
 
   services.lemurs.enable = true;
-  services.flatpak.enable = true;
-  services.flatpak.extraGroups = [ config.services.seatd.group ];
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -52,6 +50,6 @@
     # lagniappe
     btop-rocm
     inxi
-    xsettingsd
+    vesktop
   ];
 }
