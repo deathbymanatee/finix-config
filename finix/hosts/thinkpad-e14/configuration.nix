@@ -48,6 +48,7 @@
     packages.enable = true;
     lxqt.enable = true;
     lxqt.user = "ryan";
+    lxqt.enableXorg = true;
     pipewire.enable = true;
     vesktop.enable = true;
   };
