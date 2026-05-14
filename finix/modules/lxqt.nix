@@ -79,6 +79,7 @@ in
         grim
         xsettingsd
         lswt
+        satty
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
@@ -122,6 +123,7 @@ in
     xdg.autostart.enable = true;
     xdg.portal.portals = [
       xdg-desktop-portal-wlr'
+      pkgs.xdg-desktop-portal-gtk
     ];
 
     # doesn't work on fresh system install because .config doesn't exist yet
