@@ -9,5 +9,6 @@
     ./ratpoison.nix
     ./pipewire.nix
     ./steam.nix
+    ./vesktop.nix
   ];
 }

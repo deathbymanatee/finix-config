@@ -27,6 +27,8 @@
     zzz
     fwupd
     xserver
+    brightnessctl
+    ly
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;

@@ -33,7 +33,7 @@
   </placement>
   <!-- <font><theme> can be defined without an attribute to set all places -->
   <theme>
-    <name>Vent-dark</name>
+    <name>GTK</name>
     <icon>breeze-dark</icon>
     <fallbackAppIcon>labwc</fallbackAppIcon>
     <titlebar>
@@ -287,7 +287,7 @@
     <keybind key="W-D">
       <action name="Execute" command="lxqt-qdbus showdesktop"/>
     </keybind>
-    <keybind key="A-F1">
+    <keybind key="W-Space">
       <action name="Execute" command="lxqt-qdbus openmenu"/>
     </keybind>
     <!-- End LXQt Keybindings -->
@@ -331,10 +331,10 @@
       <action name="Execute" command="lxqt-qdbus volume mute"/>
     </keybind>
     <keybind key="XF86_MonBrightnessUp">
-      <action name="Execute" command="lxqt-config-brightness -i"/>
+      <action name="Execute" command="brightnessctl s 5%+"/>
     </keybind>
     <keybind key="XF86_MonBrightnessDown">
-      <action name="Execute" command="lxqt-config-brightness -d"/>
+      <action name="Execute" command="brightnessctl s 5%-"/>
     </keybind>
     <!-- SnapToRegion via W-Numpad -->
     <!--
@@ -661,13 +661,6 @@
     #     patterns (see glob(7)) so '\*' (not between brackets) matches any
     #     string and '?' matches any single character.
 
-    <windowRules>
-      <windowRule identifier="*"><action name="Maximize"/></windowRule>
-      <windowRule identifier="foo" serverDecoration="yes"/>
-      <windowRule title="bar" serverDecoration="yes"/>
-      <windowRule identifier="baz" title="quax" serverDecoration="yes"/>
-    </windowRules>
-
     # Example below for `lxqt-panel` and `pcmanfm-qt \-\-desktop`
     # where 'matchOnce' is used to avoid applying rule to the panel
     # configuration window with the same 'app_id'.
@@ -691,6 +684,11 @@
       </windowRule>
     </windowRules>
   -->
+
+  <windowRules>
+    <windowRule identifier="librewolf" serverDecoration="yes"/>
+  </windowRules>
+
   <menu>
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
     <showIcons>yes</showIcons>

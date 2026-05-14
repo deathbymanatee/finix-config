@@ -12,11 +12,13 @@
 
   networking.hostName = "thinkpad-e14"; # Define your hostname.
 
-  services.lemurs.enable = true;
   services.iwd.enable = true;
   services.iwd.enableEad = true;
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
+  services.ly.enable = true;
+
+  programs.brightnessctl.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -47,6 +49,7 @@
     lxqt.enable = true;
     lxqt.user = "ryan";
     pipewire.enable = true;
+    vesktop.enable = true;
   };
 
   # base packages
@@ -54,6 +57,5 @@
     # lagniappe
     btop-rocm
     inxi
-    vesktop
   ];
 }
