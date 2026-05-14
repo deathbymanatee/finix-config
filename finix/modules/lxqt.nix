@@ -77,7 +77,6 @@ in
         gammastep
         slurp
         grim
-        nwg-look
         xsettingsd
         lswt
       ]
