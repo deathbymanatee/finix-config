@@ -38,20 +38,19 @@
       "audio"
       "video"
       "render"
+      "tty"
       # comment out if using elogind
       config.services.seatd.group
     ];
   };
 
   # custom modules
-  modules = {
-    packages.enable = true;
-    lxqt.enable = true;
-    lxqt.user = "ryan";
-    lxqt.enableXorg = true;
-    pipewire.enable = true;
-    vesktop.enable = true;
-  };
+  modules.packages.enable = true;
+  modules.lxqt.enable = true;
+  modules.lxqt.user = "ryan";
+  modules.lxqt.enableXorg = true;
+  modules.pipewire.enable = true;
+  modules.vesktop.enable = true;
 
   # base packages
   environment.systemPackages = with pkgs; [

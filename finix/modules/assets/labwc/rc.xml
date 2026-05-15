@@ -692,9 +692,6 @@
       </windowRule>
     </windowRules>
   -->
-  <windowRules>
-    <windowRule identifier="librewolf" serverDecoration="yes"/>
-  </windowRules>
   <menu>
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
     <showIcons>yes</showIcons>

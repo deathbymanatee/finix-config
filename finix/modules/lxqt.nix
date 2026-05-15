@@ -59,16 +59,18 @@ in
     programs.xwayland-satellite.enable = true;
     programs.lxqt.enable = true;
     programs.lxqt.xsession.enable = cfg.enableXorg;
+    programs.lxqt.iconTheme = pkgs.papirus-icon-theme;
     services.xserver.enable = cfg.enableXorg;
     programs.lxqt.extraPackages =
       with pkgs;
       [
         # core breeze qt theme
         kdePackages.breeze
+        kdePackages.breeze-icons
         kdePackages.breeze-gtk
         kdePackages.qttools
         kdePackages.ark
-        papirus-icon-theme
+        hicolor-icon-theme
         keepassxc
         librewolf
         thunar
@@ -83,6 +85,10 @@ in
         xsettingsd
         lswt
         satty
+        swayidle
+        wlprop
+        lxqt.qlipper
+        swaylock
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
@@ -90,6 +96,7 @@ in
 
     fonts.fontconfig.enable = true;
     fonts.enableDefaultPackages = true;
+    fonts.fontconfig.useEmbeddedBitmaps = true;
     fonts.packages = with pkgs; [
       noto-fonts
       noto-fonts-color-emoji
@@ -129,7 +136,7 @@ in
     xdg.autostart.enable = true;
     xdg.portal.portals = [
       xdg-desktop-portal-wlr'
-      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
     ];
 
     # doesn't work on fresh system install because .config doesn't exist yet

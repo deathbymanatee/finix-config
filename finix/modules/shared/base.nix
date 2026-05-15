@@ -29,6 +29,8 @@
     xserver
     brightnessctl
     ly
+    tuigreet
+    greetd
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
