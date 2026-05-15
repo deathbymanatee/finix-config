@@ -31,6 +31,7 @@
     ly
     tuigreet
     greetd
+    pmount
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;

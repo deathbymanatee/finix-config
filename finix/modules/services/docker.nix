@@ -1,4 +1,5 @@
-# Systemd services for docker.
+# Docker service.
+# mostly lifted from nixpkgs/nixos/modules/virtualization/docker.nix then ported to finit
 
 {
   config,

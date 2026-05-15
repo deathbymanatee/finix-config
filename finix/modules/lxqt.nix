@@ -57,6 +57,7 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.xwayland-satellite.enable = true;
+    programs.pmount.enable = true;
     programs.lxqt.enable = true;
     programs.lxqt.xsession.enable = cfg.enableXorg;
     programs.lxqt.iconTheme = pkgs.papirus-icon-theme;
@@ -88,7 +89,7 @@ in
         swayidle
         wlprop
         lxqt.qlipper
-        swaylock
+        swaylock-effects
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
@@ -130,6 +131,10 @@ in
       thunar-volman
       thunar-archive-plugin
     ];
+
+    security.pam.services.swaylock = {
+      text = "auth include login";
+    };
 
     xdg.mime.enable = true;
     xdg.icons.enable = true;
