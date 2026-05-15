@@ -67,10 +67,13 @@ in
         kdePackages.breeze
         kdePackages.breeze-gtk
         kdePackages.qttools
+        kdePackages.ark
         papirus-icon-theme
         keepassxc
         librewolf
         thunar
+        thunar-volman
+        thunar-archive-plugin
         foot
         labwc-tweaks
         way-displays
@@ -116,6 +119,9 @@ in
       tumbler
       dconf
       xfconf
+      thunar
+      thunar-volman
+      thunar-archive-plugin
     ];
 
     xdg.mime.enable = true;

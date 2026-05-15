@@ -10,5 +10,6 @@
     ./pipewire.nix
     ./steam.nix
     ./vesktop.nix
+    ./audio-prod.nix
   ];
 }

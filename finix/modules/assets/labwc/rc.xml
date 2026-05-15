@@ -34,7 +34,7 @@
   <!-- <font><theme> can be defined without an attribute to set all places -->
   <theme>
     <name>GTK</name>
-    <icon>breeze-dark</icon>
+    <icon>Papirus-Dark</icon>
     <fallbackAppIcon>labwc</fallbackAppIcon>
     <titlebar>
       <layout>icon:iconify,max,close</layout>
@@ -692,11 +692,9 @@
       </windowRule>
     </windowRules>
   -->
-
   <windowRules>
     <windowRule identifier="librewolf" serverDecoration="yes"/>
   </windowRules>
-
   <menu>
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
     <showIcons>yes</showIcons>

@@ -12,9 +12,9 @@
 
   networking.hostName = "home-desktop"; # Define your hostname.
 
-  services.lemurs.enable = true;
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
+  services.ly.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -46,12 +46,13 @@
   modules.pipewire.enable = true;
   modules.steam.enable = true;
   modules.cups.enable = true;
+  modules.vesktop.enable = true;
+  modules.audioProd.enable = true;
 
   # base packages
   environment.systemPackages = with pkgs; [
     # lagniappe
     btop-rocm
     inxi
-    vesktop
   ];
 }
