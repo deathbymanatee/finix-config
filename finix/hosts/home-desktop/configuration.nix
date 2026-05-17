@@ -62,5 +62,7 @@ in
 
     # kwin test
     (kdePackages.kwin.override ({ inherit libinput; }))
+
+    libva-utils
   ];
 }

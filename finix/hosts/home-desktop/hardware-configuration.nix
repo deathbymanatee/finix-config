@@ -22,10 +22,13 @@
     "dm_crypt"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [
+    "kvm-amd"
+    "snd_seq"
+  ];
   boot.extraModulePackages = [ ];
 
-  hardware.firmware = with pkgs; [ 
+  hardware.firmware = with pkgs; [
     linux-firmware
     ipw2200-firmware
     rtl8192su-firmware

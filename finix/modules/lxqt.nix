@@ -91,6 +91,7 @@ in
         lxqt.qlipper
         swaylock-effects
         playerctl
+        bemenu
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
