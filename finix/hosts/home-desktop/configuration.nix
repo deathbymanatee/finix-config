@@ -4,6 +4,12 @@
   ...
 }:
 
+let
+  libinput = pkgs.libinput.override ({
+    udev = pkgs.libudev-zero;
+    wacomSupport = false;
+  });
+in
 {
   imports = [
     # Include the results of the hardware scan.
@@ -43,7 +49,6 @@
   modules.packages.enable = true;
   modules.lxqt.enable = true;
   modules.lxqt.user = "ryan";
-  modules.pipewire.enable = true;
   modules.steam.enable = true;
   modules.cups.enable = true;
   modules.vesktop.enable = true;
@@ -54,5 +59,8 @@
     # lagniappe
     btop-rocm
     inxi
+
+    # kwin test
+    (kdePackages.kwin.override ({ inherit libinput; }))
   ];
 }

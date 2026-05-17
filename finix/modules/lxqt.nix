@@ -90,6 +90,7 @@ in
         wlprop
         lxqt.qlipper
         swaylock-effects
+        playerctl
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
@@ -141,8 +142,18 @@ in
     xdg.autostart.enable = true;
     xdg.portal.portals = [
       xdg-desktop-portal-wlr'
-      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
     ];
+
+    # kwin test
+    security.wrappers = {
+      kwin_wayland = {
+        owner = "root";
+        group = "root";
+        capabilities = "cap_sys_nice+ep";
+        source = "${lib.getBin pkgs.kdePackages.kwin}/bin/kwin_wayland";
+      };
+    };
 
     # doesn't work on fresh system install because .config doesn't exist yet
     # system.activation.scripts = mkIf (cfg.user != "") {

@@ -5,11 +5,25 @@ let
     config = { };
     overlays = [ ];
   };
+  # libinput = pkgs.libinput.override ({
+  #   udev = pkgs.libudev-zero;
+  #   wacomSupport = false;
+  # });
 in
 
 pkgs.mkShellNoCC {
   packages = with pkgs; [
-    labwc-gtktheme
-    libva-utils
+    # labwc theme creator
+    # labwc-gtktheme
+
+    # vulkan utils (provides vulkaninfo)
+    # libva-utils
+
+    # kwin test
+    # (kdePackages.kwin.override ({ inherit libinput; }))
+
+    perl
+    unzip
+    zip
   ];
 }

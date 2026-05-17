@@ -201,7 +201,9 @@
   <desktops>
     <popupTime>1000</popupTime>
     <names>
-      <name>Default</name>
+      <name>1</name>
+      <name>2</name>
+      <name>3</name>
     </names>
   </desktops>
   <!--
@@ -343,6 +345,12 @@
       <action name="Execute">
         <command>sh -c 'grim -g "$(slurp)" -t ppm - | satty --filename - --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png'</command>
       </action>
+    </keybind>
+    <keybind key="C-W-Left">
+      <action name="GoToDesktop" to="left" wrap="yes"/>
+    </keybind>
+    <keybind key="C-W-Right">
+      <action name="GoToDesktop" to="right" wrap="yes"/>
     </keybind>
     <!-- SnapToRegion via W-Numpad -->
     <!--
@@ -672,26 +680,33 @@
     # Example below for `lxqt-panel` and `pcmanfm-qt \-\-desktop`
     # where 'matchOnce' is used to avoid applying rule to the panel
     # configuration window with the same 'app_id'.
+  -->
 
     <windowRules>
-      <windowRule identifier="lxqt-panel" matchOnce="true">
-        <skipTaskbar>yes</skipTaskbar>
-        <action name="MoveTo" x="0" y="0" />
-        <action name="ToggleAlwaysOnTop"/>
-      </windowRule>
-      <windowRule title="pcmanfm-desktop*">
-        <skipTaskbar>yes</skipTaskbar>
-        <skipWindowSwitcher>yes</skipWindowSwitcher>
-        <fixedPosition>yes</fixedPosition>
-        <action name="MoveTo" x="0" y="0" />
-        <action name="ToggleAlwaysOnBottom"/>
-      </windowRule>
-      <windowRule identifier="org.qutebrowser.qutebrowser">
-        <action name="ResizeTo" width="1024" height="800" />
-        <action name="AutoPlace"/>
+      <!--
+        # <windowRule identifier="lxqt-panel" matchOnce="true">
+        #   <skipTaskbar>yes</skipTaskbar>
+        #   <action name="MoveTo" x="0" y="0" />
+        #   <action name="ToggleAlwaysOnTop"/>
+        # </windowRule>
+        # <windowRule title="pcmanfm-desktop*">
+        #   <skipTaskbar>yes</skipTaskbar>
+        #   <skipWindowSwitcher>yes</skipWindowSwitcher>
+        #   <fixedPosition>yes</fixedPosition>
+        #   <action name="MoveTo" x="0" y="0" />
+        #   <action name="ToggleAlwaysOnBottom"/>
+        # </windowRule>
+        # <windowRule identifier="org.qutebrowser.qutebrowser">
+        #   <action name="ResizeTo" width="1024" height="800" />
+        #   <action name="AutoPlace"/>
+        # </windowRule>
+      -->
+      <windowRule identifier="steam*">
+        <action name="MoveToOutput" output="DP-3"/>
       </windowRule>
     </windowRules>
-  -->
+
+
   <menu>
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
     <showIcons>yes</showIcons>
