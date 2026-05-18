@@ -681,9 +681,8 @@
     # where 'matchOnce' is used to avoid applying rule to the panel
     # configuration window with the same 'app_id'.
   -->
-
-    <windowRules>
-      <!--
+  <windowRules>
+    <!--
         # <windowRule identifier="lxqt-panel" matchOnce="true">
         #   <skipTaskbar>yes</skipTaskbar>
         #   <action name="MoveTo" x="0" y="0" />
@@ -701,12 +700,10 @@
         #   <action name="AutoPlace"/>
         # </windowRule>
       -->
-      <windowRule identifier="steam*">
-        <action name="MoveToOutput" output="DP-3"/>
-      </windowRule>
-    </windowRules>
-
-
+    <windowRule identifier="steam*">
+      <action name="MoveToOutput" output="DP-3"/>
+    </windowRule>
+  </windowRules>
   <menu>
     <ignoreButtonReleasePeriod>250</ignoreButtonReleasePeriod>
     <showIcons>yes</showIcons>

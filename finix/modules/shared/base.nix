@@ -36,7 +36,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "loglevel=1" ];
+  # boot.kernelParams = [ "loglevel=1" ];
 
   finit.runlevel = 3;
   finit.services = {

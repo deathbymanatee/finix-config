@@ -13,7 +13,11 @@
   networking.hostName = "thinkpad-e14"; # Define your hostname.
 
   services.iwd.enable = true;
-  services.iwd.enableEad = true;
+
+  # use only on deathbymanatee/finix/main
+  # monitor https://github.com/finix-community/finix/pull/66
+  # services.iwd.enableEad = true;
+
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
   services.ly.enable = true;
@@ -57,5 +61,7 @@
     # lagniappe
     btop-rocm
     inxi
+
+    libva-utils
   ];
 }
