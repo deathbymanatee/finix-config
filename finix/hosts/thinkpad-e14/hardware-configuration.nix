@@ -20,10 +20,10 @@
     "dm_crypt"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
-    echo "sleeping for 1s"
-    sleep 1
-  '';
+  # boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
+  #   echo "sleeping for 1s"
+  #   sleep 1
+  # '';
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
@@ -45,7 +45,8 @@
   };
 
   fileSystems."crypted" = {
-    device = "/dev/disk/by-uuid/44e57707-0cc7-4305-a323-9b4d1fafa454";
+    # device = "/dev/disk/by-uuid/44e57707-0cc7-4305-a323-9b4d1fafa454";
+    device = "/dev/nvme0n1p3";
     fsType = "luks";
     neededForBoot = true;
     options = [ "--allow-discards" ];

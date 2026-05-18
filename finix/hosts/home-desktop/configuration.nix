@@ -16,6 +16,8 @@ in
     ./hardware-configuration.nix
   ];
 
+  boot.kernelParams = [ "loglevel=1" ];
+
   networking.hostName = "home-desktop"; # Define your hostname.
 
   services.flatpak.enable = true;
