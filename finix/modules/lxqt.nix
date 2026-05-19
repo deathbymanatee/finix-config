@@ -91,7 +91,7 @@ in
         lxqt.qlipper
         swaylock-effects
         playerctl
-        bemenu
+        lxqt.lxqt-panel-profiles
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
@@ -145,35 +145,5 @@ in
       xdg-desktop-portal-wlr'
       pkgs.xdg-desktop-portal-gtk
     ];
-
-    # kwin test
-    security.wrappers = {
-      kwin_wayland = {
-        owner = "root";
-        group = "root";
-        capabilities = "cap_sys_nice+ep";
-        source = "${lib.getBin pkgs.kdePackages.kwin}/bin/kwin_wayland";
-      };
-    };
-
-    # doesn't work on fresh system install because .config doesn't exist yet
-    # system.activation.scripts = mkIf (cfg.user != "") {
-    #   dotfiles = pkgs.lib.stringAfter [ "users" ] ''
-    #     home_dir=/home/${cfg.user}
-    #     assets_dir=$home_dir/.config/finix-config/finix/modules/assets
-    #     if [ ! -d "$home_dir/.config/lxqt/" ]; then
-    #       ln -s -r $assets_dir/lxqt/ $home_dir/.config
-    #       chown ${cfg.user} $home_dir/.config/lxqt/ -R
-    #     fi
-    #     if [ ! -d "$home_dir/.config/labwc/" ]; then
-    #       ln -s -r $assets_dir/labwc/ $home_dir/.config
-    #       chown ${cfg.user} $home_dir/.config/labwc/ -R
-    #     fi
-    #     if [ ! -d "$home_dir/.config/way-displays" ]; then
-    #       ln -s -r $assets_dir/way-displays/ $home_dir/.config
-    #       chown ${cfg.user} $home_dir/.config/way-displays/ -R
-    #     fi
-    #   '';
-    # };
   };
 }

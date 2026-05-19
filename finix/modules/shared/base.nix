@@ -41,6 +41,9 @@
   finit.services = {
     nix-daemon.environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
   };
+  finit.cgroups.system.settings = {
+    "cpu.weight" = 100;
+  };
 
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
@@ -49,7 +52,7 @@
   services.sysklogd.enable = true;
   services.polkit.enable = true;
   services.dbus.enable = true;
-  services.dhcpcd.enable = true;
+  services.dhcpcd.enable = true; # enable iwd for wireless
   services.openssh.enable = true;
   services.upower.enable = true;
   services.rtkit.enable = true;
@@ -71,33 +74,28 @@
   services.mdevd = {
     enable = true;
     nlgroups = 4;
-    debug = true;
+    # debug = true;
   };
 
   # required workaround to get /dev/disk/by-uuid/* mounts to work
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
   boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
-
     mkdir -p /dev/disk/by-label /dev/disk/by-uuid
-
     current_dev=""
-
     blkid --output export | while IFS='=' read -r key value; do
-        case "$key" in
-            DEVNAME)
-                current_dev="$value"
-                ;;
-            LABEL)
-                [ -n "$current_dev" ] || continue
-
-                ln -snf "$current_dev" "/dev/disk/by-label/$value"
-                ;;
-            UUID)
-                [ -n "$current_dev" ] || continue
-
-                ln -snf "$current_dev" "/dev/disk/by-uuid/$value"
-                ;;
-        esac
+      case "$key" in
+        DEVNAME)
+          current_dev="$value"
+          ;;
+        LABEL)
+          [ -n "$current_dev" ] || continue
+          ln -snf "$current_dev" "/dev/disk/by-label/$value"
+          ;;
+        UUID)
+          [ -n "$current_dev" ] || continue
+          ln -snf "$current_dev" "/dev/disk/by-uuid/$value"
+          ;;
+      esac
     done
   '';
 
@@ -110,6 +108,7 @@
     settings.editor_enabled = true;
   };
 
+  # still requires sudo poweroff, cannot use org.freedesktop power commands in graphical environments
   providers.privileges.rules = lib.optionals config.services.seatd.enable [
     {
       command = "/run/current-system/sw/bin/poweroff";

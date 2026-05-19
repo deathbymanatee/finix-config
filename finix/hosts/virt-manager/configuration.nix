@@ -12,10 +12,6 @@
 
   networking.hostName = "virt-manager"; # Define your hostname.
 
-  services.lemurs.enable = true;
-  services.iwd.enable = true;
-  services.iwd.enableEad = true;
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -40,12 +36,10 @@
   };
 
   # custom modules
-  modules = {
-    packages.enable = true;
-    lxqt.enable = true;
-    lxqt.user = "ryan";
-    lxqt.enableXorg = true;
-  };
+  modules.packages.enable = true;
+  modules.lxqt.enable = true;
+  modules.lxqt.user = "ryan";
+  modules.lxqt.enableXorg = true;
 
   # base packages
   environment.systemPackages = with pkgs; [
