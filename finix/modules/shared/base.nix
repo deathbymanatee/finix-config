@@ -71,6 +71,7 @@
   services.mdevd = {
     enable = true;
     nlgroups = 4;
+    debug = true;
   };
 
   # system programs
