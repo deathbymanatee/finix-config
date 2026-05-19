@@ -37,7 +37,7 @@ in
   options.modules.lxqt = {
     enable = mkEnableOption "lxqt";
 
-    # keep an eye on https://github.com/feel-co/hjem/pull/130
+    # TODO monitor https://github.com/feel-co/hjem/pull/130
     user = mkOption {
       type = types.str;
       default = "";

@@ -3,7 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    finix.url = "git+file:///home/ryan/Documents/finix";
+    finix.url = "github:finix-community/finix";
+
+    # local test input
+    # finix.url = "git+file:///home/ryan/Documents/finix";
   };
 
   outputs =

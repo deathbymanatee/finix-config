@@ -2,17 +2,17 @@
   "nodes": {
     "finix": {
       "locked": {
-        "lastModified": 1779209921,
-        "narHash": "sha256-UTZ+oC9bY5rIhDqATM+29gn8M+fxtOhgDYLyIYXdTYw=",
-        "ref": "refs/heads/mdevd-fix-disk-race",
-        "rev": "09c0f6fa882ba8d93de057d426161d6c45400b44",
-        "revCount": 496,
-        "type": "git",
-        "url": "file:///home/ryan/Documents/finix"
+        "lastModified": 1779135915,
+        "narHash": "sha256-UC9lwDxB+acqUIdOBsJV3nfXvm3h67yQHuOwrGd4T1Q=",
+        "owner": "finix-community",
+        "repo": "finix",
+        "rev": "fe276e88a3d9439afb459e6e2c0d85f5ff780352",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/ryan/Documents/finix"
+        "owner": "finix-community",
+        "repo": "finix",
+        "type": "github"
       }
     },
     "nixpkgs": {

@@ -15,7 +15,7 @@
   services.iwd.enable = true;
 
   # use only on deathbymanatee/finix/main
-  # monitor https://github.com/finix-community/finix/pull/66
+  # TODO monitor https://github.com/finix-community/finix/pull/66
   # services.iwd.enableEad = true;
 
   services.flatpak.enable = true;

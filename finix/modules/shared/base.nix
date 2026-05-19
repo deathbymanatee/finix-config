@@ -74,6 +74,33 @@
     debug = true;
   };
 
+  # required workaround to get /dev/disk/by-uuid/* mounts to work
+  # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
+  boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
+
+    mkdir -p /dev/disk/by-label /dev/disk/by-uuid
+
+    current_dev=""
+
+    blkid --output export | while IFS='=' read -r key value; do
+        case "$key" in
+            DEVNAME)
+                current_dev="$value"
+                ;;
+            LABEL)
+                [ -n "$current_dev" ] || continue
+
+                ln -snf "$current_dev" "/dev/disk/by-label/$value"
+                ;;
+            UUID)
+                [ -n "$current_dev" ] || continue
+
+                ln -snf "$current_dev" "/dev/disk/by-uuid/$value"
+                ;;
+        esac
+    done
+  '';
+
   # system programs
   programs.sudo.enable = true;
   programs.bash.enable = true;

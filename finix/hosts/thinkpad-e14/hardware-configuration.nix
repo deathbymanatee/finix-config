@@ -20,11 +20,10 @@
     "dm_crypt"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
-    sleep 1
-    mdevd-coldplug -O 2
-    sleep 1
-  '';
+
+  # TODO monitor https://github.com/finix-community/finix/pull/69
+  # boot.initrd.emergencyAccess = true;
+
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
@@ -47,14 +46,13 @@
 
   fileSystems."crypted" = {
     device = "/dev/disk/by-uuid/44e57707-0cc7-4305-a323-9b4d1fafa454";
-    # device = "/dev/nvme0n1p3";
     fsType = "luks";
     neededForBoot = true;
     options = [ "--allow-discards" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/nvme0n1p1";
+    device = "/dev/disk/by-uuid/38D0-460C";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -63,6 +61,6 @@
   };
 
   swapDevices = [
-    { device = "/dev/nvme0n1p2"; }
+    { device = "/dev/disk/by-uuid/c4ce02d2-e6dd-4058-b0c7-9737f6772094"; }
   ];
 }
