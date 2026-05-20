@@ -13,6 +13,7 @@
   networking.hostName = "thinkpad-e14"; # Define your hostname.
 
   services.iwd.enable = true;
+  services.docker.enable = true;
 
   # use only on deathbymanatee/finix/main
   # TODO monitor https://github.com/finix-community/finix/pull/66
@@ -63,5 +64,6 @@
     inxi
 
     libva-utils
+    systemfd
   ];
 }

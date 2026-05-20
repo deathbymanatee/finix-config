@@ -77,7 +77,7 @@
     # debug = true;
   };
 
-  # required workaround to get /dev/disk/by-uuid/* mounts to work
+  # required workaround to get /dev/disk/by-uuid/* mounts to work with mdevd
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
   boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
     mkdir -p /dev/disk/by-label /dev/disk/by-uuid

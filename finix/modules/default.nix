@@ -1,6 +1,7 @@
 { config, ... }:
 {
   imports = [
+    ./services/docker.nix
     ./cups.nix
     ./sway.nix
     ./packages.nix

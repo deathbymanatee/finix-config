@@ -1,5 +1,4 @@
 # Docker service.
-# mostly lifted from nixpkgs/nixos/modules/virtualization/docker.nix then ported to finit
 
 {
   config,
@@ -14,9 +13,14 @@ with lib;
 let
 
   cfg = config.services.docker;
-  proxy_env = config.networking.proxy.envVars;
+  # proxy_env = config.networking.proxy.envVars;
   settingsFormat = pkgs.formats.json { };
   daemonSettingsFile = settingsFormat.generate "daemon.json" cfg.daemon.settings;
+
+  command = pkgs.writeShellScriptBin ''
+    ${pkgs.systemfd}/bin/systemfd -s unix::/run/docker.sock -- ${cfg.package}/bin/dockerd --config-file=${daemonSettingsFile} ${cfg.extraOptions}
+  '';
+
 in
 
 {
@@ -38,7 +42,7 @@ in
       type = types.listOf types.str;
       default = [ "/run/docker.sock" ];
       description = ''
-        A list of unix and tcp docker should listen to. The format follows
+        A list of unix and tcp sockets docker should listen to. The format follows
         ListenStream as described in {manpage}`systemd.socket(5)`.
       '';
     };
@@ -60,10 +64,7 @@ in
         options = {
           live-restore = mkOption {
             type = types.bool;
-            # Prior to NixOS 24.11, this was set to true by default, while upstream defaulted to false.
-            # Keep the option unset to follow upstream defaults
-            default = versionOlder config.system.stateVersion "24.11";
-            defaultText = literalExpression "lib.versionOlder config.system.stateVersion \"24.11\"";
+            default = false;
             description = ''
               Allow dockerd to be restarted without affecting running container.
               This option is incompatible with docker swarm.
@@ -80,16 +81,6 @@ in
       description = ''
         Configuration for docker daemon. The attributes are serialized to JSON used as daemon.conf.
         See <https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file>
-      '';
-    };
-
-    enableNvidia = mkOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        **Deprecated**, please use hardware.nvidia-container-toolkit.enable instead.
-
-        Enable Nvidia GPU support inside docker containers.
       '';
     };
 
@@ -135,7 +126,7 @@ in
         "gcplogs"
         "local"
       ];
-      default = "journald";
+      default = "syslog";
       description = ''
         This option determines which Docker log driver to use.
       '';
@@ -221,18 +212,6 @@ in
     };
   };
 
-  imports = [
-    (mkRemovedOptionModule [
-      "virtualisation"
-      "docker"
-      "socketActivation"
-    ] "This option was removed and socket activation is now always active")
-    (mkAliasOptionModule
-      [ "virtualisation" "docker" "liveRestore" ]
-      [ "virtualisation" "docker" "daemon" "settings" "live-restore" ]
-    )
-  ];
-
   ###### implementation
 
   config = mkIf cfg.enable (mkMerge [
@@ -247,46 +226,32 @@ in
         "net.ipv4.conf.all.forwarding" = mkOverride 98 true;
         "net.ipv4.conf.default.forwarding" = mkOverride 98 true;
       };
-      environment.systemPackages = [ cfg.package ];
+      environment.systemPackages = [
+        cfg.package
+
+        # wrapper to manage our unix socket(s)
+        pkgs.systemfd
+      ];
       users.groups.docker.gid = config.ids.gids.docker;
-      systemd.packages = [ cfg.package ];
 
-      # Docker 25.0.0 supports CDI by default
-      # (https://docs.docker.com/engine/release-notes/25.0/#new). Encourage
-      # moving to CDI as opposed to having deprecated runtime
-      # wrappers.
-      warnings =
-        lib.optionals (cfg.enableNvidia && (lib.strings.versionAtLeast cfg.package.version "25"))
-          [
-            ''
-              You have set virtualisation.docker.enableNvidia. This option is deprecated, please set hardware.nvidia-container-toolkit.enable instead.
-            ''
-          ];
-
-      systemd.services.docker = {
-        wantedBy = optional cfg.enableOnBoot "multi-user.target";
-        after = [
-          "network.target"
-          "docker.socket"
+      finit.services.docker = {
+        description = "containerization service";
+        runlevels = "34";
+        conditions = [
+          "hook/net/up"
+          "task/tmpfiles-setup/success"
+          "service/syslogd/ready"
         ];
-        requires = [ "docker.socket" ];
-        environment = proxy_env;
-        serviceConfig = {
-          Type = "notify";
-          ExecStart = [
-            ""
-            ''
-              ${cfg.package}/bin/dockerd \
-                --config-file=${daemonSettingsFile} \
-                ${cfg.extraOptions}
-            ''
-          ];
-          ExecReload = [
-            ""
-            "${pkgs.procps}/bin/kill -s HUP $MAINPID"
-          ];
-        };
-
+        # TODO implement listenOptions
+        command = ''
+          ${pkgs.systemfd}/bin/systemfd -s unix::/run/docker.sock \-\- \
+          ${cfg.package}/bin/dockerd \
+          --config-file=${daemonSettingsFile} \
+          ${cfg.extraOptions}
+        '';
+        # environment = proxy_env;
+        notify = "systemd";
+        reload = "${pkgs.procps}/bin/kill -s HUP $MAINPID";
         path = [
           pkgs.kmod
         ]
@@ -294,71 +259,22 @@ in
         ++ cfg.extraPackages;
       };
 
-      systemd.sockets.docker = {
-        description = "Docker Socket for the API";
-        wantedBy = [ "sockets.target" ];
-        socketConfig = {
-          ListenStream = cfg.listenOptions;
-          SocketMode = "0660";
-          SocketUser = "root";
-          SocketGroup = "docker";
-        };
-      };
-
-      systemd.services.docker-prune = {
-        description = "Prune docker resources";
-
-        restartIfChanged = false;
-        unitConfig.X-StopOnRemoval = false;
-
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = utils.escapeSystemdExecArgs (
-            [
-              (lib.getExe cfg.package)
-              "system"
-              "prune"
-              "-f"
-            ]
-            ++ cfg.autoPrune.flags
-          );
-        };
-
-        startAt = optional cfg.autoPrune.enable cfg.autoPrune.dates;
-        after = [ "docker.service" ];
-        requires = [ "docker.service" ];
-      };
-
-      systemd.timers.docker-prune = mkIf cfg.autoPrune.enable {
-        timerConfig = {
-          RandomizedDelaySec = cfg.autoPrune.randomizedDelaySec;
-          Persistent = cfg.autoPrune.persistent;
-        };
-      };
-
-      assertions = [
-        {
-          assertion =
-            cfg.enableNvidia && pkgs.stdenv.hostPlatform.isx86_64
-            -> config.hardware.graphics.enable32Bit or false;
-          message = "Option enableNvidia on x86_64 requires 32-bit support libraries";
-        }
+      finit.tmpfiles.rules = [
+        "f /run/docker.sock 0660 root docker"
       ];
+
+      # finit.run.docker-prune = {
+      #   description = "prune docker resources";
+      #   conditions = [
+      #     "service/docker/running"
+      #   ];
+      # };
 
       services.docker.daemon.settings = {
         group = "docker";
         hosts = [ "fd://" ];
         log-driver = mkDefault cfg.logDriver;
         storage-driver = mkIf (cfg.storageDriver != null) (mkDefault cfg.storageDriver);
-        runtimes = mkIf cfg.enableNvidia {
-          nvidia = {
-            # Use the legacy nvidia-container-runtime wrapper to allow
-            # the `--runtime=nvidia` approach to expose
-            # GPU's. Starting with Docker > 25, CDI can be used
-            # instead, removing the need for runtime wrappers.
-            path = lib.getExe' (lib.getOutput "tools" config.hardware.nvidia-container-toolkit.package) "nvidia-container-runtime";
-          };
-        };
       };
     }
   ]);
