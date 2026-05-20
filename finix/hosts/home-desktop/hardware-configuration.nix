@@ -43,7 +43,7 @@
   boot.supportedFilesystems.luks.enable = true;
 
   fileSystems."crypted" = {
-    device = "/dev/nvme1n1p1";
+    device = "/dev/disk/by-uuid/635797a9-367d-48c9-bd96-c23caf4bfbe3";
     fsType = "luks";
     neededForBoot = true;
     options = [ "--allow-discards" ];
@@ -55,7 +55,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/nvme1n1p2";
+    device = "/dev/disk/by-uuid/CAF2-A3A9";
     fsType = "vfat";
     options = [
       "fmask=0077"

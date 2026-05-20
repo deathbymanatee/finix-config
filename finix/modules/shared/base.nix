@@ -134,5 +134,6 @@
     man
     fastfetch
     ripgrep
+    ncdu
   ];
 }

@@ -91,7 +91,7 @@ in
         lxqt.qlipper
         swaylock-effects
         playerctl
-        lxqt.lxqt-panel-profiles
+        lxqt-panel-profiles
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala

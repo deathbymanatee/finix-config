@@ -63,7 +63,7 @@ in
     inxi
 
     # kwin test
-    (kdePackages.kwin.override ({ inherit libinput; }))
+    # (kdePackages.kwin.override ({ inherit libinput; }))
 
     libva-utils
   ];
