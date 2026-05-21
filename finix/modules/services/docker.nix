@@ -17,10 +17,6 @@ let
   settingsFormat = pkgs.formats.json { };
   daemonSettingsFile = settingsFormat.generate "daemon.json" cfg.daemon.settings;
 
-  command = pkgs.writeShellScriptBin ''
-    ${pkgs.systemfd}/bin/systemfd -s unix::/run/docker.sock -- ${cfg.package}/bin/dockerd --config-file=${daemonSettingsFile} ${cfg.extraOptions}
-  '';
-
 in
 
 {
@@ -35,6 +31,19 @@ in
         linux containers. Users in the "docker" group can interact with
         the daemon (e.g. to start or stop containers) using the
         {command}`docker` command line tool.
+      '';
+    };
+
+    group = mkOption {
+      type = types.str;
+      default = "docker";
+      description = ''
+        Group to own any unix and tcp sockets defined in `services.docker.listenOptions`.
+
+        ::: {.note}
+        If you want non-`root` users to be able to access `docker` daemon commands, add
+        them to this group.
+        :::
       '';
     };
 
@@ -232,21 +241,22 @@ in
         # wrapper to manage our unix socket(s)
         pkgs.systemfd
       ];
-      users.groups.docker.gid = config.ids.gids.docker;
+
+      users.groups = lib.optionalAttrs (cfg.group == "docker") {
+        docker = { };
+      };
 
       finit.services.docker = {
         description = "containerization service";
         runlevels = "34";
         conditions = [
           "hook/net/up"
-          "task/tmpfiles-setup/success"
           "service/syslogd/ready"
         ];
         # TODO implement listenOptions
         command = ''
           ${pkgs.systemfd}/bin/systemfd -s unix::/run/docker.sock \-\- \
-          ${cfg.package}/bin/dockerd \
-          --config-file=${daemonSettingsFile} \
+          ${cfg.package}/bin/dockerd --config-file=${daemonSettingsFile} \
           ${cfg.extraOptions}
         '';
         # environment = proxy_env;
@@ -259,10 +269,6 @@ in
         ++ cfg.extraPackages;
       };
 
-      finit.tmpfiles.rules = [
-        "f /run/docker.sock 0660 root docker"
-      ];
-
       # finit.run.docker-prune = {
       #   description = "prune docker resources";
       #   conditions = [
@@ -271,7 +277,7 @@ in
       # };
 
       services.docker.daemon.settings = {
-        group = "docker";
+        group = "${cfg.group}";
         hosts = [ "fd://" ];
         log-driver = mkDefault cfg.logDriver;
         storage-driver = mkIf (cfg.storageDriver != null) (mkDefault cfg.storageDriver);
