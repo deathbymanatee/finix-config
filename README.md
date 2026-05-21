@@ -37,8 +37,11 @@ This configuration was scaffolded from [vitrial's minimal config / install guide
 
 - [x] install in qemu
 - [x] install on desktop
-    - [ ] set up steam
+    - [x] set up steam
     - [ ] set up audio prod
+        - [x] low latency audio input
+        - [ ] install and configure plugins with yabridge
+- [ ] get docker working (kinda works atm? needs more work)
 - [ ] convert laptop to finix
 - [ ] convert server to finix
 

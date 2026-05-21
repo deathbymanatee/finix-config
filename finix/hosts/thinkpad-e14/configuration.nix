@@ -44,6 +44,7 @@
       "video"
       "render"
       "tty"
+      "docker"
       # comment out if using elogind
       config.services.seatd.group
     ];
