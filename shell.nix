@@ -22,8 +22,11 @@ pkgs.mkShellNoCC {
     # kwin test
     # (kdePackages.kwin.override ({ inherit libinput; }))
 
-    perl
-    unzip
-    zip
+    # needed for SpotX patcher
+    # perl
+    # unzip
+    # zip
+
+    strace
   ];
 }

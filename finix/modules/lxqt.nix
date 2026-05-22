@@ -32,6 +32,26 @@ let
 
   xdg-desktop-portal-wlr' = pkgs.xdg-desktop-portal-wlr.override ({ pipewire = pipewire'; });
 
+  loginctl = pkgs.writeShellScript ''
+    #!$/bin/sh
+    # Script to reboot and poweroff without elogind.
+
+    case "$1" in
+        reboot) exec sudo /run/current-system/sw/bin/reboot
+        ;;
+        poweroff) exec sudo /run/current-system/sw/bin/poweroff
+        ;;
+        suspend) exec sudo /run/current-system/sw/bin/zzz
+        ;;
+        hibernate) exec sudo /run/current-system/sw/bin/ZZZ
+        ;;
+        *) echo "error occured"
+        exit 1
+        ;;
+    esac
+    exit 0
+  '';
+
 in
 {
   options.modules.lxqt = {

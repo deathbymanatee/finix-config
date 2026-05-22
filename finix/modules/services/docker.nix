@@ -3,7 +3,6 @@
 {
   config,
   lib,
-  utils,
   pkgs,
   ...
 }:
@@ -13,6 +12,7 @@ with lib;
 let
 
   cfg = config.services.docker;
+  # proxy setup when?
   # proxy_env = config.networking.proxy.envVars;
   settingsFormat = pkgs.formats.json { };
   daemonSettingsFile = settingsFormat.generate "daemon.json" cfg.daemon.settings;
@@ -49,13 +49,17 @@ in
 
     listenOptions = mkOption {
       type = types.listOf types.str;
-      default = [ "/run/docker.sock" ];
+      default = [ "unix:///run/docker.sock" ];
       description = ''
-        A list of unix and tcp sockets docker should listen to. The format follows
-        ListenStream as described in {manpage}`systemd.socket(5)`.
+        A list of unix and tcp sockets docker should listen to. 
       '';
+      example = [
+        "unix:///run/docker.sock"
+        "tcp://0.0.0.0:2375"
+      ];
     };
 
+    # TODO not implemented
     enableOnBoot = mkOption {
       type = types.bool;
       default = true;
@@ -150,6 +154,7 @@ in
       '';
     };
 
+    # TODO not implemented
     autoPrune = {
       enable = mkOption {
         type = types.bool;
@@ -237,9 +242,6 @@ in
       };
       environment.systemPackages = [
         cfg.package
-
-        # wrapper to manage our unix socket(s)
-        pkgs.systemfd
       ];
 
       users.groups = lib.optionalAttrs (cfg.group == "docker") {
@@ -247,20 +249,14 @@ in
       };
 
       finit.services.docker = {
-        description = "containerization service";
+        description = "docker containerization service";
         runlevels = "34";
         conditions = [
           "hook/net/up"
           "service/syslogd/ready"
         ];
-        # TODO implement listenOptions
-        command = ''
-          ${pkgs.systemfd}/bin/systemfd -s unix::/run/docker.sock \-\- \
-          ${cfg.package}/bin/dockerd --config-file=${daemonSettingsFile} \
-          ${cfg.extraOptions}
-        '';
+        command = "${cfg.package}/bin/dockerd --config-file=${daemonSettingsFile} ${cfg.extraOptions}";
         # environment = proxy_env;
-        notify = "systemd";
         reload = "${pkgs.procps}/bin/kill -s HUP $MAINPID";
         path = [
           pkgs.kmod
@@ -269,6 +265,7 @@ in
         ++ cfg.extraPackages;
       };
 
+      # TODO implement as cron job
       # finit.run.docker-prune = {
       #   description = "prune docker resources";
       #   conditions = [
@@ -278,7 +275,7 @@ in
 
       services.docker.daemon.settings = {
         group = "${cfg.group}";
-        hosts = [ "fd://" ];
+        hosts = cfg.listenOptions;
         log-driver = mkDefault cfg.logDriver;
         storage-driver = mkIf (cfg.storageDriver != null) (mkDefault cfg.storageDriver);
       };
