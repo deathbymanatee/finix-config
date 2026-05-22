@@ -12,7 +12,7 @@ with lib;
 let
 
   cfg = config.services.docker;
-  # proxy setup when?
+  # TODO advanced proxy setup when?
   # proxy_env = config.networking.proxy.envVars;
   settingsFormat = pkgs.formats.json { };
   daemonSettingsFile = settingsFormat.generate "daemon.json" cfg.daemon.settings;
@@ -27,7 +27,7 @@ in
       type = types.bool;
       default = false;
       description = ''
-        This option enables docker, a daemon that manages
+        This option enables (docker)[https://www.docker.com/], a daemon that manages
         linux containers. Users in the "docker" group can interact with
         the daemon (e.g. to start or stop containers) using the
         {command}`docker` command line tool.
