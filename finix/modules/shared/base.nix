@@ -97,6 +97,10 @@
           ;;
       esac
     done
+
+    ls -l /dev/disk/by-uuid
+    ls -l /dev/disk/by-label
+    blkid --output export
   '';
 
   # system programs

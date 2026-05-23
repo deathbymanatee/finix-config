@@ -23,6 +23,7 @@ in
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
   services.ly.enable = true;
+  services.docker.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -42,6 +43,7 @@ in
       "audio"
       "video"
       "render"
+      "docker"
       # comment out if using elogind
       config.services.seatd.group
     ];
@@ -66,5 +68,7 @@ in
     # (kdePackages.kwin.override ({ inherit libinput; }))
 
     libva-utils
+    gnumake
+    python314
   ];
 }

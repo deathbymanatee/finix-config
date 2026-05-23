@@ -340,6 +340,21 @@
     <keybind key="XF86_MonBrightnessDown">
       <action name="Execute" command="brightnessctl s 5%-"/>
     </keybind>
+    <keybind key="XF86_AudioPlay">
+      <action name="Execute" command="playerctl play-pause"/>
+    </keybind>
+    <keybind key="XF86_AudioPause">
+      <action name="Execute" command="playerctl play-pause"/>
+    </keybind>
+    <keybind key="XF86_AudioPrev">
+      <action name="Execute" command="playerctl previous"/>
+    </keybind>
+    <keybind key="XF86_AudioNext">
+      <action name="Execute" command="playerctl next"/>
+    </keybind>
+    <keybind key="XF86_AudioStop">
+      <action name="Execute" command="playerctl stop"/>
+    </keybind>
     <!-- screenshot bind -->
     <keybind key="W-S-s">
       <action name="Execute">
