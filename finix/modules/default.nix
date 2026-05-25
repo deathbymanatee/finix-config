@@ -1,7 +1,7 @@
 { config, ... }:
 {
   imports = [
-    ./services/docker.nix
+    ./services
     ./cups.nix
     ./sway.nix
     ./packages.nix
@@ -12,5 +12,6 @@
     ./steam.nix
     ./vesktop.nix
     ./audio-prod.nix
+    ./programs
   ];
 }
