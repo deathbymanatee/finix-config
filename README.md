@@ -12,13 +12,13 @@ This config provides a few helper scripts to automate some routine maintenance, 
 
 - `rebuild`
     - activates a full system rebuild
-    - pass the `boot` parameter to switch to build on next reboot
 - `maintenance`
     - collects garbage in nix store and deletes old generations
-    - verifies and repairs store paths
+    - verifies store paths
     - updates flake inputs
     - rebuilds system
-    - pass the `boot` parameter to switch to build on next reboot
+
+Invoke either of these with the `boot` parameter to remain on your current generation. 
 
 # Credits
 
@@ -41,7 +41,7 @@ This configuration was scaffolded from [vitrial's minimal config / install guide
     - [ ] set up audio prod
         - [x] low latency audio input
         - [ ] install and configure plugins with yabridge
-- [ ] get docker working (kinda works atm? needs more work)
+- [x] get docker working 
 - [ ] convert laptop to finix
 - [ ] convert server to finix
 

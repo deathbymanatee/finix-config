@@ -2,10 +2,7 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  config,
-  lib,
   pkgs,
-  modulesPath,
   ...
 }:
 
@@ -26,7 +23,6 @@
     "kvm-amd"
     "snd_seq"
   ];
-  boot.extraModulePackages = [ ];
 
   hardware.firmware = with pkgs; [
     linux-firmware
@@ -71,6 +67,9 @@
   fileSystems."/mnt/disk2" = {
     device = "/dev/disk/by-uuid/dc514686-c1e3-4235-95b0-8accb8a7b129";
     fsType = "ext4";
+
+    # don't do this without a good reason
+    noCheck = true;
   };
 
   swapDevices = [ ];

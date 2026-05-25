@@ -2,11 +2,11 @@
   config,
   pkgs,
   lib,
-  inputs,
+  modules,
   ...
 }:
 {
-  imports = with inputs.finix.nixosModules; [
+  imports = with modules; [
     nix-daemon
     upower
     openssh
@@ -29,8 +29,6 @@
     xserver
     brightnessctl
     ly
-    tuigreet
-    greetd
     pmount
   ];
 
@@ -80,6 +78,8 @@
   # required workaround to get /dev/disk/by-uuid/* mounts to work with mdevd
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
   boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
+    sleep 3
+
     mkdir -p /dev/disk/by-label /dev/disk/by-uuid
     current_dev=""
     blkid --output export | while IFS='=' read -r key value; do
@@ -97,10 +97,6 @@
           ;;
       esac
     done
-
-    ls -l /dev/disk/by-uuid
-    ls -l /dev/disk/by-label
-    blkid --output export
   '';
 
   # system programs
