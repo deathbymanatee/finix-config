@@ -74,6 +74,7 @@
     nlgroups = 4;
     # debug = true;
   };
+  services.gardendevd.enable = true;
 
   # required workaround to get /dev/disk/by-uuid/* mounts to work with mdevd
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
