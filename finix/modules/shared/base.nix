@@ -30,6 +30,7 @@
     brightnessctl
     ly
     pmount
+    docker
   ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;

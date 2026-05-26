@@ -2,11 +2,11 @@
   "nodes": {
     "finix": {
       "locked": {
-        "lastModified": 1779495496,
-        "narHash": "sha256-SyX0xuUZOLSN28lb7wH3H+yQMHOkMFTqg8mlfwESWh4=",
+        "lastModified": 1779743957,
+        "narHash": "sha256-okYVM3Z9HDvrOxR9ImWNn6/UUkN39uFnGnXEJBb/Euw=",
         "owner": "finix-community",
         "repo": "finix",
-        "rev": "a2c7d31abee62a432311116df39a4af7481a0463",
+        "rev": "0b0fb8a46a2c42b3023784ddcb3a1b678352ed84",
         "type": "github"
       },
       "original": {
@@ -17,11 +17,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1779508470,
-        "narHash": "sha256-Ap9KJX+5xHIn3bPIpfNgT6MEXdAECECwo4/rmlQD74M=",
+        "lastModified": 1779560665,
+        "narHash": "sha256-tpyBcxPpcQb8ukyNF7DoCwfSY3VPsxHoYwj00Cayv5o=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "29916453413845e54a65b8a1cf996842300cd299",
+        "rev": "64c08a7ca051951c8eae34e3e3cb1e202fe36786",
         "type": "github"
       },
       "original": {
