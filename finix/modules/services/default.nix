@@ -1,6 +1,5 @@
 {
   imports = [
-    ./docker
     ./gardendevd
     ./xinetd
   ];
