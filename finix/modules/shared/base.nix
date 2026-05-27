@@ -57,6 +57,7 @@
   services.rtkit.enable = true;
   services.seatd.enable = true;
   services.rtkit.extraGroups = [ config.services.seatd.group ];
+  services.gardendevd.enable = true;
   services.nix-daemon = {
     enable = true;
     settings = {
@@ -75,12 +76,27 @@
     nlgroups = 4;
     # debug = true;
   };
-  services.gardendevd.enable = true;
+  services.mdevd.hotplugRules = lib.mkIf config.services.mdevd.enable (
+    lib.mkAfter ''
+      grsec       root:root 660
+      kmem        root:root 640
+      mem         root:root 640
+      port        root:root 640
+      console     root:tty 600 @chmod 600 $MDEV
+      card[0-9]   root:video 660 =dri/
+
+      event[0-9]+ root:input 660 =input/
+      mice        root:input 660 =input/
+      mouse[0-9]+ root:input 660 =input/
+
+      rfkill      root:${config.services.seatd.group} 660
+    ''
+  );
 
   # required workaround to get /dev/disk/by-uuid/* mounts to work with mdevd
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
   boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
-    sleep 3
+    sleep 2
 
     mkdir -p /dev/disk/by-label /dev/disk/by-uuid
     current_dev=""
@@ -99,6 +115,10 @@
           ;;
       esac
     done
+
+    # extra debug output
+    # ls -l /dev/disk/by-uuid
+    # blkid --output export
   '';
 
   # system programs
