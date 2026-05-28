@@ -1,6 +1,6 @@
 {
   imports = [
     # ./initviz
-    ./pipewire
+    # ./pipewire
   ];
 }

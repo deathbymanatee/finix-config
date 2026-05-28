@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "community-modules": {
+      "locked": {
+        "lastModified": 1780003976,
+        "narHash": "sha256-tUuy2/R8s92sTw0lCdj29N02zakvCjFv0Utg/6lZLCU=",
+        "ref": "refs/heads/flake-fix",
+        "rev": "a4824454a2adf55259630cfce79bfad1ec009bcb",
+        "revCount": 13,
+        "type": "git",
+        "url": "file:///home/ryan/Documents/community-modules"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/ryan/Documents/community-modules"
+      }
+    },
     "finix": {
       "locked": {
         "lastModified": 1779743957,
@@ -33,6 +48,7 @@
     },
     "root": {
       "inputs": {
+        "community-modules": "community-modules",
         "finix": "finix",
         "nixpkgs": "nixpkgs"
       }

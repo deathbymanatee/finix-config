@@ -3,35 +3,44 @@
   pkgs,
   lib,
   modules,
+  inputs,
   ...
 }:
-{
-  imports = with modules; [
-    nix-daemon
-    upower
-    openssh
-    sysklogd
-    limine
-    sudo
-    getty
-    bash
-    iwd
-    dhcpcd
-    lemurs
-    flatpak
-    polkit
-    sway
-    xwayland-satellite
-    rtkit
-    lxqt
-    zzz
-    fwupd
-    xserver
-    brightnessctl
-    ly
-    pmount
-    docker
+let
+  communityModules = with inputs.community-modules.nixosModules; [
+    pipewire
   ];
+in
+{
+  imports =
+    with modules;
+    [
+      nix-daemon
+      upower
+      openssh
+      sysklogd
+      limine
+      sudo
+      getty
+      bash
+      iwd
+      dhcpcd
+      lemurs
+      flatpak
+      polkit
+      sway
+      xwayland-satellite
+      rtkit
+      lxqt
+      zzz
+      fwupd
+      xserver
+      brightnessctl
+      ly
+      pmount
+      docker
+    ]
+    ++ communityModules;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
