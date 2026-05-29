@@ -153,6 +153,8 @@ in
     }
   ];
 
+  security.pam.environment.NIX_PATH.default = "nixpkgs=${pkgs.path}";
+
   environment.systemPackages = with pkgs; [
     neovim
     wget
@@ -166,5 +168,6 @@ in
     fastfetch
     ripgrep
     ncdu
+    nix-init
   ];
 }
