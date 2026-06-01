@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 
@@ -15,5 +16,11 @@ in
   };
   config = mkIf cfg.enable {
     programs.pipewire.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      easyeffects
+      calf
+      qpwgraph
+    ];
   };
 }

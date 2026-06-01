@@ -14,6 +14,8 @@ let
     pipewire = config.programs.pipewire.package;
   });
 
+  labwc' = pkgs.callPackage ./packages/labwc.nix { };
+
 in
 {
   options.modules.lxqt = {
@@ -74,10 +76,13 @@ in
         swaylock-effects
         playerctl
         lxqt-panel-profiles
+
+        rofi
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
       ];
+    programs.lxqt.wayland.compositor = labwc';
 
     fonts.fontconfig.enable = true;
     fonts.enableDefaultPackages = true;
