@@ -10,47 +10,11 @@ with lib;
 let
   cfg = config.modules.lxqt;
 
-  libinput = pkgs.libinput.override (
-    lib.optionalAttrs config.services.mdevd.enable {
-      udev = pkgs.libudev-zero;
-      wacomSupport = false;
-    }
-  );
+  xdg-desktop-portal-wlr' = pkgs.xdg-desktop-portal-wlr.override ({
+    pipewire = config.programs.pipewire.package;
+  });
 
-  pipewire' =
-    (pkgs.pipewire.override (
-      lib.optionalAttrs config.services.mdevd.enable {
-        enableSystemd = false;
-        udev = pkgs.libudev-zero;
-      }
-    )).overrideAttrs
-      (o: {
-        # https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/2398#note_2967898
-        patches =
-          o.patches or [ ] ++ lib.optionals config.services.mdevd.enable [ ./assets/pipewire/pipewire.patch ];
-      });
-
-  xdg-desktop-portal-wlr' = pkgs.xdg-desktop-portal-wlr.override ({ pipewire = pipewire'; });
-
-  loginctl = pkgs.writeShellScript ''
-    #!$/bin/sh
-    # Script to reboot and poweroff without elogind.
-
-    case "$1" in
-        reboot) exec sudo /run/current-system/sw/bin/reboot
-        ;;
-        poweroff) exec sudo /run/current-system/sw/bin/poweroff
-        ;;
-        suspend) exec sudo /run/current-system/sw/bin/zzz
-        ;;
-        hibernate) exec sudo /run/current-system/sw/bin/ZZZ
-        ;;
-        *) echo "error occured"
-        exit 1
-        ;;
-    esac
-    exit 0
-  '';
+  labwc' = pkgs.callPackage ./packages/labwc.nix { };
 
 in
 {
@@ -112,10 +76,13 @@ in
         swaylock-effects
         playerctl
         lxqt-panel-profiles
+
+        rofi
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
       ];
+    programs.lxqt.wayland.compositor = labwc';
 
     fonts.fontconfig.enable = true;
     fonts.enableDefaultPackages = true;

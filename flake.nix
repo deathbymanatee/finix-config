@@ -4,9 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     finix.url = "github:finix-community/finix";
-
-    # local test input
-    # finix.url = "git+file:///home/ryan/Documents/finix";
+    community-modules.url = "github:finix-community/community-modules";
   };
 
   outputs =
@@ -14,6 +12,7 @@
       self,
       nixpkgs,
       finix,
+      community-modules,
       ...
     }:
     let
@@ -30,7 +29,7 @@
           inherit inputs;
         };
 
-        modules = with finix.nixosModules; [
+        modules = [
           {
             nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
           }

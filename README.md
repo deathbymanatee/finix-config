@@ -1,6 +1,6 @@
 # finix-config
 
-Personal flake-based configuration for [finix](https://github.com/finix-community/finix). Currently a hotbed for experimentation. The end goal is to try and replicate my current [nixos configuration](https://github.com/deathbymanatee/nixos-dotfiles). My current use cases consist of development work, gaming, and audio production. Since finix is currently in an experimental state, so too is this configuration. I will write more documentation when I'm able to, or when the nix code isn't enough to explain why I did certain things the way I did them. 
+Personal flake-based configuration for [finix](https://github.com/finix-community/finix). Currently a hotbed for experimentation. The end goal is to try and replicate my current [nixos configuration](https://github.com/deathbymanatee/nixos-dotfiles). My current use cases consist of development work, gaming, and audio production. Since finix is currently in an experimental state, so too is this configuration (aka a big fat mess). I will write more documentation when I'm able to, or when the nix code isn't enough to explain why I did certain things the way I did them. 
 
 So far, I've been able to install finix using this configuration on the following: 
 
