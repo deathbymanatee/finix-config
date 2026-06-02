@@ -14,9 +14,14 @@ in
 {
   options.programs.initviz = {
     enable = mkEnableOption "initviz";
-    package = mkPackageOption pkg;
+    package = mkOption {
+      type = types.package;
+      default = pkg;
+      defaultText = "pkgs.initviz";
+      description = "The Pipewire package to use.";
+    };
   };
-  config.programs.initviz = mkIf cfg.enable {
+  config = mkIf cfg.enable {
     environment.systemPackages = [ cfg.package ];
   };
 }

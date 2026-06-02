@@ -134,6 +134,7 @@ in
   programs.sudo.enable = true;
   programs.bash.enable = true;
   programs.resolvconf.enable = true;
+  programs.initviz.enable = true;
   programs.limine = {
     enable = true;
     settings.editor_enabled = true;
