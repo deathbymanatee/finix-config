@@ -1,31 +1,22 @@
 {
   lib,
-  stdenv,
-  fetchFromGitHub,
-  nix-update-script,
+  pkgs,
+  config,
+  ...
 }:
 
-stdenv.mkDerivation (finalAttrs: {
-  pname = "initviz";
-  version = "1.0.0-rc1";
-  __structuredAttrs = true;
-  strictDeps = true;
+with lib;
 
-  src = fetchFromGitHub {
-    owner = "finit-project";
-    repo = "initviz";
-    tag = finalAttrs.version;
-    hash = "sha256-/kg1p70rONnsyJL0VnAAatnsoBzsqTHyoXyH0JK83Dg=";
+let
+  cfg = config.programs.initviz;
+  pkg = pkgs.callPackage ./package.nix { };
+in
+{
+  options.programs.initviz = {
+    enable = mkEnableOption "initviz";
+    package = mkPackageOption pkg;
   };
-
-  passthru.updateScript = nix-update-script { };
-
-  meta = {
-    description = "InitViz is a fork of bootchart2 for use with any init system.  Some bells and whistles added, for Finit";
-    homepage = "https://github.com/finit-project/initviz";
-    license = lib.licenses.gpl2Only;
-    maintainers = with lib.maintainers; [ ];
-    mainProgram = "initviz";
-    platforms = lib.platforms.all;
+  config.programs.initviz = mkIf cfg.enable {
+    environment.systemPackages = [ cfg.package ];
   };
-})
+}
