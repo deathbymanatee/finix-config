@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     finix.url = "github:finix-community/finix";
-    community-modules.url = "git+file:///home/ryan/Documents/community-modules";
+    community-modules.url = "github:finix-community/community-modules";
   };
 
   outputs =

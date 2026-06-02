@@ -12,6 +12,7 @@
   libxcb,
   libxkbcommon,
   libxml2,
+  wlroots_0_20,
   meson,
   ninja,
   pango,
@@ -25,7 +26,7 @@
   libxcb-wm,
   xwayland,
 
-  enableSystemd ? false,
+  enableSystemd ? true,
 }:
 
 let
@@ -33,9 +34,6 @@ let
     udev = pkgs.libudev-zero;
     wacomSupport = false;
   });
-
-  wlroots = pkgs.callPackage ./wlroots.nix { inherit libinput; };
-  wlroots_0_20 = wlroots.wlroots_0_20;
 
 in
 stdenv.mkDerivation (finalAttrs: {
@@ -48,6 +46,12 @@ stdenv.mkDerivation (finalAttrs: {
     tag = finalAttrs.version;
     hash = "sha256-JSs1Xys0+XAPbxLv5pR91K0/e78mu5xLKu0HGdFFCEM=";
   };
+
+  postPatch = ''
+    substituteInPlace meson.build \
+      --replace-fail "install_dir: systemd.get_variable('systemduserunitdir')" \
+                     "install_dir: '$out/lib/systemd/user'"
+  '';
 
   outputs = [
     "out"
@@ -85,10 +89,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeInstallCheckInputs = [ versionCheckHook ];
 
-  mesonFlags = [
-    (lib.mesonEnable "xwayland" true)
-    (lib.mesonEnable "systemd-session" false)
-  ];
+  mesonFlags = [ (lib.mesonEnable "xwayland" true) ];
 
   strictDeps = true;
 
