@@ -33,7 +33,7 @@ in
       jack = {
         "12-jack-low-latency" = {
           "jack.properties" = {
-            "node.latency" = 256/48000;
+            "node.latency" = "256/48000";
           };
         };
       };
