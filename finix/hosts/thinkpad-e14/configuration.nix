@@ -10,13 +10,10 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "thinkpad-e14"; # Define your hostname.
-
   services.iwd.enable = true;
   services.docker.enable = true;
 
-  # use only on deathbymanatee/finix/main
-  # TODO monitor https://github.com/finix-community/finix/pull/66
+  # TODO https://github.com/finix-community/finix/pull/66
   # services.iwd.enableEad = true;
 
   services.flatpak.enable = true;
@@ -53,12 +50,10 @@
   # custom modules
   modules.packages.enable = true;
   modules.lxqt.enable = true;
-  modules.lxqt.user = "ryan";
-  modules.lxqt.enableXorg = true;
   modules.pipewire.enable = true;
   modules.vesktop.enable = true;
 
-  # base packages
+  # extra packages
   environment.systemPackages = with pkgs; [
     # lagniappe
     btop-rocm

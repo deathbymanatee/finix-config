@@ -1,3 +1,4 @@
+# minimal, shared, base configuration
 {
   config,
   pkgs,
@@ -56,11 +57,10 @@ in
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 
-  # system services
   services.sysklogd.enable = true;
   services.polkit.enable = true;
   services.dbus.enable = true;
-  services.dhcpcd.enable = true; # enable iwd for wireless
+  services.dhcpcd.enable = true;
   services.openssh.enable = true;
   services.upower.enable = true;
   services.rtkit.enable = true;
@@ -83,7 +83,6 @@ in
   services.mdevd = {
     enable = true;
     nlgroups = 4;
-    # debug = true;
   };
   services.mdevd.hotplugRules = lib.mkIf config.services.mdevd.enable (
     lib.mkAfter ''
@@ -102,7 +101,6 @@ in
     ''
   );
 
-  # required workaround to get /dev/disk/by-uuid/* mounts to work with mdevd
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
   boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
     sleep 2
@@ -130,17 +128,15 @@ in
     # blkid --output export
   '';
 
-  # system programs
   programs.sudo.enable = true;
   programs.bash.enable = true;
   programs.resolvconf.enable = true;
-  # programs.initviz.enable = true;
   programs.limine = {
     enable = true;
     settings.editor_enabled = true;
   };
 
-  # still requires sudo poweroff, cannot use org.freedesktop power commands in graphical environments
+  # requires sudo
   providers.privileges.rules = lib.optionals config.services.seatd.enable [
     {
       command = "/run/current-system/sw/bin/poweroff";
@@ -170,5 +166,9 @@ in
     ripgrep
     ncdu
     nix-init
+    strace
+    perl
+    unzip
+    zip
   ];
 }

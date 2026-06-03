@@ -1,5 +1,5 @@
 {
-  description = "Minimal finix flake";
+  description = "finix flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -20,75 +20,34 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
       };
+
+      mkSystem =
+        hostname:
+        finix.lib.finixSystem {
+          inherit (pkgs) lib;
+          specialArgs = {
+            modulesPath = toString nixpkgs + "/nixos/modules";
+            inherit inputs;
+          };
+
+          modules = [
+            {
+              nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
+            }
+            { networking.hostName = hostname; }
+            (./finix/hosts/${hostname}/configuration.nix)
+            (./finix/modules/shared/base.nix)
+            (./finix/modules)
+          ];
+        };
+
     in
     {
-      nixosConfigurations.home-desktop = finix.lib.finixSystem {
-        inherit (pkgs) lib;
-        specialArgs = {
-          modulesPath = toString nixpkgs + "/nixos/modules";
-          inherit inputs;
-        };
-
-        modules = [
-          {
-            nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
-          }
-          (./finix/hosts/home-desktop/configuration.nix)
-          (./finix/modules/shared/base.nix)
-          (./finix/modules)
-        ];
-      };
-
-      nixosConfigurations.virt-manager = finix.lib.finixSystem {
-        inherit (pkgs) lib;
-
-        specialArgs = {
-          modulesPath = toString nixpkgs + "/nixos/modules";
-          inherit inputs;
-        };
-
-        modules = [
-          {
-            nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
-          }
-          (./finix/hosts/virt-manager/configuration.nix)
-          (./finix/modules/shared/base.nix)
-          (./finix/modules)
-        ];
-      };
-      nixosConfigurations.thinkpad-e14 = finix.lib.finixSystem {
-        inherit (pkgs) lib;
-
-        specialArgs = {
-          modulesPath = toString nixpkgs + "/nixos/modules";
-          inherit inputs;
-        };
-
-        modules = [
-          {
-            nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
-          }
-          (./finix/hosts/thinkpad-e14/configuration.nix)
-          (./finix/modules/shared/base.nix)
-          (./finix/modules)
-        ];
-      };
-      nixosConfigurations.virtualbox = finix.lib.finixSystem {
-        inherit (pkgs) lib;
-
-        specialArgs = {
-          modulesPath = toString nixpkgs + "/nixos/modules";
-          inherit inputs;
-        };
-
-        modules = with finix.nixosModules; [
-          {
-            nixpkgs.pkgs = nixpkgs.lib.mkDefault pkgs;
-          }
-          (./finix/hosts/virtualbox/configuration.nix)
-          (./finix/modules/shared/base.nix)
-          (./finix/modules)
-        ];
+      nixosConfigurations = {
+        thinkpad-e14 = mkSystem "thinkpad-e14";
+        virtualbox = mkSystem "virtualbox";
+        home-desktop = mkSystem "home-desktop";
+        virt-manager = mkSystem "virt-manager";
       };
     };
 }

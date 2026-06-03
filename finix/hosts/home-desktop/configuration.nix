@@ -11,8 +11,6 @@
 
   boot.kernelParams = [ "loglevel=1" ];
 
-  networking.hostName = "home-desktop"; # Define your hostname.
-
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
   services.ly.enable = true;

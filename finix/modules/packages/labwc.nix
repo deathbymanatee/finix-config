@@ -24,8 +24,6 @@
   wayland-scanner,
   libxcb-wm,
   xwayland,
-
-  enableSystemd ? true,
 }:
 
 let

@@ -21,15 +21,6 @@ in
   options.modules.lxqt = {
     enable = mkEnableOption "lxqt";
 
-    # TODO monitor https://github.com/feel-co/hjem/pull/130
-    user = mkOption {
-      type = types.str;
-      default = "";
-      description = ''
-        User for home directory dotfile symlinking
-      '';
-    };
-
     enableXorg = lib.mkOption {
       type = types.bool;
       default = false;
@@ -76,6 +67,7 @@ in
         swaylock-effects
         playerctl
         lxqt-panel-profiles
+        labwc-gtktheme
 
         rofi
       ]
