@@ -12,7 +12,6 @@
   libxcb,
   libxkbcommon,
   libxml2,
-  wlroots_0_20,
   meson,
   ninja,
   pango,
@@ -34,6 +33,7 @@ let
     udev = pkgs.libudev-zero;
     wacomSupport = false;
   });
+  wlroots_0_20 = pkgs.wlroots_0_20.override ({ inherit libinput; });
 
 in
 stdenv.mkDerivation (finalAttrs: {
@@ -89,7 +89,10 @@ stdenv.mkDerivation (finalAttrs: {
 
   nativeInstallCheckInputs = [ versionCheckHook ];
 
-  mesonFlags = [ (lib.mesonEnable "xwayland" true) ];
+  mesonFlags = [
+    (lib.mesonEnable "xwayland" true)
+    (lib.mesonEnable "systemd-session" false)
+  ];
 
   strictDeps = true;
 
