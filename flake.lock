@@ -4,15 +4,15 @@
       "locked": {
         "lastModified": 1780596685,
         "narHash": "sha256-yJJlxq3MW98/FoskUzdRS+ULK74cganQT7vHYmPgmNQ=",
-        "ref": "refs/heads/main",
+        "owner": "finix-community",
+        "repo": "community-modules",
         "rev": "042d36e779b221c23aae1df3d05ff6dd149359cb",
-        "revCount": 14,
-        "type": "git",
-        "url": "file:///home/ryan/Documents/community-modules"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/ryan/Documents/community-modules"
+        "owner": "finix-community",
+        "repo": "community-modules",
+        "type": "github"
       }
     },
     "finix": {
