@@ -79,7 +79,6 @@ in
         "root"
         "@wheel"
       ];
-      auto-optimize-store = true;
     };
   };
   services.mdevd = {
