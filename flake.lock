@@ -2,17 +2,17 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1780082353,
-        "narHash": "sha256-4oj5vGnopoC9x8DRRfjtiqxfTEfYuqcNq2OzkgBf75Q=",
-        "owner": "finix-community",
-        "repo": "community-modules",
-        "rev": "8ba71a324b0689373873d197f2f025242bb1af44",
-        "type": "github"
+        "lastModified": 1780596685,
+        "narHash": "sha256-yJJlxq3MW98/FoskUzdRS+ULK74cganQT7vHYmPgmNQ=",
+        "ref": "refs/heads/main",
+        "rev": "042d36e779b221c23aae1df3d05ff6dd149359cb",
+        "revCount": 14,
+        "type": "git",
+        "url": "file:///home/ryan/Documents/community-modules"
       },
       "original": {
-        "owner": "finix-community",
-        "repo": "community-modules",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/ryan/Documents/community-modules"
       }
     },
     "finix": {

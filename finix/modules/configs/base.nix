@@ -1,4 +1,5 @@
 # minimal, shared, base configuration
+# this will get you a TTY but that's it. everything else should be defined somewhere else
 {
   config,
   pkgs,
@@ -78,6 +79,7 @@ in
         "root"
         "@wheel"
       ];
+      auto-optimize-store = true;
     };
   };
   services.mdevd = {

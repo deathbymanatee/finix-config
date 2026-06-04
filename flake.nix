@@ -36,7 +36,7 @@
             }
             { networking.hostName = hostname; }
             (./finix/hosts/${hostname}/configuration.nix)
-            (./finix/modules/shared/base.nix)
+            (./finix/modules/configs/base.nix)
             (./finix/modules)
           ];
         };
