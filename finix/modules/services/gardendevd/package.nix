@@ -4,34 +4,45 @@
   fetchFromCodeberg,
   acl,
   elogind,
-  mdevd,
   meson,
   ninja,
   pkg-config,
   util-linux,
   kmod,
+  uaccessSupport ? true,
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "gardendevd";
-  version = "0.1";
+  version = "0.2";
+
+  __structuredAttrs = true;
 
   src = fetchFromCodeberg {
     owner = "Gardenhouse";
     repo = "gardendevd";
-    rev = "v${finalAttrs.version}";
-    sha256 = "sha256-8G6Omeia1W+4dZOVHGtY/9CnKEpqD2x/W8Zkjt7fK/Q=";
+    tag = "v${finalAttrs.version}";
+    sha256 = "sha256-aEG2QIRFH3F5tXBD1U+6SNmOpUMHgdhH7AXwyGGrilI=";
   };
 
+  strictDeps = true;
+
   nativeBuildInputs = [
-    acl
-    elogind
     meson
     ninja
     pkg-config
   ];
 
-  buildInputs = [ mdevd ];
+  buildInputs = lib.optionals uaccessSupport [
+    acl
+    elogind
+  ];
+
+  mesonFlags = [
+    "-Dopenrc=disabled"
+    "-Dmdevd=enabled"
+    "-Duaccess=${if uaccessSupport then "enabled" else "disabled"}"
+  ];
 
   postPatch = ''
     substituteInPlace src/rules-builtin.c \
