@@ -11,6 +11,7 @@
 let
   communityModules = with inputs.community-modules.nixosModules; [
     pipewire
+    cups
   ];
 in
 {

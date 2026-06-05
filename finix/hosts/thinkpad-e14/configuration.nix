@@ -12,6 +12,7 @@
 
   services.iwd.enable = true;
   services.docker.enable = true;
+  services.cups.enable = true;
 
   # TODO https://github.com/finix-community/finix/pull/80
   # services.iwd.enableEad = true;

@@ -15,6 +15,7 @@
   services.flatpak.extraGroups = [ config.services.seatd.group ];
   services.ly.enable = true;
   services.docker.enable = true;
+  services.cups.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -48,7 +49,6 @@
   modules.lxqt.enable = true;
   modules.lxqt.user = "ryan";
   modules.steam.enable = true;
-  modules.cups.enable = true;
   modules.vesktop.enable = true;
   modules.audioProd.enable = true;
 
