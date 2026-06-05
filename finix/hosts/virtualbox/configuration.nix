@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 
@@ -10,8 +9,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
-  networking.hostName = "virtualbox"; # Define your hostname.
 
   # Set your time zone.
   time.timeZone = "America/Chicago";

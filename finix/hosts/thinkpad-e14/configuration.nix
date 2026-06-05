@@ -13,7 +13,7 @@
   services.iwd.enable = true;
   services.docker.enable = true;
 
-  # TODO https://github.com/finix-community/finix/pull/66
+  # TODO https://github.com/finix-community/finix/pull/80
   # services.iwd.enableEad = true;
 
   services.flatpak.enable = true;
@@ -25,12 +25,15 @@
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
-  # trying to do nixos-enter 'passwd' will result in 'command passwd not found' so we need to do something different for initial account setup.
-  # you will need to include a password hash here on first setup. example:
-  # `password = "some password hash";`
-  # generate this hash with: `mkpasswd -m sha-512 password`
-  # don't commit the password hash to git for the love of god
-  # this issue will probably be fixed later
+  /*
+    trying to do nixos-enter 'passwd' will result in 'command passwd not found',
+    so we need to do something different for initial account setup.
+    you will need to include a password hash here on first setup. example:
+    `password = "some password hash";`
+    generate this hash with: `mkpasswd -m sha-512 password`
+    don't commit the password hash to git for the love of god
+    this issue will probably be fixed later
+  */
   users.users.ryan = {
     isNormalUser = true;
     description = "test user";

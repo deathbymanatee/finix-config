@@ -10,8 +10,6 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "virt-manager"; # Define your hostname.
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
