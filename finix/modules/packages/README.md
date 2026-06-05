@@ -5,3 +5,5 @@ Nix derivations that are either updates of packages not yet updated in nixpkgs-u
 # labwc
 
 see https://github.com/NixOS/nixpkgs/pull/526832
+
+might need to change it to remove the hard systemd dependency with an `enableSystemd ? true` input

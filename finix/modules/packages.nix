@@ -10,9 +10,10 @@ let
   cfg = config.modules.packages;
   maintenance = pkgs.writeShellScriptBin "maintenance" ''
     nix-collect-garbage -d
+    nix store optimise
     sudo nix-collect-garbage -d 
     sudo nix store verify --all
-    sudo nix store repair --all
+    sudo nix store optimise
     cd ~/.config/finix-config
     hostname=$HOSTNAME
     nix flake update
