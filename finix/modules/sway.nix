@@ -12,9 +12,6 @@ let
 
 in
 {
-  imports = [
-    ./soteria.nix
-  ];
   options.modules.sway = {
     enable = mkEnableOption "sway";
     user = mkOption {
@@ -44,7 +41,6 @@ in
           });
         '';
       };
-      soteria.enable = true;
     };
 
     users.groups.power = { };

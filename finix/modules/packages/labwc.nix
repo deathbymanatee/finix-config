@@ -84,8 +84,8 @@ stdenv.mkDerivation (finalAttrs: {
 
   mesonFlags = [
     (lib.mesonEnable "xwayland" true)
-  ]
-  ++ lib.optionals (enableSystemd) [ (lib.mesonEnable "systemd-session" false) ];
+    (lib.mesonEnable "systemd-session" enableSystemd)
+  ];
 
   strictDeps = true;
 

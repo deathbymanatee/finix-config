@@ -20,9 +20,9 @@ let
   });
 
   labwc' = pkgs.callPackage ./packages/labwc.nix {
+    enableSystemd = false;
     inherit libinput;
     wlroots_0_20 = pkgs.wlroots_0_20.override ({ inherit libinput; });
-    enableSystemd = false;
   };
 
 in
@@ -83,7 +83,7 @@ in
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
       ];
-    programs.lxqt.wayland.compositor = labwc';
+    programs.lxqt.wayland.compositor = lib.mkForce labwc';
 
     fonts.fontconfig.enable = true;
     fonts.enableDefaultPackages = true;
