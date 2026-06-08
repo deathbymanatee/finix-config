@@ -1,11 +1,11 @@
 {
   lib,
-  pkgs,
   cairo,
   fetchFromGitHub,
   gettext,
   glib,
   libdrm,
+  libinput,
   libpng,
   librsvg,
   libsfdo,
@@ -22,18 +22,13 @@
   wayland,
   wayland-protocols,
   wayland-scanner,
+  wlroots_0_20,
   libxcb-wm,
   xwayland,
+
+  enableSystemd ? true,
 }:
 
-let
-  libinput = pkgs.libinput.override ({
-    udev = pkgs.libudev-zero;
-    wacomSupport = false;
-  });
-  wlroots_0_20 = pkgs.wlroots_0_20.override ({ inherit libinput; });
-
-in
 stdenv.mkDerivation (finalAttrs: {
   pname = "labwc";
   version = "0.20.0";
@@ -89,8 +84,8 @@ stdenv.mkDerivation (finalAttrs: {
 
   mesonFlags = [
     (lib.mesonEnable "xwayland" true)
-    (lib.mesonEnable "systemd-session" false)
-  ];
+  ]
+  ++ lib.optionals (enableSystemd) [ (lib.mesonEnable "systemd-session" false) ];
 
   strictDeps = true;
 

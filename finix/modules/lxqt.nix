@@ -14,7 +14,16 @@ let
     pipewire = config.programs.pipewire.package;
   });
 
-  labwc' = pkgs.callPackage ./packages/labwc.nix { };
+  libinput = pkgs.libinput.override ({
+    udev = pkgs.libudev-zero;
+    wacomSupport = false;
+  });
+
+  labwc' = pkgs.callPackage ./packages/labwc.nix {
+    inherit libinput;
+    wlroots_0_20 = pkgs.wlroots_0_20.override ({ inherit libinput; });
+    enableSystemd = false;
+  };
 
 in
 {
