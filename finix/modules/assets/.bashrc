@@ -28,3 +28,7 @@ fi
 
 alias poweroff="sudo poweroff"
 alias reboot="sudo reboot"
+alias mt="maintenance"
+alias mtb="maintenance boot"
+alias rb="rebuild"
+alias rbb="rebuild boot"
