@@ -14,17 +14,6 @@ let
     pipewire = config.programs.pipewire.package;
   });
 
-  libinput = pkgs.libinput.override ({
-    udev = pkgs.libudev-zero;
-    wacomSupport = false;
-  });
-
-  labwc' = pkgs.callPackage ./packages/labwc.nix {
-    enableSystemd = false;
-    inherit libinput;
-    wlroots_0_20 = pkgs.wlroots_0_20.override ({ inherit libinput; });
-  };
-
 in
 {
   options.modules.lxqt = {
@@ -57,10 +46,7 @@ in
         kdePackages.ark
         hicolor-icon-theme
         keepassxc
-        librewolf
-        thunar
-        thunar-volman
-        thunar-archive-plugin
+        librewolf-bin
         foot
         labwc-tweaks
         way-displays
@@ -83,7 +69,6 @@ in
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
       ];
-    programs.lxqt.wayland.compositor = lib.mkForce labwc';
 
     fonts.fontconfig.enable = true;
     fonts.enableDefaultPackages = true;
@@ -117,9 +102,6 @@ in
       tumbler
       dconf
       xfconf
-      thunar
-      thunar-volman
-      thunar-archive-plugin
     ];
 
     security.pam.services.swaylock = {

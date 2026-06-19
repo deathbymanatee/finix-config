@@ -12,6 +12,7 @@ let
   communityModules = with inputs.community-modules.nixosModules; [
     pipewire
     cups
+    home-manager
   ];
 in
 {
@@ -68,7 +69,6 @@ in
   services.rtkit.enable = true;
   services.seatd.enable = true;
   services.rtkit.extraGroups = [ config.services.seatd.group ];
-  services.gardendevd.enable = true;
   services.nix-daemon = {
     enable = true;
     settings = {
@@ -85,23 +85,24 @@ in
   services.mdevd = {
     enable = true;
     nlgroups = 4;
+    hotplugRules = lib.mkIf config.services.mdevd.enable (
+      lib.mkAfter ''
+        grsec       root:root 660
+        kmem        root:root 640
+        mem         root:root 640
+        port        root:root 640
+        console     root:tty 600 @chmod 600 $MDEV
+        card[0-9]   root:video 660 =dri/
+
+        event[0-9]+ root:input 660 =input/
+        mice        root:input 660 =input/
+        mouse[0-9]+ root:input 660 =input/
+
+        rfkill      root:${config.services.seatd.group} 660
+      ''
+    );
+
   };
-  services.mdevd.hotplugRules = lib.mkIf config.services.mdevd.enable (
-    lib.mkAfter ''
-      grsec       root:root 660
-      kmem        root:root 640
-      mem         root:root 640
-      port        root:root 640
-      console     root:tty 600 @chmod 600 $MDEV
-      card[0-9]   root:video 660 =dri/
-
-      event[0-9]+ root:input 660 =input/
-      mice        root:input 660 =input/
-      mouse[0-9]+ root:input 660 =input/
-
-      rfkill      root:${config.services.seatd.group} 660
-    ''
-  );
 
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
   boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
@@ -124,10 +125,6 @@ in
           ;;
       esac
     done
-
-    # extra debug output
-    # ls -l /dev/disk/by-uuid
-    # blkid --output export
   '';
 
   programs.sudo.enable = true;

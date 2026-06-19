@@ -51,6 +51,13 @@
     ];
   };
 
+  home-manager.users.ryan = {
+    home.username = "ryan";
+    home.homeDirectory = "/home/ryan/";
+    home.stateVersion = "24.11";
+    home.enableNixpkgsReleaseCheck = false;
+  };
+
   # custom modules
   modules.packages.enable = true;
   modules.lxqt.enable = true;

@@ -13,7 +13,6 @@ let
     nix store optimise
     sudo nix-collect-garbage -d 
     sudo nix store verify --all
-    sudo nix store optimise
     cd ~/.config/finix-config
     hostname=$HOSTNAME
     nix flake update
@@ -22,6 +21,7 @@ let
     else
       sudo nixos-rebuild switch --flake .#$hostname
     fi
+    sudo nix store optimise
   '';
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
     hostname=$HOSTNAME

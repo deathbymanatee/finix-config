@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     finix.url = "github:finix-community/finix";
-    community-modules.url = "github:finix-community/community-modules";
+    community-modules.url = "git+file:///home/ryan/Documents/community-modules";
   };
 
   outputs =
@@ -19,6 +19,11 @@
       pkgs = import nixpkgs {
         system = "x86_64-linux";
         config.allowUnfree = true;
+        config.permittedInsecurePackages = [
+          "librewolf-bin-151.0.1-2"
+          "librewolf-bin-unwrapped-151.0.1-2"
+
+        ];
       };
 
       mkSystem =

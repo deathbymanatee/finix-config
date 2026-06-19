@@ -129,7 +129,7 @@ in
 
       # gui
       keepassxc
-      librewolf
+      librewolf-bin
 
       # displays
       way-displays

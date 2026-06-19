@@ -37,7 +37,6 @@
   # custom modules
   modules.packages.enable = true;
   modules.lxqt.enable = true;
-  modules.lxqt.user = "ryan";
   modules.lxqt.enableXorg = true;
 
   # base packages

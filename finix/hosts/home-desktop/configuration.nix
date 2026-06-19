@@ -47,7 +47,6 @@
   # custom modules
   modules.packages.enable = true;
   modules.lxqt.enable = true;
-  modules.lxqt.user = "ryan";
   modules.steam.enable = true;
   modules.vesktop.enable = true;
   modules.audioProd.enable = true;
