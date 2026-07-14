@@ -54,8 +54,8 @@
   # custom modules
   modules.packages.enable = true;
   modules.lxqt.enable = true;
-  # modules.pipewire.enable = true;
-  # modules.vesktop.enable = true;
+  modules.pipewire.enable = true;
+  modules.vesktop.enable = true;
 
   # extra packages
   environment.systemPackages = with pkgs; [
@@ -65,5 +65,6 @@
 
     libva-utils
     systemfd
+    xterm
   ];
 }

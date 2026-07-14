@@ -29,7 +29,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.xwayland-satellite.enable = true;
+    # programs.xwayland-satellite.enable = true;
     programs.pmount.enable = true;
     programs.lxqt.enable = true;
     programs.lxqt.xsession.enable = cfg.enableXorg;
@@ -63,6 +63,10 @@ in
         playerctl
         lxqt-panel-profiles
         labwc-gtktheme
+        wl-clipboard
+        cliphist
+        xclip
+        xprop
 
         rofi
       ]
@@ -108,11 +112,12 @@ in
       text = "auth include login";
     };
 
+    xdg.portal.enable = true;
     xdg.mime.enable = true;
     xdg.icons.enable = true;
     xdg.autostart.enable = true;
     xdg.portal.portals = [
-      # xdg-desktop-portal-wlr'
+      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];
   };

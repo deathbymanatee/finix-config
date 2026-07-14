@@ -23,4 +23,4 @@ sleep 0.5; easyeffects &
 sleep 0.5; qpwgraph &
 sleep 0.5; qjackctl &
 gammastep -O 3725 >/dev/null 2>&1 &
-qlipper >/dev/null 2>&1 &
+wl-paste --watch cliphist store >/dev/null 2>&1 &
