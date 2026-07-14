@@ -19,8 +19,8 @@ in
     programs.pipewire.jack.enable = true;
     programs.pipewire.alsa.enable = true;
 
-    programs.pipewire.extraConfig = {
-      pipewire = {
+    programs.pipewire = {
+      settings = {
         "10-low-latency" = {
           "context.properties" = {
             "default.clock.rate" = 48000;
@@ -30,7 +30,7 @@ in
           };
         };
       };
-      jack = {
+      jack.settings = {
         "12-jack-low-latency" = {
           "jack.properties" = {
             "node.latency" = "256/48000";

@@ -10,15 +10,14 @@
 }:
 let
   communityModules = with inputs.community-modules.nixosModules; [
-    pipewire
     cups
-    home-manager
   ];
 in
 {
   imports =
     with modules;
     [
+      pipewire
       nix-daemon
       upower
       openssh
@@ -28,6 +27,7 @@ in
       getty
       bash
       iwd
+      networkmanager
       dhcpcd
       lemurs
       flatpak
@@ -35,10 +35,9 @@ in
       sway
       xwayland-satellite
       rtkit
-      lxqt
       zzz
       fwupd
-      xserver
+      xorg
       brightnessctl
       ly
       pmount
@@ -82,50 +81,51 @@ in
       ];
     };
   };
-  services.mdevd = {
-    enable = true;
-    nlgroups = 4;
-    hotplugRules = lib.mkIf config.services.mdevd.enable (
-      lib.mkAfter ''
-        grsec       root:root 660
-        kmem        root:root 640
-        mem         root:root 640
-        port        root:root 640
-        console     root:tty 600 @chmod 600 $MDEV
-        card[0-9]   root:video 660 =dri/
+  services.gardendevd.enable = true;
+  # services.mdevd = {
+  #   enable = true;
+  #   nlgroups = 4;
+  #   hotplugRules = lib.mkIf config.services.mdevd.enable (
+  #     lib.mkAfter ''
+  #       grsec       root:root 660
+  #       kmem        root:root 640
+  #       mem         root:root 640
+  #       port        root:root 640
+  #       console     root:tty 600 @chmod 600 $MDEV
+  #       card[0-9]   root:video 660 =dri/
 
-        event[0-9]+ root:input 660 =input/
-        mice        root:input 660 =input/
-        mouse[0-9]+ root:input 660 =input/
+  #       event[0-9]+ root:input 660 =input/
+  #       mice        root:input 660 =input/
+  #       mouse[0-9]+ root:input 660 =input/
 
-        rfkill      root:${config.services.seatd.group} 660
-      ''
-    );
+  #       rfkill      root:${config.services.seatd.group} 660
+  #     ''
+  #   );
 
-  };
+  # };
 
   # https://github.com/finix-community/finix/issues/67#issuecomment-4491668055
-  boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
-    sleep 2
+  # boot.initrd.fileSystemImportCommands = lib.mkOrder 499 ''
+  #   sleep 2
 
-    mkdir -p /dev/disk/by-label /dev/disk/by-uuid
-    current_dev=""
-    blkid --output export | while IFS='=' read -r key value; do
-      case "$key" in
-        DEVNAME)
-          current_dev="$value"
-          ;;
-        LABEL)
-          [ -n "$current_dev" ] || continue
-          ln -snf "$current_dev" "/dev/disk/by-label/$value"
-          ;;
-        UUID)
-          [ -n "$current_dev" ] || continue
-          ln -snf "$current_dev" "/dev/disk/by-uuid/$value"
-          ;;
-      esac
-    done
-  '';
+  #   mkdir -p /dev/disk/by-label /dev/disk/by-uuid
+  #   current_dev=""
+  #   blkid --output export | while IFS='=' read -r key value; do
+  #     case "$key" in
+  #       DEVNAME)
+  #         current_dev="$value"
+  #         ;;
+  #       LABEL)
+  #         [ -n "$current_dev" ] || continue
+  #         ln -snf "$current_dev" "/dev/disk/by-label/$value"
+  #         ;;
+  #       UUID)
+  #         [ -n "$current_dev" ] || continue
+  #         ln -snf "$current_dev" "/dev/disk/by-uuid/$value"
+  #         ;;
+  #     esac
+  #   done
+  # '';
 
   programs.sudo.enable = true;
   programs.bash.enable = true;

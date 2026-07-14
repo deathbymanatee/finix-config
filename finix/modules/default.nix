@@ -6,7 +6,7 @@
     ./plasma.nix
     ./lxqt.nix
     ./ratpoison.nix
-    ./pipewire.nix
+    #./pipewire.nix
     ./steam.nix
     ./vesktop.nix
     ./audio-prod.nix

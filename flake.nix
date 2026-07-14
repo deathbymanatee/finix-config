@@ -2,7 +2,7 @@
   description = "finix flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?rev=ddd7720cc351111b47fa618dd1e7afebf0c8e661";
     finix.url = "github:finix-community/finix";
     community-modules.url = "git+file:///home/ryan/Documents/community-modules";
   };

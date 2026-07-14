@@ -10,9 +10,9 @@ with lib;
 let
   cfg = config.modules.lxqt;
 
-  xdg-desktop-portal-wlr' = pkgs.xdg-desktop-portal-wlr.override ({
-    pipewire = config.programs.pipewire.package;
-  });
+  # xdg-desktop-portal-wlr' = pkgs.xdg-desktop-portal-wlr.override ({
+  #   pipewire = config.programs.pipewire.package;
+  # });
 
 in
 {
@@ -34,7 +34,7 @@ in
     programs.lxqt.enable = true;
     programs.lxqt.xsession.enable = cfg.enableXorg;
     programs.lxqt.iconTheme = pkgs.papirus-icon-theme;
-    services.xserver.enable = cfg.enableXorg;
+    programs.xorg.enable = cfg.enableXorg;
     programs.lxqt.extraPackages =
       with pkgs;
       [
@@ -112,7 +112,7 @@ in
     xdg.icons.enable = true;
     xdg.autostart.enable = true;
     xdg.portal.portals = [
-      xdg-desktop-portal-wlr'
+      # xdg-desktop-portal-wlr'
       pkgs.xdg-desktop-portal-gtk
     ];
   };

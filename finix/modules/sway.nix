@@ -151,7 +151,6 @@ in
       autostart.enable = true;
     };
 
-    # hacky and bad but only here because of no hjem / home-manager :(
     system.activation.scripts = mkIf (cfg.user != "") {
       dotfiles = pkgs.lib.stringAfter [ "users" ] ''
         home_dir=/home/${cfg.user}
