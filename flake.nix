@@ -20,8 +20,8 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
         config.permittedInsecurePackages = [
-          "librewolf-bin-151.0.1-2"
-          "librewolf-bin-unwrapped-151.0.1-2"
+          "librewolf-bin-152.0.5-1"
+          "librewolf-bin-unwrapped-152.0.5-1"
 
         ];
       };
