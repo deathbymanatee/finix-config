@@ -67,6 +67,7 @@ in
         cliphist
         xclip
         xprop
+        clipse
 
         rofi
       ]

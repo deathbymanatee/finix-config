@@ -2,26 +2,26 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1781126587,
-        "narHash": "sha256-yDX9JDjqCjSmXkmeoqopu+nxlRAIC90scM1iRZuDzFw=",
-        "ref": "refs/heads/programs/steam",
-        "rev": "6c3a5ed92cf196474866ba1a9ee34b2e6834c683",
-        "revCount": 35,
-        "type": "git",
-        "url": "file:///home/ryan/Documents/community-modules"
+        "lastModified": 1784125385,
+        "narHash": "sha256-McTnmfCE/IkPZDLWewezlg4w7k5fEK5caq2clxLs6+c=",
+        "owner": "finix-community",
+        "repo": "community-modules",
+        "rev": "9dfe8ae9df007c441abbe3184e531e70dffa05b0",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/ryan/Documents/community-modules"
+        "owner": "finix-community",
+        "repo": "community-modules",
+        "type": "github"
       }
     },
     "finix": {
       "locked": {
-        "lastModified": 1783977583,
-        "narHash": "sha256-gnwRvQIEpaIJBr3tniNQjI8PYQl5EJAK0dwqUW538jg=",
+        "lastModified": 1784070678,
+        "narHash": "sha256-5KP4iyxGvHX78uMuBQ4jRnimMAm12KrLu8Djs5hPl44=",
         "owner": "finix-community",
         "repo": "finix",
-        "rev": "8598b051fcce90333c47b177fa2732c2e3ad6004",
+        "rev": "6adaaf78ca90865c6c3b8838b5e29f9d771d83b8",
         "type": "github"
       },
       "original": {

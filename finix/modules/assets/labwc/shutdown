@@ -13,7 +13,8 @@
 # systemctl --user stop graphical-session.target
 
 pkill qpwgraph >/dev/null 2>&1 &
-pkill easyeffects >/dev/null 2>&1 &
-pkill wireplumber >/dev/null 2>&1 &
+sleep 0.5; pkill easyeffects >/dev/null 2>&1 &
+sleep 0.5; pkill wireplumber >/dev/null 2>&1 &
 sleep 0.5; pkill pipewire-pulse >/dev/null 2>&1 &
 sleep 0.5; pkill pipewire >/dev/null 2>&1 &
+pkill clipse >/dev/null 2>&1 &
