@@ -67,9 +67,6 @@
   fileSystems."/mnt/disk2" = {
     device = "/dev/disk/by-uuid/dc514686-c1e3-4235-95b0-8accb8a7b129";
     fsType = "ext4";
-
-    # don't do this without a good reason
-    noCheck = true;
   };
 
   swapDevices = [ ];

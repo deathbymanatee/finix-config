@@ -22,16 +22,12 @@ Invoke either of these with the `boot` parameter to remain on your current gener
 
 # Credits
 
-This configuration was scaffolded from [vitrial's minimal config / install guide](https://codeberg.org/vitrial/finix-config/src/branch/main). Their repository contains an excellent guide for starting your own minimal finix config if you don't want to copy my stuff.
+This configuration was scaffolded from [vitrial's minimal config / install guide](https://github.com/finix-community/examples/tree/main/installations). Their repository contains an excellent guide for starting your own minimal finix config if you don't want to copy my stuff.
 
 # Requirements
 
 - Nix Flakes
 - Internet
-
-# Installing
-
-[Installation Instructions](./docs/INSTALL.md)
 
 # TODOs
 

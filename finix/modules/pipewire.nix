@@ -16,6 +16,7 @@ in
   };
   config = mkIf cfg.enable {
     programs.pipewire.enable = true;
+    programs.wireplumber.enable = true;
 
     environment.systemPackages = with pkgs; [
       easyeffects

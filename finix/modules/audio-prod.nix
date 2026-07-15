@@ -18,6 +18,7 @@ in
     programs.pipewire.enable = true;
     programs.pipewire.jack.enable = true;
     programs.pipewire.alsa.enable = true;
+    programs.wireplumber.enable = true;
 
     programs.pipewire = {
       settings = {

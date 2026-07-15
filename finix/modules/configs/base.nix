@@ -1,5 +1,11 @@
-# minimal, shared, base configuration
-# this will get you a TTY but that's it. everything else should be defined somewhere else
+/*
+  minimal, shared, base configuration. using this alone will only get you a TTY.
+
+  TODO
+
+    1. move session managers to host configs maybe?
+    2. move network services to hosts potentially?
+*/
 {
   config,
   pkgs,
@@ -18,6 +24,7 @@ in
     with modules;
     [
       pipewire
+      wireplumber
       nix-daemon
       upower
       openssh
@@ -67,6 +74,7 @@ in
   services.upower.enable = true;
   services.rtkit.enable = true;
   services.seatd.enable = true;
+  services.udev.enable = true;
   services.rtkit.extraGroups = [ config.services.seatd.group ];
   services.nix-daemon = {
     enable = true;
@@ -81,12 +89,9 @@ in
       ];
     };
   };
-  # services.gardendevd.enable = true;
-  services.udev.enable = true;
 
   programs.sudo.enable = true;
   programs.bash.enable = true;
-  # programs.resolvconf.enable = true;
   programs.limine = {
     enable = true;
     settings.editor_enabled = true;
