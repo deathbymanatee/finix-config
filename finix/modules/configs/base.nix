@@ -4,7 +4,8 @@
   TODO
 
     1. move session managers to host configs maybe?
-    2. move network services to hosts potentially?
+    2. move network services to host configs maybe?
+    3. import less stuff in here? only import in places where needed
 */
 {
   config,

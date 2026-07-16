@@ -10,7 +10,6 @@ let
   cfg = config.modules.packages;
   maintenance = pkgs.writeShellScriptBin "maintenance" ''
     nix-collect-garbage -d
-    nix store optimise
     sudo nix-collect-garbage -d 
     sudo nix store verify --all
     cd ~/.config/finix-config
@@ -21,6 +20,7 @@ let
     else
       sudo nixos-rebuild switch --flake .#$hostname
     fi
+    nix store optimise
     sudo nix store optimise
   '';
   rebuild = pkgs.writeShellScriptBin "rebuild" ''
@@ -32,6 +32,8 @@ let
     else
       sudo nixos-rebuild switch --flake .#$hostname
     fi
+    nix store optimise
+    sudo nix store optimise
   '';
 
 in
