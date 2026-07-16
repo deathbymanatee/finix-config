@@ -19,6 +19,7 @@ in
       steam
       steam-run
       protonup-qt
+      gamescope
     ];
   };
 }
