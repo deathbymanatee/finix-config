@@ -58,5 +58,6 @@
     libva-utils
     gnumake
     python314
+    xterm
   ];
 }
