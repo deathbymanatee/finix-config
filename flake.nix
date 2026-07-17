@@ -2,7 +2,7 @@
   description = "finix flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?rev=ddd7720cc351111b47fa618dd1e7afebf0c8e661";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     finix.url = "github:finix-community/finix";
     community-modules.url = "github:finix-community/community-modules";
   };
@@ -20,9 +20,9 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
         config.permittedInsecurePackages = [
-          "librewolf-bin-152.0.5-1"
-          "librewolf-bin-unwrapped-152.0.5-1"
-
+          #   "librewolf-bin-152.0.5-1"
+          #   "librewolf-bin-unwrapped-152.0.5-1"
+          "electron-40.10.5"
         ];
       };
 
