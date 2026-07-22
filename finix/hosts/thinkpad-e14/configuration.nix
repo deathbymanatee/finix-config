@@ -1,16 +1,21 @@
 {
   config,
   pkgs,
+  modules,
   ...
 }:
 
 {
-  imports = [
+  imports = with modules; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    iwd
+    dhcpcd
+    flatpak
   ];
 
   services.iwd.enable = true;
+  services.dhcpcd.enable = true;
   services.docker.enable = true;
   services.cups.enable = true;
   services.flatpak.enable = true;

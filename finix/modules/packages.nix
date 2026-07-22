@@ -32,8 +32,6 @@ let
     else
       sudo nixos-rebuild switch --flake .#$hostname
     fi
-    nix store optimise
-    sudo nix store optimise
   '';
 
 in

@@ -24,8 +24,6 @@ in
   imports =
     with modules;
     [
-      pipewire
-      wireplumber
       nix-daemon
       upower
       openssh
@@ -34,11 +32,6 @@ in
       sudo
       getty
       bash
-      iwd
-      networkmanager
-      dhcpcd
-      lemurs
-      flatpak
       polkit
       sway
       xwayland-satellite
@@ -70,7 +63,6 @@ in
   services.sysklogd.enable = true;
   services.polkit.enable = true;
   services.dbus.enable = true;
-  services.dhcpcd.enable = true;
   services.openssh.enable = true;
   services.upower.enable = true;
   services.rtkit.enable = true;

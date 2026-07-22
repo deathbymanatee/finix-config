@@ -4,6 +4,7 @@
   pkgs,
   config,
   lib,
+  modules,
   ...
 }:
 with lib;
@@ -16,6 +17,10 @@ let
 
 in
 {
+  imports = with modules; [
+    iwd
+  ];
+
   options.modules.lxqt = {
     enable = mkEnableOption "lxqt";
 

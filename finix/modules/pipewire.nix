@@ -2,6 +2,7 @@
   lib,
   config,
   pkgs,
+  modules,
   ...
 }:
 
@@ -11,6 +12,11 @@ let
 
 in
 {
+  imports = with modules; [
+    pipewire
+    wireplumber
+  ];
+
   options.modules.pipewire = {
     enable = mkEnableOption "pipewire";
   };

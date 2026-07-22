@@ -1,18 +1,22 @@
 {
   config,
   pkgs,
+  modules,
   ...
 }:
 {
-  imports = [
+  imports = with modules; [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    dhcpcd
+    flatpak
   ];
 
   boot.kernelParams = [ "loglevel=1" ];
 
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
+  services.dhcpcd.enable = true;
   services.ly.enable = true;
   services.docker.enable = true;
   services.cups.enable = true;
