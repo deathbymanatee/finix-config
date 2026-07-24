@@ -15,11 +15,6 @@
   inputs,
   ...
 }:
-let
-  communityModules = with inputs.community-modules.nixosModules; [
-    cups
-  ];
-in
 {
   imports =
     with modules;
@@ -32,17 +27,6 @@ in
       sudo
       getty
       bash
-      polkit
-      sway
-      xwayland-satellite
-      rtkit
-      zzz
-      fwupd
-      xorg
-      brightnessctl
-      ly
-      pmount
-      docker
     ]
     ++ communityModules;
 
@@ -61,14 +45,9 @@ in
   hardware.graphics.enable32Bit = true;
 
   services.sysklogd.enable = true;
-  services.polkit.enable = true;
-  services.dbus.enable = true;
   services.openssh.enable = true;
   services.upower.enable = true;
-  services.rtkit.enable = true;
-  services.seatd.enable = true;
-  services.udev.enable = true;
-  services.rtkit.extraGroups = [ config.services.seatd.group ];
+  services.gardendevd.enable = true;
   services.nix-daemon = {
     enable = true;
     settings = {
@@ -85,24 +64,8 @@ in
 
   programs.sudo.enable = true;
   programs.bash.enable = true;
-  programs.limine = {
-    enable = true;
-    settings.editor_enabled = true;
-  };
-
-  # requires sudo
-  providers.privileges.rules = lib.optionals config.services.seatd.enable [
-    {
-      command = "/run/current-system/sw/bin/poweroff";
-      groups = [ config.services.seatd.group ];
-      requirePassword = false;
-    }
-    {
-      command = "/run/current-system/sw/bin/reboot";
-      groups = [ config.services.seatd.group ];
-      requirePassword = false;
-    }
-  ];
+  programs.limine.enable = true;
+  programs.limine.settings.editor_enabled = true;
 
   security.pam.environment.NIX_PATH.default = "nixpkgs=${pkgs.path}";
 

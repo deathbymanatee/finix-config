@@ -10,15 +10,16 @@
 with lib;
 let
   cfg = config.modules.lxqt;
-
-  # xdg-desktop-portal-wlr' = pkgs.xdg-desktop-portal-wlr.override ({
-  #   pipewire = config.programs.pipewire.package;
-  # });
-
 in
 {
   imports = with modules; [
     iwd
+    polkit
+    rtkit
+    udisks2
+    ly
+    xorg
+    brightnessctl
   ];
 
   options.modules.lxqt = {
@@ -34,7 +35,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # programs.xwayland-satellite.enable = true;
+
     programs.pmount.enable = true;
     programs.lxqt.enable = true;
     programs.lxqt.xsession.enable = cfg.enableXorg;
@@ -108,6 +109,15 @@ in
       ];
     };
 
+    services.polkit.enable = true;
+    # requires dev manager that can read udev rules
+    services.udisks2.enable =
+      config.services.gardendevd.enable || config.services.udev.enable || config.services.keventd.enable;
+    services.rtkit.enable = true;
+    services.rtkit.extraGroups = [ config.services.seatd.group ];
+    services.dbus.enable = true;
+    services.seatd.enable = true;
+    services.ly.enable = true;
     services.dbus.packages = with pkgs; [
       tumbler
       dconf
@@ -117,6 +127,20 @@ in
     security.pam.services.swaylock = {
       text = "auth include login";
     };
+
+    # requires sudo
+    providers.privileges.rules = lib.optionals config.services.seatd.enable [
+      {
+        command = "/run/current-system/sw/bin/poweroff";
+        groups = [ config.services.seatd.group ];
+        requirePassword = false;
+      }
+      {
+        command = "/run/current-system/sw/bin/reboot";
+        groups = [ config.services.seatd.group ];
+        requirePassword = false;
+      }
+    ];
 
     xdg.portal.enable = true;
     xdg.mime.enable = true;

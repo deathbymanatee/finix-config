@@ -2,17 +2,26 @@
   config,
   pkgs,
   modules,
+  inputs,
   ...
 }:
-
-{
-  imports = with modules; [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    iwd
-    dhcpcd
-    flatpak
+let
+  communityModules = with inputs.community-modules.nixosModules; [
+    cups
   ];
+in
+{
+  imports =
+    with modules;
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      iwd
+      dhcpcd
+      flatpak
+      docker
+    ]
+    ++ communityModules;
 
   services.iwd.enable = true;
   services.dhcpcd.enable = true;
@@ -20,7 +29,6 @@
   services.cups.enable = true;
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
-  services.ly.enable = true;
 
   programs.brightnessctl.enable = true;
 
