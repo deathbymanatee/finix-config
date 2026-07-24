@@ -53,7 +53,7 @@
   modules.lxqt.enable = true;
   modules.steam.enable = true;
   modules.vesktop.enable = true;
-  modules.audioProd.enable = true;
+  modules.pro-audio.enable = true;
 
   # lagniappe packages
   environment.systemPackages = with pkgs; [

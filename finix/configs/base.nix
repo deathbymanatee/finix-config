@@ -33,16 +33,12 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  finit.runlevel = 3;
   finit.services = {
     nix-daemon.environment.CURL_CA_BUNDLE = config.security.pki.caBundle;
   };
   finit.cgroups.system.settings = {
     "cpu.weight" = 100;
   };
-
-  hardware.graphics.enable = true;
-  hardware.graphics.enable32Bit = true;
 
   services.sysklogd.enable = true;
   services.openssh.enable = true;

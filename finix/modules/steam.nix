@@ -15,6 +15,10 @@ in
     enable = mkEnableOption "steam";
   };
   config = mkIf cfg.enable {
+
+    hardware.graphics.enable = true;
+    hardware.graphics.enable32Bit = true;
+
     environment.systemPackages = with pkgs; [
       steam
       steam-run
