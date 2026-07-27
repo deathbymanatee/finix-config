@@ -3,7 +3,7 @@
   pkgs,
   config,
   lib,
-  inputs,
+  modules,
   ...
 }:
 with lib;
@@ -12,6 +12,10 @@ let
 
 in
 {
+  imports = with modules; [
+    sway
+  ];
+
   options.modules.sway = {
     enable = mkEnableOption "sway";
     user = mkOption {

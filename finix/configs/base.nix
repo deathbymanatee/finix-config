@@ -16,19 +16,16 @@
   ...
 }:
 {
-  imports =
-    with modules;
-    [
-      nix-daemon
-      upower
-      openssh
-      sysklogd
-      limine
-      sudo
-      getty
-      bash
-    ]
-    ++ communityModules;
+  imports = with modules; [
+    nix-daemon
+    upower
+    openssh
+    sysklogd
+    limine
+    sudo
+    getty
+    bash
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.loader.efi.canTouchEfiVariables = true;

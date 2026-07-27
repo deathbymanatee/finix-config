@@ -20,6 +20,7 @@ in
     ly
     xorg
     brightnessctl
+    pmount
   ];
 
   options.modules.lxqt = {
@@ -38,6 +39,9 @@ in
 
     # graphical runlevel
     finit.runlevel = 3;
+
+    hardware.graphics.enable = true;
+    hardware.graphics.enable32Bit = true;
 
     programs.pmount.enable = true;
     programs.lxqt.enable = true;
