@@ -10,9 +10,7 @@
 {
   config,
   pkgs,
-  lib,
   modules,
-  inputs,
   ...
 }:
 {
@@ -39,7 +37,6 @@
 
   services.sysklogd.enable = true;
   services.openssh.enable = true;
-  services.upower.enable = true;
   services.gardendevd.enable = true;
   services.nix-daemon = {
     enable = true;
@@ -67,18 +64,8 @@
     wget
     git
     nixos-rebuild-ng
-    iputils
-    iproute2
-    cargo
-    gcc
     man
     fastfetch
-    ripgrep
     ncdu
-    nix-init
-    strace
-    perl
-    unzip
-    zip
   ];
 }

@@ -7,7 +7,7 @@
 }:
 
 {
-
+  boot.initrd.kernelModules = [ ];
   boot.initrd.availableKernelModules = [
     "nvme"
     "xhci_pci"
@@ -18,7 +18,8 @@
     "dm_mod"
     "dm_crypt"
   ];
-  boot.initrd.kernelModules = [ ];
+
+  boot.kernelParams = [ "loglevel=1" ];
   boot.kernelModules = [
     "kvm-amd"
     "snd_seq"

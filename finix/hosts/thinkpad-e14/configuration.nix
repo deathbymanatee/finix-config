@@ -27,6 +27,7 @@ in
   services.dhcpcd.enable = true;
   services.docker.enable = true;
   services.cups.enable = true;
+  services.upower.enable = true;
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
 
@@ -65,15 +66,16 @@ in
   modules.lxqt.enable = true;
   modules.pipewire.enable = true;
   modules.vesktop.enable = true;
+  modules.dev-tools.enable = true;
 
   # extra packages
   environment.systemPackages = with pkgs; [
     # lagniappe
     btop-rocm
     inxi
-
     libva-utils
-    systemfd
     xterm
+    iputils
+    iproute2
   ];
 }

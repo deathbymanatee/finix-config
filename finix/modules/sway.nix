@@ -1,4 +1,5 @@
 # base configuration for my sway desktop
+# nonfunctional, queued for deletion
 {
   pkgs,
   config,

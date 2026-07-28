@@ -1,4 +1,3 @@
-# base configuration for my lxqt desktop
 # wrapper module
 {
   pkgs,

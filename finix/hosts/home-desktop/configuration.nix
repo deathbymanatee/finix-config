@@ -2,17 +2,25 @@
   config,
   pkgs,
   modules,
+  inputs,
   ...
 }:
-{
-  imports = with modules; [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    dhcpcd
-    flatpak
+let
+  communityModules = with inputs.community-modules.nixosModules; [
+    cups
   ];
-
-  boot.kernelParams = [ "loglevel=1" ];
+in
+{
+  imports =
+    with modules;
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      dhcpcd
+      flatpak
+      docker
+    ]
+    ++ communityModules;
 
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];

@@ -221,9 +221,13 @@ in
       ];
 
     environment.pathsToLink = [
-      "/share"
+      # "/share" # FIXME too broad
+      "/share/lxqt"
+      "/share/themes"
+      "/share/wallpapers"
       "/share/icons"
       "/share/pixmaps"
+      "/share/palettes"
     ];
 
     security.pam.environment = {
