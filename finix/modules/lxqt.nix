@@ -20,6 +20,7 @@ in
     xorg
     brightnessctl
     pmount
+    lxqt
   ];
 
   options.modules.lxqt = {

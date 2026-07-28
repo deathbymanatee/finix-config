@@ -1,7 +1,5 @@
 {
   imports = [
-    # ./services
-    ./programs
     ./packages.nix
     ./sway.nix
     ./lxqt.nix
