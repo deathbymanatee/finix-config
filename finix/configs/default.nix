@@ -1,6 +1,6 @@
 {
   imports = [
     ./base.nix
-    ./graphical-lxqt.nix
+    ./graphical-wlroots.nix
   ];
 }

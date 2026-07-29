@@ -1,4 +1,3 @@
-# wrapper module
 {
   pkgs,
   config,
@@ -9,17 +8,13 @@
 with lib;
 let
   cfg = config.modules.lxqt;
+  xdg-desktop-portal-wlr' = pkgs.callPackage ./packages/xdg-desktop-portal-wlr.nix { };
 in
 {
   imports = with modules; [
     iwd
-    polkit
-    rtkit
-    udisks2
-    ly
     xorg
     brightnessctl
-    pmount
     lxqt
   ];
 
@@ -36,14 +31,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
-    # graphical runlevel
-    finit.runlevel = 3;
-
-    hardware.graphics.enable = true;
-    hardware.graphics.enable32Bit = true;
-
-    programs.pmount.enable = true;
     programs.lxqt.enable = true;
     programs.lxqt.xsession.enable = cfg.enableXorg;
     programs.lxqt.iconTheme = pkgs.papirus-icon-theme;
@@ -81,7 +68,6 @@ in
         xclip
         xprop
         clipse
-
         rofi
       ]
       ++ lib.optionals config.services.iwd.enable [
@@ -116,15 +102,6 @@ in
       ];
     };
 
-    # requires dev manager that can read udev rules
-    services.udisks2.enable =
-      config.services.gardendevd.enable || config.services.udev.enable || config.services.keventd.enable;
-    services.seatd.enable = true;
-    services.dbus.enable = true;
-    services.ly.enable = true;
-    services.polkit.enable = true;
-    services.rtkit.enable = true;
-    services.rtkit.extraGroups = [ config.services.seatd.group ];
     services.dbus.packages = with pkgs; [
       tumbler
       dconf
@@ -135,26 +112,12 @@ in
       text = "auth include login";
     };
 
-    # invocation still requires sudo; just removes password prompt
-    providers.privileges.rules = lib.optionals config.services.seatd.enable [
-      {
-        command = "/run/current-system/sw/bin/poweroff";
-        groups = [ config.services.seatd.group ];
-        requirePassword = false;
-      }
-      {
-        command = "/run/current-system/sw/bin/reboot";
-        groups = [ config.services.seatd.group ];
-        requirePassword = false;
-      }
-    ];
-
     xdg.portal.enable = true;
     xdg.mime.enable = true;
     xdg.icons.enable = true;
     xdg.autostart.enable = true;
     xdg.portal.portals = [
-      pkgs.xdg-desktop-portal-wlr
+      xdg-desktop-portal-wlr'
       pkgs.xdg-desktop-portal-gtk
     ];
   };

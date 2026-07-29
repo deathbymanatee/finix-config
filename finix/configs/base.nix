@@ -15,25 +15,26 @@
   ...
 }:
 let
-  cfg = config.configs.CONFIG;
+  cfg = config.configs.base;
 
 in
 {
-  options.configs.CONFIG = {
-    enable = lib.mkEnableOption "CONFIG";
+  imports = with modules; [
+    nix-daemon
+    upower
+    openssh
+    sysklogd
+    limine
+    sudo
+    getty
+    bash
+    rtkit
+  ];
+
+  options.configs.base = {
+    enable = lib.mkEnableOption "base";
   };
   config = lib.mkIf cfg.enable {
-    imports = with modules; [
-      nix-daemon
-      upower
-      openssh
-      sysklogd
-      limine
-      sudo
-      getty
-      bash
-    ];
-
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.loader.efi.canTouchEfiVariables = true;
 
@@ -47,6 +48,7 @@ in
     services.sysklogd.enable = true;
     services.openssh.enable = true;
     services.gardendevd.enable = true;
+    services.rtkit.enable = true;
     services.nix-daemon = {
       enable = true;
       settings = {
@@ -77,6 +79,5 @@ in
       fastfetch
       ncdu
     ];
-
   };
 }

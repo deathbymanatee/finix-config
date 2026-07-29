@@ -23,6 +23,9 @@ in
     ]
     ++ communityModules;
 
+  configs.base.enable = true;
+  configs.graphical-wlroots.enable = true;
+
   services.iwd.enable = true;
   services.dhcpcd.enable = true;
   services.docker.enable = true;
