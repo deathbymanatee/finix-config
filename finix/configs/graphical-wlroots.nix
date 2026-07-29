@@ -37,6 +37,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    configs.base.enable = true;
+
     # graphical runlevel
     finit.runlevel = 3;
 

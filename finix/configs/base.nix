@@ -1,11 +1,6 @@
 /*
-  minimal, shared, base configuration. using this alone will only get you a TTY.
-
-  TODO
-
-    1. move session managers to host configs maybe?
-    2. move network services to host configs maybe?
-    3. import less stuff in here? only import in places where needed
+  minimal, shared, base configuration. using this alone will only get you a TTY and
+  wired newtorking with dhcpcd.
 */
 {
   config,
@@ -29,11 +24,13 @@ in
     getty
     bash
     rtkit
+    dhcpcd
   ];
 
   options.configs.base = {
     enable = lib.mkEnableOption "base";
   };
+
   config = lib.mkIf cfg.enable {
     boot.kernelPackages = pkgs.linuxPackages_latest;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -49,6 +46,7 @@ in
     services.openssh.enable = true;
     services.gardendevd.enable = true;
     services.rtkit.enable = true;
+    services.dhcpcd.enable = true;
     services.nix-daemon = {
       enable = true;
       settings = {
@@ -68,7 +66,11 @@ in
     programs.limine.enable = true;
     programs.limine.settings.editor_enabled = true;
 
+    # sets NIX_PATH env variable for ad hoc nix shells
     security.pam.environment.NIX_PATH.default = "nixpkgs=${pkgs.path}";
+
+    # builds `maintenance` and `rebuild` commands
+    modules.packages.enable = true;
 
     environment.systemPackages = with pkgs; [
       neovim
