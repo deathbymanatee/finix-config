@@ -24,6 +24,8 @@ in
       perl
       unzip
       zip
+      gnumake
+      python314
     ];
   };
 }

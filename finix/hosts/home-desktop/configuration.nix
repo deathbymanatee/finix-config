@@ -22,10 +22,10 @@ in
     ]
     ++ communityModules;
 
+  configs.graphical-wlroots.enable = true;
+
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
-  services.dhcpcd.enable = true;
-  services.ly.enable = true;
   services.docker.enable = true;
   services.cups.enable = true;
 
@@ -62,14 +62,13 @@ in
   modules.steam.enable = true;
   modules.vesktop.enable = true;
   modules.pro-audio.enable = true;
+  modules.dev-tools.enable = true;
 
   # lagniappe packages
   environment.systemPackages = with pkgs; [
     btop-rocm
     inxi
     libva-utils
-    gnumake
-    python314
     xterm
   ];
 }
