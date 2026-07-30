@@ -7,10 +7,12 @@
     - enables dbus
     - installs graphics drivers
 
-  it does not set up an audio stack. not like you can run pipewire as a system
+  it does not set up an audio stack. not like you can run pipewire as a finit system
   service anyway...
 
-  note: this does not INSTALL or ENABLE any wlroots compositors, just the plumbing
+  note: this does not INSTALL or ENABLE any wlroots compositors, just the session related plumbing.
+
+  composes with configs.base
 */
 {
   lib,

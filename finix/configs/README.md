@@ -22,3 +22,13 @@ Sets up:
 - bash
 
 and nothing else... except for Fastfetch.
+
+## graphical-wlroots.nix
+
+Sets up what you need to run most wlroots compositors.
+
+- `seatd` for seat management
+- `ly` as a greeter service
+- `polkit` to cover weird edge cases
+- `dbus`... regretably 
+- installs graphics drivers with hardware.graphics.enable
