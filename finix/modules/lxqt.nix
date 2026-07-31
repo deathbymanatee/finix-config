@@ -8,7 +8,6 @@
 with lib;
 let
   cfg = config.modules.lxqt;
-  xdg-desktop-portal-wlr' = pkgs.callPackage ./packages/xdg-desktop-portal-wlr.nix { };
 in
 {
   imports = with modules; [
@@ -43,8 +42,6 @@ in
       kdePackages.qttools
       kdePackages.ark
       hicolor-icon-theme
-      keepassxc
-      librewolf-bin
       labwc-tweaks
       lxqt-panel-profiles
       labwc-gtktheme
@@ -57,7 +54,7 @@ in
     ];
 
     xdg.portal.portals = [
-      xdg-desktop-portal-wlr'
+      pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];
   };
