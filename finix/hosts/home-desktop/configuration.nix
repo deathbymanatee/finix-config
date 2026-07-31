@@ -2,22 +2,30 @@
   config,
   pkgs,
   modules,
+  inputs,
   ...
 }:
-{
-  imports = with modules; [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    dhcpcd
-    flatpak
+let
+  communityModules = with inputs.community-modules.nixosModules; [
+    cups
   ];
+in
+{
+  imports =
+    with modules;
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      dhcpcd
+      flatpak
+      docker
+    ]
+    ++ communityModules;
 
-  boot.kernelParams = [ "loglevel=1" ];
+  configs.graphical-wlroots.enable = true;
 
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
-  services.dhcpcd.enable = true;
-  services.ly.enable = true;
   services.docker.enable = true;
   services.cups.enable = true;
 
@@ -49,19 +57,19 @@
   };
 
   # custom modules
-  modules.packages.enable = true;
   modules.lxqt.enable = true;
   modules.steam.enable = true;
   modules.vesktop.enable = true;
-  modules.audioProd.enable = true;
+  modules.pro-audio.enable = true;
+  modules.dev-tools.enable = true;
 
   # lagniappe packages
   environment.systemPackages = with pkgs; [
     btop-rocm
     inxi
     libva-utils
-    gnumake
-    python314
     xterm
+    keepassxc
+    librewolf-bin
   ];
 }

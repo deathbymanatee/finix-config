@@ -7,11 +7,11 @@
 
 with lib;
 let
-  cfg = config.modules.audioProd;
+  cfg = config.modules.pro-audio;
 
 in
 {
-  options.modules.audioProd = {
+  options.modules.pro-audio = {
     enable = mkEnableOption "Audio production stack";
   };
   config = mkIf cfg.enable {

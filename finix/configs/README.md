@@ -5,3 +5,30 @@ This directory contains "recipes" for building a finix system; they can all be i
 This makes it so I don't have to copy tons of nix if I want a basic setup, and I can instead just set up a user account, install some packages if needed, and go.
 
 In a roundabout way this is just me reinventing the `finix-community/profiles` wheel.
+
+## base.nix
+
+Provides: 
+
+- tty login
+- text editor (neovim)
+
+Sets up: 
+
+- device manager 
+- bootloader
+- openssh
+- sudo
+- bash
+
+and nothing else... except for Fastfetch.
+
+## graphical-wlroots.nix
+
+Sets up what you need to run most wlroots compositors.
+
+- `seatd` for seat management
+- `ly` as a greeter service
+- `polkit` to cover weird edge cases
+- `dbus`... regretably 
+- installs graphics drivers with hardware.graphics.enable

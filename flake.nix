@@ -20,8 +20,6 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
         config.permittedInsecurePackages = [
-          #   "librewolf-bin-152.0.5-1"
-          #   "librewolf-bin-unwrapped-152.0.5-1"
           "electron-40.10.5"
         ];
       };
@@ -41,7 +39,7 @@
             }
             { networking.hostName = hostname; }
             (./finix/hosts/${hostname}/configuration.nix)
-            (./finix/modules/configs/base.nix)
+            (./finix/configs)
             (./finix/modules)
           ];
         };

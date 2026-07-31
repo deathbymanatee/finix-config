@@ -1,15 +1,12 @@
 {
   imports = [
-    # ./services
-    ./programs
-    ./packages.nix
+    ./custom-packages.nix
     ./sway.nix
-    ./plasma.nix
     ./lxqt.nix
-    ./ratpoison.nix
     ./pipewire.nix
     ./steam.nix
     ./vesktop.nix
-    ./audio-prod.nix
+    ./pro-audio.nix
+    ./dev-tools.nix
   ];
 }

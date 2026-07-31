@@ -2,30 +2,46 @@
   config,
   pkgs,
   modules,
+  inputs,
   ...
 }:
-
-{
-  imports = with modules; [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    iwd
-    dhcpcd
-    flatpak
+let
+  communityModules = with inputs.community-modules.nixosModules; [
+    cups
   ];
+in
+{
+  imports =
+    with modules;
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      iwd
+      dhcpcd
+      flatpak
+      docker
+    ]
+    ++ communityModules;
+
+  configs.graphical-wlroots.enable = true;
 
   services.iwd.enable = true;
-  services.dhcpcd.enable = true;
   services.docker.enable = true;
   services.cups.enable = true;
+  services.upower.enable = true;
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
-  services.ly.enable = true;
 
   programs.brightnessctl.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
+
+  # custom modules
+  modules.lxqt.enable = true;
+  modules.pipewire.enable = true;
+  modules.vesktop.enable = true;
+  modules.dev-tools.enable = true;
 
   /*
     trying to do nixos-enter 'passwd' will result in 'command passwd not found',
@@ -52,20 +68,14 @@
     ];
   };
 
-  # custom modules
-  modules.packages.enable = true;
-  modules.lxqt.enable = true;
-  modules.pipewire.enable = true;
-  modules.vesktop.enable = true;
-
   # extra packages
   environment.systemPackages = with pkgs; [
     # lagniappe
     btop-rocm
     inxi
-
     libva-utils
-    systemfd
     xterm
+    keepassxc
+    librewolf-bin
   ];
 }
