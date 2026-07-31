@@ -57,7 +57,6 @@ in
   };
 
   # custom modules
-  modules.packages.enable = true;
   modules.lxqt.enable = true;
   modules.steam.enable = true;
   modules.vesktop.enable = true;
@@ -70,5 +69,7 @@ in
     inxi
     libva-utils
     xterm
+    keepassxc
+    librewolf-bin
   ];
 }

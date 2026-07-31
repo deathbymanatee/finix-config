@@ -1,6 +1,6 @@
 {
   imports = [
-    ./packages.nix
+    ./custom-packages.nix
     ./sway.nix
     ./lxqt.nix
     ./pipewire.nix

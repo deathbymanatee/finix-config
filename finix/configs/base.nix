@@ -70,7 +70,7 @@ in
     security.pam.environment.NIX_PATH.default = "nixpkgs=${pkgs.path}";
 
     # builds `maintenance` and `rebuild` commands
-    modules.packages.enable = true;
+    modules.custom-packages.enable = true;
 
     environment.systemPackages = with pkgs; [
       neovim
@@ -80,6 +80,8 @@ in
       man
       fastfetch
       ncdu
+      iputils
+      iproute2
     ];
   };
 }

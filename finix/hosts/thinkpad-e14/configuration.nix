@@ -75,7 +75,7 @@ in
     inxi
     libva-utils
     xterm
-    iputils
-    iproute2
+    keepassxc
+    librewolf-bin
   ];
 }

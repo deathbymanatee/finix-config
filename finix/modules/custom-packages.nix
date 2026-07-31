@@ -7,7 +7,7 @@
 
 with lib;
 let
-  cfg = config.modules.packages;
+  cfg = config.modules.custom-packages;
   maintenance = pkgs.writeShellScriptBin "maintenance" ''
     nix-collect-garbage -d
     sudo nix-collect-garbage -d 
@@ -36,8 +36,8 @@ let
 
 in
 {
-  options.modules.packages = {
-    enable = mkEnableOption "packages";
+  options.modules.custom-packages = {
+    enable = mkEnableOption "custom-packages";
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [

@@ -6,6 +6,9 @@
     - enables polkit
     - enables dbus
     - installs graphics drivers
+    - installs useful wayland applications
+    - sets up fonts
+    - enables desktop portals
 
   it does not set up an audio stack. not like you can run pipewire as a finit system
   service anyway...
@@ -18,6 +21,7 @@
   lib,
   config,
   modules,
+  pkgs,
   ...
 }:
 
@@ -69,5 +73,68 @@ in
         requirePassword = false;
       }
     ];
+
+    environment.systemPackages =
+      with pkgs;
+      [
+        foot
+        way-displays
+        slurp
+        grim
+        xsettingsd
+        lswt
+        satty
+        swayidle
+        wlprop
+        clipse
+        rofi
+        xclip
+        xprop
+        wl-clipboard
+        playerctl
+        swaylock-effects
+        gammastep
+      ]
+      ++ lib.optionals config.services.iwd.enable [
+        pkgs.impala
+      ];
+
+    fonts.fontconfig.enable = true;
+    fonts.enableDefaultPackages = true;
+    fonts.fontconfig.useEmbeddedBitmaps = true;
+    fonts.packages = with pkgs; [
+      noto-fonts
+      noto-fonts-color-emoji
+      font-awesome
+      source-han-sans
+      source-han-serif
+      nerd-fonts.jetbrains-mono
+    ];
+    fonts.fontconfig.defaultFonts = {
+      serif = [
+        "Noto Serif"
+        "Source Han Serif"
+      ];
+      sansSerif = [
+        "Noto Sans"
+        "Source Han Sans"
+      ];
+      monospace = [
+        "Jetbrains Mono Nerd Font"
+      ];
+      emoji = [
+        "Noto Color Emoji"
+      ];
+    };
+
+    # required for swaylock
+    security.pam.services.swaylock = {
+      text = "auth include login";
+    };
+
+    xdg.portal.enable = true;
+    xdg.mime.enable = true;
+    xdg.icons.enable = true;
+    xdg.autostart.enable = true;
   };
 }
