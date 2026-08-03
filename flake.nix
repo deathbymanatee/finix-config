@@ -20,7 +20,6 @@
         system = "x86_64-linux";
         config.allowUnfree = true;
         config.permittedInsecurePackages = [
-          "electron-40.10.5"
         ];
       };
 

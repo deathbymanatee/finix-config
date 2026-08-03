@@ -10,12 +10,6 @@ with lib;
 let
   cfg = config.modules.vesktop;
 
-  vesktop' = pkgs.vesktop.override (
-    lib.optionalAttrs config.services.mdevd.enable {
-      pipewire = config.programs.pipewire.package;
-    }
-  );
-
 in
 {
   options.modules.vesktop = {
@@ -23,7 +17,7 @@ in
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      vesktop'
+      pkgs.vesktop
     ];
   };
 }
