@@ -13,6 +13,7 @@ in
   imports = with modules; [
     labwc
     pmount
+    ./services/gvfs.nix
   ];
 
   options.modules.labwc = {
@@ -38,8 +39,12 @@ in
       labwc-gtktheme
       nwg-look
       qt6Packages.qt6ct
+      libnotify
+      wlopm
     ];
 
+    services.gvfs.enable = true;
+    services.gvfs.debug = true;
     services.dbus.packages = with pkgs; [
       thunar-volman
       thunar-archive-plugin

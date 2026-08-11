@@ -13,7 +13,7 @@
     <keybind key="C-S-r">
       <action name="Reconfigure"/>
     </keybind>
-    <!-- Noctalia Core keys -->
+    <!-- Noctalia core keys -->
     <keybind key="Super_L" onRelease="yes">
       <action name="Execute">
         <command>noctalia msg panel-toggle launcher</command>
@@ -27,6 +27,11 @@
     <keybind key="W-,">
       <action name="Execute">
         <command>noctalia msg settings-toggle</command>
+      </action>
+    </keybind>
+    <keybind key="W-l">
+      <action name="Execute">
+        <command>noctalia msg session lock && notify-send 'Session locked'</command>
       </action>
     </keybind>
     <!-- Noctalia Media keys -->

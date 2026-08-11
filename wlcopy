@@ -1,0 +1,33 @@
+Aug 11 09:10:12 framework-13 finit[1]: Starting gvfs[10129]
+Aug 11 09:10:12 framework-13 gvfs[10129]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:12 framework-13 finit[1]: Service gvfs[10129] died (with exit status: 1), restarting (retry in 2000 msec) (attempt: 1/10)
+Aug 11 09:10:12 framework-13 finit[1]: Starting gvfs[10135]
+Aug 11 09:10:12 framework-13 gvfs[10135]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:14 framework-13 finit[1]: Service gvfs[10135] died (with exit status: 1), restarting (retry in 2000 msec) (attempt: 2/10)
+Aug 11 09:10:14 framework-13 finit[1]: Starting gvfs[10141]
+Aug 11 09:10:14 framework-13 gvfs[10141]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:16 framework-13 finit[1]: Service gvfs[10141] died (with exit status: 1), restarting (retry in 2000 msec) (attempt: 3/10)
+Aug 11 09:10:16 framework-13 finit[1]: Starting gvfs[10151]
+Aug 11 09:10:16 framework-13 gvfs[10151]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:18 framework-13 finit[1]: Service gvfs[10151] died (with exit status: 1), restarting (retry in 2000 msec) (attempt: 4/10)
+Aug 11 09:10:18 framework-13 finit[1]: Starting gvfs[10157]
+Aug 11 09:10:18 framework-13 gvfs[10157]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:20 framework-13 finit[1]: Service gvfs[10157] died (with exit status: 1), restarting (retry in 2000 msec) (attempt: 5/10)
+Aug 11 09:10:20 framework-13 finit[1]: Starting gvfs[10165]
+Aug 11 09:10:20 framework-13 gvfs[10165]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:22 framework-13 finit[1]: Service gvfs[10165] died (with exit status: 1), restarting (retry in 5000 msec) (attempt: 6/10)
+Aug 11 09:10:22 framework-13 finit[1]: Starting gvfs[10175]
+Aug 11 09:10:22 framework-13 gvfs[10175]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:27 framework-13 finit[1]: Service gvfs[10175] died (with exit status: 1), restarting (retry in 5000 msec) (attempt: 7/10)
+Aug 11 09:10:27 framework-13 finit[1]: Starting gvfs[10193]
+Aug 11 09:10:27 framework-13 gvfs[10193]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:32 framework-13 finit[1]: Service gvfs[10193] died (with exit status: 1), restarting (retry in 5000 msec) (attempt: 8/10)
+Aug 11 09:10:32 framework-13 finit[1]: Starting gvfs[10199]
+Aug 11 09:10:32 framework-13 gvfs[10199]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:37 framework-13 finit[1]: Service gvfs[10199] died (with exit status: 1), restarting (retry in 5000 msec) (attempt: 9/10)
+Aug 11 09:10:37 framework-13 finit[1]: Starting gvfs[10207]
+Aug 11 09:10:37 framework-13 gvfs[10207]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:42 framework-13 finit[1]: Service gvfs[10207] died (with exit status: 1), restarting (retry in 5000 msec) (attempt: 10/10)
+Aug 11 09:10:42 framework-13 finit[1]: Starting gvfs[10213]
+Aug 11 09:10:42 framework-13 gvfs[10213]: Failed to connect to the D-BUS daemon: Cannot autolaunch D-Bus without X11 $DISPLAY (g-io-error-quark, 0)
+Aug 11 09:10:47 framework-13 finit[1]: Service gvfs keeps crashing, not restarting.
