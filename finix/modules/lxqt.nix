@@ -11,9 +11,7 @@ let
 in
 {
   imports = with modules; [
-    iwd
     xorg
-    brightnessctl
     lxqt
   ];
 
@@ -45,17 +43,6 @@ in
       labwc-tweaks
       lxqt-panel-profiles
       labwc-gtktheme
-    ];
-
-    services.dbus.packages = with pkgs; [
-      tumbler
-      dconf
-      xfconf
-    ];
-
-    xdg.portal.portals = [
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
     ];
   };
 }

@@ -86,13 +86,20 @@ MODE:
     WIDTH: 1920
     HEIGHT: 1080
     HZ: 60
+  - NAME_DESC: 'BOE 0x0BCA (eDP-1)'
+    WIDTH: 2256
+    HEIGHT: 1504
+    HZ: 60
 
 VRR_OFF:
   - '0x40A9'
+  - '0X0BCA'
 
 SCALE: 
   - NAME_DESC: 'Lenovo Group Limited 0x40A9 (eDP-1)'
     SCALE: 1.25
+  - NAME_DESC: 'BOE 0x0BCA (eDP-1)'
+    SCALE: 1.5
 
 ## Rotate or translate the display.
 ## 90, 180, 270, FLIPPED, FLIPPED-90, FLIPPED-180, FLIPPED-270

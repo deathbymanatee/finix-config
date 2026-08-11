@@ -40,6 +40,7 @@ in
 
   options.configs.graphical-wlroots = {
     enable = mkEnableOption "graphical-wlroots";
+    enableNoctalia = mkEnableOption "with noctalia";
   };
 
   config = mkIf cfg.enable {
@@ -52,8 +53,7 @@ in
     hardware.graphics.enable32Bit = true;
 
     # requires dev manager that can read udev rules
-    services.udisks2.enable =
-      config.services.gardendevd.enable || config.services.udev.enable || config.services.keventd.enable;
+    services.udisks2.enable = true;
     services.seatd.enable = true;
     services.dbus.enable = true;
     services.ly.enable = true;
@@ -97,7 +97,8 @@ in
       ]
       ++ lib.optionals config.services.iwd.enable [
         pkgs.impala
-      ];
+      ]
+      ++ lib.optionals cfg.enableNoctalia [ pkgs.noctalia ];
 
     fonts.fontconfig.enable = true;
     fonts.enableDefaultPackages = true;
@@ -127,6 +128,11 @@ in
       ];
     };
 
+    services.dbus.packages = with pkgs; [
+      tumbler
+      dconf
+    ];
+
     # required for swaylock
     security.pam.services.swaylock = {
       text = "auth include login";
@@ -136,5 +142,9 @@ in
     xdg.mime.enable = true;
     xdg.icons.enable = true;
     xdg.autostart.enable = true;
+    xdg.portal.portals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 }
