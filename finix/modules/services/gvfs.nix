@@ -9,15 +9,6 @@
 }:
 let
   cfg = config.services.gvfs;
-
-  # gardendevd needs libudev-garden; mdevd/keventd need libudev-zero
-  udevApi =
-    if config.services.gardendevd.enable then
-      pkgs.libudev-garden
-    else if config.services.mdevd.enable || config.services.keventd.enable then
-      pkgs.libudev-zero
-    else
-      null;
 in
 {
   imports = [
@@ -31,9 +22,7 @@ in
       enable = lib.mkEnableOption "GVfs, a userspace virtual filesystem";
       package = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.gvfs.override ({
-          udisks = config.services.udisks2.package;
-        });
+        default = pkgs.udisks2;
         defaultText = lib.literalExpression "pkgs.labwc";
         description = ''
           The package to use for `labwc`.
