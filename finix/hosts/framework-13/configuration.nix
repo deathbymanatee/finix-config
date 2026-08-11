@@ -64,6 +64,7 @@ in
       "render"
       "tty"
       "docker"
+      "storage"
       # comment out if using elogind
       config.services.seatd.group
     ];

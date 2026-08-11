@@ -31,7 +31,7 @@
     </keybind>
     <keybind key="W-l">
       <action name="Execute">
-        <command>noctalia msg session lock && notify-send 'Session locked'</command>
+        <command>noctalia msg session lock</command>
       </action>
     </keybind>
     <!-- Noctalia Media keys -->

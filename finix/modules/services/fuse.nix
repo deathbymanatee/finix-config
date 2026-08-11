@@ -9,8 +9,6 @@ let
   cfg = config.programs.fuse;
 in
 {
-  meta.maintainers = [ ];
-
   options.programs.fuse = {
     enable = lib.mkEnableOption "fuse" // {
       default = true;

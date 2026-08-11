@@ -1,5 +1,3 @@
-# GVfs
-
 {
   config,
   lib,
@@ -9,12 +7,13 @@
 }:
 let
   cfg = config.services.gvfs;
+  libgudev = pkgs.libgudev.override ({ udev = pkgs.libudev-garden; });
 in
 {
   imports = [
     ./fuse.nix
-    modules.polkit
     modules.udisks2
+    modules.polkit
   ];
 
   options = {
@@ -22,10 +21,10 @@ in
       enable = lib.mkEnableOption "GVfs, a userspace virtual filesystem";
       package = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.udisks2;
-        defaultText = lib.literalExpression "pkgs.labwc";
+        default = pkgs.gvfs;
+        defaultText = lib.literalExpression "pkgs.gvfs";
         description = ''
-          The package to use for `labwc`.
+          The package to use for `gvfs`.
         '';
       };
       debug = lib.mkEnableOption "Enable debug output";
@@ -51,9 +50,25 @@ in
       GIO_EXTRA_MODULES.default = [ "${cfg.package}/lib/gio/modules" ];
     };
 
+    environment.etc."polkit-1/rules.d/50-udisks.rules".text = lib.mkIf config.services.polkit.enable ''
+      polkit.addRule(function(action, subject) {
+          if ((subject.isInGroup("disk") || subject.isInGroup("storage")) &&
+              (action.id == "org.freedesktop.udisks2.filesystem-mount" ||
+               action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
+               action.id == "org.freedesktop.udisks2.filesystem-unmount-others" ||
+               action.id == "org.freedesktop.udisks2.eject-media" ||
+               action.id == "org.freedesktop.udisks2.encrypted-unlock" ||
+               action.id == "org.freedesktop.udisks2.power-off-drive")) {
+              return polkit.Result.YES;
+          }
+      });
+    '';
+
     finit.services.gvfs = {
       description = "userspace virtual filesystem";
-      command = "${cfg.package}/libexec/gvfsd" + lib.optionalString cfg.debug " --debug";
+      command =
+        "${pkgs.dbus}/bin/dbus-launch ${cfg.package}/libexec/gvfsd"
+        + lib.optionalString cfg.debug " --debug";
       conditions = "service/dbus/ready";
       log = true;
     };
