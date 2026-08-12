@@ -21,6 +21,7 @@ in
       flatpak
       docker
       brightnessctl
+      power-profiles-daemon
     ]
     ++ communityModules;
 
@@ -33,6 +34,10 @@ in
   services.upower.enable = true;
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
+  services.power-profiles-daemon.enable = true;
+  services.power-profiles-daemon.extraGroups = [
+    config.services.seatd.group
+  ];
 
   programs.brightnessctl.enable = true;
 

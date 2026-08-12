@@ -11,7 +11,7 @@ let
 in
 {
   imports = [
-    ./fuse.nix
+    # ./fuse.nix
     modules.udisks2
     modules.polkit
   ];
@@ -36,9 +36,9 @@ in
 
     environment.systemPackages = [ cfg.package ];
 
-    programs.fuse.enable = true;
+    # programs.fuse.enable = true;
 
-    services.dbus.enable = lib.mkForce true;
+    services.dbus.enable = true;
     services.dbus.packages = [ cfg.package ];
 
     services.udev.packages = [ pkgs.libmtp.out ];
@@ -50,20 +50,6 @@ in
       GIO_EXTRA_MODULES.default = [ "${cfg.package}/lib/gio/modules" ];
     };
 
-    environment.etc."polkit-1/rules.d/50-udisks.rules".text = lib.mkIf config.services.polkit.enable ''
-      polkit.addRule(function(action, subject) {
-          if ((subject.isInGroup("disk") || subject.isInGroup("storage")) &&
-              (action.id == "org.freedesktop.udisks2.filesystem-mount" ||
-               action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
-               action.id == "org.freedesktop.udisks2.filesystem-unmount-others" ||
-               action.id == "org.freedesktop.udisks2.eject-media" ||
-               action.id == "org.freedesktop.udisks2.encrypted-unlock" ||
-               action.id == "org.freedesktop.udisks2.power-off-drive")) {
-              return polkit.Result.YES;
-          }
-      });
-    '';
-
     finit.services.gvfs = {
       description = "userspace virtual filesystem";
       command =
@@ -73,5 +59,4 @@ in
       log = true;
     };
   };
-
 }

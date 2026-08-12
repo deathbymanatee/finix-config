@@ -58,6 +58,7 @@ in
     services.dbus.enable = true;
     services.ly.enable = true;
     services.polkit.enable = true;
+    services.polkit.debug = true;
     services.rtkit.extraGroups = [ config.services.seatd.group ];
 
     # invocation still requires sudo; just removes password prompt

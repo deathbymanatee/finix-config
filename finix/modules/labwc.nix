@@ -13,7 +13,7 @@ in
   imports = with modules; [
     labwc
     pmount
-    ./services/gvfs.nix
+    ./staging/services/gvfs.nix
   ];
 
   options.modules.labwc = {
@@ -50,6 +50,23 @@ in
       thunar-archive-plugin
       xfconf
     ];
+
+    # gvfs polkit shenanigans
+    services.polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+          if ((subject.isInGroup("disk") || subject.isInGroup("storage")) &&
+              (action.id == "org.freedesktop.udisks2.filesystem-mount" ||
+               action.id == "org.freedesktop.udisks2.filesystem-mount-system" ||
+               action.id == "org.freedesktop.udisks2.filesystem-unmount-others" ||
+               action.id == "org.freedesktop.udisks2.eject-media" ||
+               action.id == "org.freedesktop.udisks2.encrypted-unlock" ||
+               action.id == "org.freedesktop.udisks2.power-off-drive")) {
+              return polkit.Result.YES;
+          }
+      });
+    '';
+
+    users.groups.storage = { };
 
     # TODO xdg.mime.defaultApplications and xdg.mime.addedAssociations
   };

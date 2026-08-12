@@ -46,8 +46,8 @@
     in
     {
       nixosConfigurations = {
+        home-desktop = mkSystem "home-desktop";
         thinkpad-e14 = mkSystem "thinkpad-e14";
-        virtualbox = mkSystem "virtualbox";
         framework-13 = mkSystem "framework-13";
       };
     };
