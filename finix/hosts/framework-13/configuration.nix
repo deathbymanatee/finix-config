@@ -84,5 +84,6 @@ in
     xterm
     keepassxc
     librewolf-bin
+    impala
   ];
 }

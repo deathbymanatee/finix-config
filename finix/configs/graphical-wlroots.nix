@@ -96,9 +96,6 @@ in
         swaylock-effects
         gammastep
       ]
-      ++ lib.optionals config.services.iwd.enable [
-        pkgs.impala
-      ]
       ++ lib.optionals cfg.enableNoctalia [ pkgs.noctalia ];
 
     fonts.fontconfig.enable = true;

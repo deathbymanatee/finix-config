@@ -23,6 +23,7 @@ in
     ++ communityModules;
 
   configs.graphical-wlroots.enable = true;
+  configs.graphical-wlroots.enableNoctalia = true;
 
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
@@ -51,13 +52,14 @@ in
       "video"
       "render"
       "docker"
+      "storage"
       # comment out if using elogind
       config.services.seatd.group
     ];
   };
 
   # custom modules
-  modules.lxqt.enable = true;
+  modules.labwc.enable = true;
   modules.steam.enable = true;
   modules.vesktop.enable = true;
   modules.pro-audio.enable = true;

@@ -102,6 +102,11 @@
     <name>GTK</name>
     <icon>Papirus-Dark</icon>
   </theme>
+  <windowRules>
+    <windowRule identifier="steam*">
+      <action name="MoveToOutput" output="DP-3"/>
+    </windowRule>
+  </windowRules>
   <libinput>
     <device category="default">
       <tap>yes</tap>
