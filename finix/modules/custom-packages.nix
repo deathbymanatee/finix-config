@@ -41,7 +41,7 @@ let
 
     low_threshold="20"
     warning_threshold="10"
-    critical_threshold="10"
+    critical_threshold="5"
 
     # Keep a tiny state file so the script can compare this event with the last one.
     state_dir="''${XDG_STATE_HOME:-$HOME/.local/state}/noctalia"
@@ -72,7 +72,7 @@ let
       powerprofilesctl set power-saver
     fi
     if (( previous >= critical_threshold && percent < critical_threshold )); then
-      notify-send -u critical "Very low battery" "Battery is ''${percent}%. You may want to plug in soon."
+      notify-send -u critical "Very low battery" "Battery is ''${percent}%. Plug in as soon as possible."
       brightnessctl set 30%
       powerprofilesctl set power-saver
     fi

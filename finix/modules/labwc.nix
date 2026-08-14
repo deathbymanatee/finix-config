@@ -33,6 +33,7 @@ in
       kdePackages.breeze-gtk
       kdePackages.qttools
       kdePackages.ark
+      kdePackages.okular
       papirus-icon-theme
       thunar
       thunar-volman
