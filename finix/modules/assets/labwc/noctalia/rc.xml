@@ -2,6 +2,7 @@
 <labwc_config>
   <core>
     <gap>0</gap>
+    <decoration>client</decoration>
   </core>
   <!-- Thumbnail-based window switcher -->
   <windowSwitcher preview="no" outlines="yes">

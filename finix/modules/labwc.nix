@@ -8,6 +8,9 @@
 with lib;
 let
   cfg = config.modules.labwc;
+  fix-gtk-buttons = pkgs.writeShellScriptBin "fix-gtk-buttons" ''
+    dconf write /org/gnome/desktop/wm/preferences/button-layout '":minimize,maximize,close"'
+  '';
 in
 {
   imports = with modules; [
@@ -30,7 +33,6 @@ in
       kdePackages.breeze-gtk
       kdePackages.qttools
       kdePackages.ark
-      hicolor-icon-theme
       papirus-icon-theme
       thunar
       thunar-volman
@@ -41,6 +43,10 @@ in
       qt6Packages.qt6ct
       libnotify
       wlopm
+      dconf
+      xfconf
+      gsettings-desktop-schemas
+      fix-gtk-buttons
     ];
 
     services.gvfs.enable = true;

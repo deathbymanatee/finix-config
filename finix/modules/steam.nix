@@ -16,7 +16,14 @@ in
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      steam
+      steam.override
+      ({
+        extraPkgs = [
+          pkgs.kdePackages.breeze
+          pkgs.kdePackages.breeze-icons
+          pkgs.kdePackages.breeze-gtk
+        ];
+      })
       steam-run
       protonup-qt
       gamescope
