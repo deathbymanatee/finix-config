@@ -7,13 +7,10 @@
 }:
 let
   cfg = config.services.gvfs;
-  libgudev = pkgs.libgudev.override ({ udev = pkgs.libudev-garden; });
 in
 {
   imports = [
-    # ./fuse.nix
     modules.udisks2
-    modules.polkit
   ];
 
   options = {
@@ -48,15 +45,6 @@ in
     # Needed for unwrapped applications
     security.pam.environment = {
       GIO_EXTRA_MODULES.default = [ "${cfg.package}/lib/gio/modules" ];
-    };
-
-    finit.services.gvfs = {
-      description = "userspace virtual filesystem";
-      command =
-        "${pkgs.dbus}/bin/dbus-launch ${cfg.package}/libexec/gvfsd"
-        + lib.optionalString cfg.debug " --debug";
-      conditions = "service/dbus/ready";
-      log = true;
     };
   };
 }
