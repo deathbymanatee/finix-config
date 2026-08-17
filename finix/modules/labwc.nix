@@ -16,7 +16,7 @@ in
   imports = with modules; [
     labwc
     pmount
-    ./staging/services/gvfs.nix
+    gvfs
   ];
 
   options.modules.labwc = {
@@ -51,7 +51,6 @@ in
     ];
 
     services.gvfs.enable = true;
-    services.gvfs.debug = true;
     services.dbus.packages = with pkgs; [
       thunar-volman
       thunar-archive-plugin

@@ -52,8 +52,6 @@ in
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
 
-    # requires dev manager that can read udev rules
-    services.udisks2.enable = true;
     services.seatd.enable = true;
     services.dbus.enable = true;
     services.ly.enable = true;
@@ -86,7 +84,6 @@ in
         lswt
         satty
         swayidle
-        wlprop
         clipse
         rofi
         xclip
@@ -108,6 +105,8 @@ in
       source-han-sans
       source-han-serif
       nerd-fonts.jetbrains-mono
+      google-fonts
+      twitter-color-emoji
     ];
     fonts.fontconfig.defaultFonts = {
       serif = [
