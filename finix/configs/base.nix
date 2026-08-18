@@ -45,7 +45,7 @@ in
 
     services.sysklogd.enable = true;
     services.openssh.enable = true;
-    services.gardendevd.enable = true;
+    services.udev.enable = true;
     services.rtkit.enable = true;
     services.dhcpcd.enable = true;
     services.nftables.enable = true;
