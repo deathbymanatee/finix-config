@@ -17,11 +17,11 @@
     },
     "finix": {
       "locked": {
-        "lastModified": 1786919557,
-        "narHash": "sha256-3gqAjXyVTInA1IJbS4w41fBAJQvpymWRsDQ/PWtJ0yI=",
+        "lastModified": 1787009917,
+        "narHash": "sha256-aqbynP+n5ADu+fEu51uv5LI3H5d1gT2Lkz1J39y31r4=",
         "owner": "finix-community",
         "repo": "finix",
-        "rev": "886498c9ef8c6015f165085c1071347ee11687df",
+        "rev": "4b3eca00b44791bd6f1175d5d92f52641ea682b9",
         "type": "github"
       },
       "original": {

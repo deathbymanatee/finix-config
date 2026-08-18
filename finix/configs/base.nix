@@ -1,6 +1,6 @@
 /*
   minimal, shared, base configuration. using this alone will only get you a TTY and
-  wired newtorking with dhcpcd.
+  wired newtorking with dhcpcd + nftables service.
 */
 {
   config,
@@ -25,6 +25,7 @@ in
     bash
     rtkit
     dhcpcd
+    nftables
   ];
 
   options.configs.base = {
@@ -47,6 +48,7 @@ in
     services.gardendevd.enable = true;
     services.rtkit.enable = true;
     services.dhcpcd.enable = true;
+    services.nftables.enable = true;
     services.nix-daemon = {
       enable = true;
       settings = {
