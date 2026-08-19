@@ -1,6 +1,6 @@
 /*
   minimal, shared, base configuration. using this alone will only get you a TTY and
-  wired newtorking with dhcpcd + nftables service.
+  wired newtorking with dhcpcd + nftables service + chronyd.
 */
 {
   config,
@@ -26,6 +26,7 @@ in
     rtkit
     dhcpcd
     nftables
+    chronyd
   ];
 
   options.configs.base = {
@@ -49,6 +50,7 @@ in
     services.rtkit.enable = true;
     services.dhcpcd.enable = true;
     services.nftables.enable = true;
+    services.chrony.enable = true;
     services.nix-daemon = {
       enable = true;
       settings = {
