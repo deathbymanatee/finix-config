@@ -28,6 +28,7 @@ in
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
   services.docker.enable = true;
+  services.udev.enable = true;
   services.cups.enable = true;
 
   # Set your time zone.

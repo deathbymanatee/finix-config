@@ -26,6 +26,7 @@ in
       zip
       gnumake
       python314
+      tmux
     ];
   };
 }

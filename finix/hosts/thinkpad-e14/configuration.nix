@@ -29,6 +29,7 @@ in
   services.docker.enable = true;
   services.cups.enable = true;
   services.upower.enable = true;
+  services.udev.enable = true;
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
 
