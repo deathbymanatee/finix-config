@@ -40,8 +40,6 @@ in
     config.services.seatd.group
   ];
 
-  security.sudo.wheelNeedsPassword = false;
-
   programs.brightnessctl.enable = true;
 
   # Set your time zone.

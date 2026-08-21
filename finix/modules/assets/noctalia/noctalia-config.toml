@@ -1,15 +1,16 @@
 [bar.default]
 capsule_thickness = 0.74999998696148396
 center = []
-end = [ "tray", "clipboard", "notifications", "network", "bluetooth", "volume", "battery", "clock" ]
+end = [ "tray", "clipboard", "notifications", "network", "bluetooth", "volume", "battery", "clock", "control-center" ]
+hover_highlight = false
 margin_ends = 0
 panel_overlap = 0
 position = "bottom"
 radius = 0
-scale = 1.2500000111758709
-start = [ "workspaces", "taskbar" ]
-thickness = 40
-widget_spacing = 8
+scale = 1.350000012665987
+start = [ "launcher", "workspaces", "taskbar" ]
+thickness = 45
+widget_spacing = 10
 
 [control_center]
 hidden_tabs = [ "weather" ]
@@ -26,10 +27,19 @@ widget_order = []
 
     [desktop_widgets.widget]
 
+[hooks]
+battery_charging = "powerprofilesctl set performance"
+battery_discharging = "powerprofilesctl set balanced"
+battery_percentage_changed = "low-battery"
+battery_plugged = "powerprofilesctl set performance"
+
+[lockscreen]
+blurred_desktop = true
+
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1" ]
+widget_order = [ "lockscreen-login-box@eDP-1", "lockscreen-widget-0000000000000001", "lockscreen-widget-0000000000000002" ]
 
     [lockscreen_widgets.grid]
     cell_size = 16
@@ -39,8 +49,8 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
     [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
     box_height = 196.0
     box_width = 810.0
-    cx = 1128.0
-    cy = 1322.0
+    cx = 752.0
+    cy = 871.0
     output = "eDP-1"
     rotation = 0.0
     type = "login_box"
@@ -61,11 +71,44 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
         show_unlock_hint = true
         show_weather = true
 
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 752.0
+    cy = 405.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        clock_style = "analog"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000002]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 752.0
+    cy = 597.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000002.settings]
+        stat = "cpu_usage"
+        stat2 = "cpu_temp"
+
+[nightlight]
+temperature_day = 2500
+
 [osd.kinds]
 lock_keys = false
 
 [shell]
+clipboard_image_action_command = "satty -f-"
 offline_mode = true
+
+    [shell.launcher.providers.session]
+    global = true
 
     [shell.panel]
     clipboard_position = "auto"
@@ -133,18 +176,21 @@ path = "/home/ryan/Pictures/Wallpapers/foggy_mountains_4k_5k.jpg"
 [wallpaper.monitors.eDP-1]
 path = "/home/ryan/Pictures/Wallpapers/foggy_mountains_4k_5k.jpg"
 
+[widget.clock]
+format = "{:%-I:%M %p}\\n{:%Y-%m-%d}"
+
 [widget.control-center]
+enabled = false
 glyph = "snowflake"
 
 [widget.network]
 show_label = false
 
 [widget.taskbar]
-inactive_opacity = 0.84999999999999998
 pinned = [ "librewolf", "thunar", "foot" ]
 pinned_opacity = 0.75
-scale = 1.25
 show_all_outputs = true
+show_window_title = true
 window_title_max_width = 75
 
 [widget.tray]
@@ -153,3 +199,6 @@ pinned = [ "Vesktop" ]
 
 [widget.volume]
 show_label = false
+
+[widget.workspaces]
+style = "focus_hint"
