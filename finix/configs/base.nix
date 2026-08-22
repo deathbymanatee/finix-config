@@ -31,6 +31,14 @@ in
 
   options.configs.base = {
     enable = lib.mkEnableOption "base";
+
+    dotfileManagement = {
+      user = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "User to chown dotfiles to";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {

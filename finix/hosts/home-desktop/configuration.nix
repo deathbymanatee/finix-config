@@ -13,17 +13,17 @@ in
 {
   imports =
     with modules;
+    with inputs.community-modules.nixosModules;
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       dhcpcd
       flatpak
       docker
-    ]
-    ++ communityModules;
+    ];
 
   configs.graphical-wlroots.enable = true;
-  configs.graphical-wlroots.enableNoctalia = true;
+  configs.graphical-wlroots.withNoctalia = true;
 
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
@@ -58,6 +58,8 @@ in
       config.services.seatd.group
     ];
   };
+
+  configs.base.dotfileManagement.user = "ryan";
 
   # custom modules
   modules.labwc.enable = true;

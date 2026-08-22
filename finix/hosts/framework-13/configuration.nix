@@ -26,7 +26,7 @@ in
     ++ communityModules;
 
   configs.graphical-wlroots.enable = true;
-  configs.graphical-wlroots.enableNoctalia = true;
+  configs.graphical-wlroots.withNoctalia = true;
 
   services.iwd.enable = true;
   services.docker.enable = true;
@@ -75,6 +75,8 @@ in
       config.services.seatd.group
     ];
   };
+
+  configs.base.dotfileManagement.user = "ryan";
 
   # extra packages
   environment.systemPackages = with pkgs; [

@@ -40,7 +40,7 @@ in
 
   options.configs.graphical-wlroots = {
     enable = mkEnableOption "graphical-wlroots";
-    enableNoctalia = mkEnableOption "with noctalia";
+    withNoctalia = mkEnableOption "with noctalia";
   };
 
   config = mkIf cfg.enable {
@@ -52,6 +52,7 @@ in
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
 
+    # went with seatd instead of elogind / sessiond
     services.seatd.enable = true;
     services.dbus.enable = true;
     services.ly.enable = true;
@@ -92,8 +93,10 @@ in
         playerctl
         swaylock-effects
         gammastep
+        libnotify
+        wlopm
       ]
-      ++ lib.optionals cfg.enableNoctalia [ pkgs.noctalia ];
+      ++ lib.optionals cfg.withNoctalia [ pkgs.noctalia ];
 
     fonts.fontconfig.enable = true;
     fonts.enableDefaultPackages = true;
