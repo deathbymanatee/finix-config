@@ -37,13 +37,11 @@
     libreelec-dvb-firmware
   ];
 
-  boot.supportedFilesystems.luks.enable = true;
-
   fileSystems."crypted" = {
     device = "/dev/disk/by-uuid/635797a9-367d-48c9-bd96-c23caf4bfbe3";
     fsType = "luks";
     neededForBoot = true;
-    options = [ "--allow-discards" ];
+    options = [ "--timeout 60" ];
   };
 
   fileSystems."/" = {

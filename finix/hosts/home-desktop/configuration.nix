@@ -13,14 +13,14 @@ in
 {
   imports =
     with modules;
-    with inputs.community-modules.nixosModules;
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       dhcpcd
       flatpak
       docker
-    ];
+    ]
+    ++ communityModules;
 
   configs.graphical-wlroots.enable = true;
   configs.graphical-wlroots.withNoctalia = true;
