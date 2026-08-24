@@ -61,6 +61,26 @@
         <command>noctalia msg brightness-down</command>
       </action>
     </keybind>
+    <keybind key="XF86AudioPlay">
+      <action name="Execute">
+        <command>noctalia msg media toggle</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioPause">
+      <action name="Execute">
+        <command>noctalia msg media toggle</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioNext">
+      <action name="Execute">
+        <command>noctalia msg media next</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioPrev">
+      <action name="Execute">
+        <command>noctalia msg media previous</command>
+      </action>
+    </keybind>
     <!-- screenshot keys -->
     <keybind key="Print">
       <action name="Execute">

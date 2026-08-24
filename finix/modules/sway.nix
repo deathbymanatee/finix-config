@@ -63,6 +63,7 @@ in
 
     fonts = {
       fontconfig.enable = true;
+      fontconfig.hinting.style = "medium";
       enableDefaultPackages = true;
       packages = with pkgs; [
         noto-fonts

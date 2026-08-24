@@ -1,6 +1,6 @@
 way-displays >/dev/null 2>&1 &
 noctalia >/dev/null 2>&1 &
-gammastep -O 3725 >/dev/null 2>&1 &
+gammastep -O 4000 >/dev/null 2>&1 &
 pipewire 2>&1 &
 sleep 0.5; wireplumber 2>&1 &
 sleep 0.5; pipewire-pulse 2>&1 &

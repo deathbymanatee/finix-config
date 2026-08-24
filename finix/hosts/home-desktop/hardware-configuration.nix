@@ -41,7 +41,7 @@
     device = "/dev/disk/by-uuid/635797a9-367d-48c9-bd96-c23caf4bfbe3";
     fsType = "luks";
     neededForBoot = true;
-    options = [ "--timeout 60" ];
+    options = [ "--debug" ];
   };
 
   fileSystems."/" = {

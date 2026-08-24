@@ -99,6 +99,7 @@ in
       ++ lib.optionals cfg.withNoctalia [ pkgs.noctalia ];
 
     fonts.fontconfig.enable = true;
+    fonts.fontconfig.hinting.style = "full";
     fonts.enableDefaultPackages = true;
     fonts.fontconfig.useEmbeddedBitmaps = true;
     fonts.packages = with pkgs; [

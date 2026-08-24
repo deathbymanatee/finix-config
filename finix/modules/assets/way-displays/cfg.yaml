@@ -90,7 +90,7 @@ MODE:
     WIDTH: 2256
     HEIGHT: 1504
     HZ: 60
-  - NAME_DESC: 'GIGA-BYTE TECHNOLOGY CO., LTD. M27Q X 24130B004219 (DP-3)'
+  - NAME_DESC: 'Samsung Electric Company Odyssey G61SH HNAL301906 (DP-3)'
     WIDTH: 2560
     HEIGHT: 1440
     HZ: 240
@@ -106,6 +106,8 @@ ORDER:
 VRR_OFF:
   - '0x40A9'
   - '0X0BCA'
+  - 'Samsung Electric Company Odyssey G61SH HNAL301906 (DP-3)'
+  - 'GIGA-BYTE TECHNOLOGY CO., LTD. M27Q 23080B005710 (DP-2)'
 
 SCALE: 
   - NAME_DESC: 'Lenovo Group Limited 0x40A9 (eDP-1)'
