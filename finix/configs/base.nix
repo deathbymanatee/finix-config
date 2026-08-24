@@ -83,16 +83,34 @@ in
     # builds `maintenance` and `rebuild` commands
     modules.custom-packages.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      neovim
-      wget
-      git
-      nixos-rebuild-ng
-      man
-      fastfetch
-      ncdu
-      iputils
-      iproute2
-    ];
+    environment.systemPackages =
+      with pkgs;
+      # https://wiki.nixos.org/wiki/Neovim#Troubleshooting
+      let
+        neovim-fhs =
+          {
+            buildFHSEnv,
+            writeShellScript,
+            neovim,
+          }:
+          buildFHSEnv {
+            name = "nvim-fhs";
+            targetPkgs = pkgs: [ neovim ];
+
+            runScript = writeShellScript "nvim-fhs.sh" ''
+              exec ${neovim}/bin/nvim "$@"
+            '';
+          };
+      in
+      [
+        (pkgs.callPackage neovim-fhs { })
+        wget
+        git
+        nixos-rebuild-ng
+        man
+        ncdu
+        iputils
+        iproute2
+      ];
   };
 }

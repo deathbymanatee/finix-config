@@ -8,6 +8,7 @@
 let
   communityModules = with inputs.community-modules.nixosModules; [
     cups
+    bootchart
   ];
 in
 {
@@ -25,11 +26,16 @@ in
   configs.graphical-wlroots.enable = true;
   configs.graphical-wlroots.withNoctalia = true;
 
+  # oled woes
+  fonts.fontconfig.hinting.style = "full";
+
   services.flatpak.enable = true;
   services.flatpak.extraGroups = [ config.services.seatd.group ];
   services.docker.enable = true;
   services.udev.enable = true;
   services.cups.enable = true;
+  services.bootchart.enable = true;
+  services.bootchart.stop.conditions = [ "service/ly/ready" ];
 
   # Set your time zone.
   time.timeZone = "America/Chicago";

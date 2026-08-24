@@ -22,21 +22,26 @@
   config,
   modules,
   pkgs,
+  inputs,
   ...
 }:
 
 with lib;
 let
   cfg = config.configs.graphical-wlroots;
+  cmodules = with inputs.community-modules.nixosModules; [ fastfetch ];
 
 in
 {
-  imports = with modules; [
-    udisks2
-    polkit
-    rtkit
-    ly
-  ];
+  imports =
+    with modules;
+    [
+      udisks2
+      polkit
+      rtkit
+      ly
+    ]
+    ++ cmodules;
 
   options.configs.graphical-wlroots = {
     enable = mkEnableOption "graphical-wlroots";
@@ -51,6 +56,8 @@ in
 
     hardware.graphics.enable = true;
     hardware.graphics.enable32Bit = true;
+
+    programs.fastfetch.enable = true;
 
     # went with seatd instead of elogind / sessiond
     services.seatd.enable = true;
@@ -99,7 +106,6 @@ in
       ++ lib.optionals cfg.withNoctalia [ pkgs.noctalia ];
 
     fonts.fontconfig.enable = true;
-    fonts.fontconfig.hinting.style = "full";
     fonts.enableDefaultPackages = true;
     fonts.fontconfig.useEmbeddedBitmaps = true;
     fonts.packages = with pkgs; [

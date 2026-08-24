@@ -32,3 +32,6 @@ alias mt="maintenance"
 alias mtb="maintenance boot"
 alias rb="rebuild"
 alias rbb="rebuild boot"
+
+# custom nvim with fhs environment
+alias nvim="nvim-fhs"

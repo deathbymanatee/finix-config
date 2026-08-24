@@ -8,6 +8,7 @@
 let
   communityModules = with inputs.community-modules.nixosModules; [
     cups
+    bootchart
   ];
 in
 {
@@ -34,6 +35,8 @@ in
   services.upower.enable = true;
   services.udev.enable = true;
   services.flatpak.enable = true;
+  services.bootchart.enable = true;
+  services.bootchart.stop.conditions = [ "service/ly/ready" ];
   services.flatpak.extraGroups = [ config.services.seatd.group ];
   services.power-profiles-daemon.enable = true;
   services.power-profiles-daemon.extraGroups = [
