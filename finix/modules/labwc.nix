@@ -85,8 +85,7 @@ in
       ln -sf -r $assets_dir/labwc/noctalia-shell/labwc $home/.config
       chown ${dots-user} $home/.config/labwc/ -R
 
-      mkdir -p $home/Pictures/Wallpapers
-      ln -sf -r $assets_dir/wallpapers/ $home/Pictures/
+      ln -sf -r $assets_dir/wallpapers/ $home/Pictures/Wallpapers
       chown ${dots-user} $home/Pictures/Wallpapers/ -R
 
       ln -sf -r $assets_dir/way-displays/ $home/.config
