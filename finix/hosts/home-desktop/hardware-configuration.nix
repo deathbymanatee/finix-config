@@ -75,15 +75,15 @@
       //Arch Linux
         protocol: linux
         kernel_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/vmlinuz-linux
-        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/initramfs-linux.img
         module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/amd-ucode.img
+        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/initramfs-linux.img
         cmdline: root=UUID=a1462fcd-734d-47c6-b114-0f743dc799a4 rw loglevel=3 amd_iommu=on iommu=pt amdgpu.dcdebugmask=0x12
 
       //Arch Linux LTS
         protocol: linux
         kernel_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/vmlinuz-linux-lts
-        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/initramfs-linux-lts.img
         module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/amd-ucode.img
+        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/initramfs-linux-lts.img
         cmdline: root=UUID=a1462fcd-734d-47c6-b114-0f743dc799a4 rw loglevel=3 amd_iommu=on iommu=pt amdgpu.dcdebugmask=0x12
   '';
 

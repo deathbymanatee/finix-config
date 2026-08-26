@@ -70,7 +70,6 @@ in
   # custom modules
   modules.labwc.enable = true;
   modules.steam.enable = true;
-  modules.vesktop.enable = true;
   modules.pro-audio.enable = true;
   modules.dev-tools.enable = true;
 

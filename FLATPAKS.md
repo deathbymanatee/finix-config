@@ -2,6 +2,10 @@
 
 Optional flatpaks are documented here. 
 
+## Add remote repository
+
+`sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo`
+
 ## spotify
 
 `flatpak install spotify`

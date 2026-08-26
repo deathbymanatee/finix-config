@@ -41,7 +41,7 @@ in
   # custom modules
   modules.lxqt.enable = true;
   modules.pipewire.enable = true;
-  modules.vesktop.enable = true;
+  modules.legcord.enable = true;
   modules.dev-tools.enable = true;
 
   /*

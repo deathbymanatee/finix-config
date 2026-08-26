@@ -51,7 +51,6 @@ in
   # custom modules
   modules.pipewire.enable = true;
   modules.labwc.enable = true;
-  modules.vesktop.enable = true;
   modules.dev-tools.enable = true;
 
   /*

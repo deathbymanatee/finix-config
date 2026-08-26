@@ -51,12 +51,12 @@
         <command>noctalia msg volume-mute</command>
       </action>
     </keybind>
-    <keybind key="XF86MonBrightnessUp">
+    <keybind key="XF86_MonBrightnessUp">
       <action name="Execute">
         <command>noctalia msg brightness-up</command>
       </action>
     </keybind>
-    <keybind key="XF86MonBrightnessDown">
+    <keybind key="XF86_MonBrightnessDown">
       <action name="Execute">
         <command>noctalia msg brightness-down</command>
       </action>

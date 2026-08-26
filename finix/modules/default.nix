@@ -6,7 +6,7 @@
     ./labwc.nix
     ./pipewire.nix
     ./steam.nix
-    ./vesktop.nix
+    ./legcord.nix
     ./pro-audio.nix
     ./dev-tools.nix
   ];

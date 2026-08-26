@@ -153,5 +153,11 @@ in
       pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk
     ];
+
+    environment.etc."xdg/xdg-desktop-portal-wlr/config".text = ''
+      [screencast]
+      chooser_type=dmenu
+      chooser_cmd=rofi -dmenu -p "Share"
+    '';
   };
 }
