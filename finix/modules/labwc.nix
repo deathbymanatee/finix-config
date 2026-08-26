@@ -86,7 +86,7 @@ in
       chown ${dots-user} $home/.config/labwc/ -R
 
       mkdir -p $home/Pictures/Wallpapers
-      ln -sf -r $assets_dir/wallpapers/ $home/Pictures/Wallpapers/ 
+      ln -sf -r $assets_dir/wallpapers/ $home/Pictures/
       chown ${dots-user} $home/Pictures/Wallpapers/ -R
 
       ln -sf -r $assets_dir/way-displays/ $home/.config

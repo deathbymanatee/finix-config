@@ -79,7 +79,9 @@ in
     inxi
     libva-utils
     xterm
+
     keepassxc
     librewolf-bin
+    libreoffice
   ];
 }
