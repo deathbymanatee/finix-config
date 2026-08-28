@@ -23,6 +23,7 @@ in
       docker
       brightnessctl
       power-profiles-daemon
+      virtualbox
     ]
     ++ communityModules;
 
@@ -44,6 +45,7 @@ in
   ];
 
   programs.brightnessctl.enable = true;
+  programs.virtualbox.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -73,6 +75,7 @@ in
       "tty"
       "docker"
       "storage"
+      "vboxusers"
       # comment out if using elogind
       config.services.seatd.group
     ];

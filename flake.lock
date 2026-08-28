@@ -2,11 +2,11 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1787604931,
-        "narHash": "sha256-u4pGrR06LMkaJviL6lKS7hzmpi6K4XBe9C6nsV5C5CQ=",
+        "lastModified": 1787694080,
+        "narHash": "sha256-5xJYZmz8bz7SPHseUdGGlJUPPDUZUmXpBb21jAlbjDw=",
         "owner": "finix-community",
         "repo": "community-modules",
-        "rev": "c0c28a064ae0e5f832b9a452ea4ed95da4d77166",
+        "rev": "6062166edac360360a29e2dd85ce7d80ab2aefc4",
         "type": "github"
       },
       "original": {

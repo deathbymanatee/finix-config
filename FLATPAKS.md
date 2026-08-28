@@ -25,3 +25,7 @@ requires:
 fix for the ugly adwaita icon showing instead of breeze cursors (my preferred cursor theme)
 
 `flatpak --user override com.discordapp.Discord --filesystem=/run/current-system/sw/share/icons/breeze_cursors/:ro`
+
+fix for incorrect timezone
+
+`flatpak override --user --env=TZ=Some/ICANN-Timezone com.discordapp.Discord`
