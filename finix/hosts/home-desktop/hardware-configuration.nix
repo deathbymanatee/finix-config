@@ -27,14 +27,7 @@
 
   hardware.firmware = with pkgs; [
     linux-firmware
-    ipw2200-firmware
-    rtl8192su-firmware
-    rt5677-firmware
-    rtl8761b-firmware
-    zd1211fw
     alsa-firmware
-    sof-firmware
-    libreelec-dvb-firmware
   ];
 
   fileSystems."crypted" = {
@@ -70,21 +63,12 @@
 
   swapDevices = [ ];
 
+  # maybe this will work... someday
   programs.limine.extraEntries = ''
     /+Arch Linux
-      //Arch Linux
-        protocol: linux
-        kernel_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/vmlinuz-linux
-        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/amd-ucode.img
-        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/initramfs-linux.img
-        cmdline: root=UUID=a1462fcd-734d-47c6-b114-0f743dc799a4 rw loglevel=3 amd_iommu=on iommu=pt amdgpu.dcdebugmask=0x12
-
-      //Arch Linux LTS
-        protocol: linux
-        kernel_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/vmlinuz-linux-lts
-        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/amd-ucode.img
-        module_path: guid(a1462fcd-734d-47c6-b114-0f743dc799a4):/boot/initramfs-linux-lts.img
-        cmdline: root=UUID=a1462fcd-734d-47c6-b114-0f743dc799a4 rw loglevel=3 amd_iommu=on iommu=pt amdgpu.dcdebugmask=0x12
+      //GRUB: Arch Linux
+        protocol: efi
+        path: uuid(bd1a0932-9169-414f-84bf-5a76264ef829):/EFI/grub/grubx64.efi
   '';
 
 }

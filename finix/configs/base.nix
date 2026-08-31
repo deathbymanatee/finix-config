@@ -58,6 +58,7 @@ in
     services.dhcpcd.enable = true;
     services.nftables.enable = true;
     services.chrony.enable = true;
+    services.getty.enable = true;
     services.nix-daemon = {
       enable = true;
       settings = {
@@ -111,6 +112,19 @@ in
         ncdu
         iputils
         iproute2
+        bzip2
+        cpio
+        curl
+        diffutils
+        gzip
+        xz
+        netcat
+        mkpasswd
+        zstd
+        gnupatch
+        gnused
+        gnutar
+        pciutils
       ];
   };
 }

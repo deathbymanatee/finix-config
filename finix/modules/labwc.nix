@@ -65,6 +65,7 @@ in
       services.dbus.packages = with pkgs; [
         thunar
         xfconf
+        vlc
       ];
 
       # gvfs polkit shenanigans

@@ -30,6 +30,7 @@ in
 
     environment.systemPackages = with pkgs; [
       protonup-qt
+      steam-run
     ];
   };
 }
