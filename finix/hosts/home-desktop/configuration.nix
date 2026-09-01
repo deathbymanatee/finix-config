@@ -97,6 +97,7 @@ in
     keepassxc
     librewolf-bin
     libreoffice
+    joplin-desktop
 
     qbittorrent
     gnupg
