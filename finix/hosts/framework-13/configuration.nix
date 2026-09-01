@@ -91,9 +91,11 @@ in
     libva-utils
     xterm
 
+    # these are pretty common, maybe make a wrapper?
     keepassxc
     librewolf-bin
     impala
     libreoffice
+    joplin-desktop
   ];
 }

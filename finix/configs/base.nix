@@ -27,6 +27,7 @@ in
     dhcpcd
     nftables
     chronyd
+    anacron
   ];
 
   options.configs.base = {
@@ -59,6 +60,7 @@ in
     services.nftables.enable = true;
     services.chrony.enable = true;
     services.getty.enable = true;
+    services.anacron.enable = true;
     services.nix-daemon = {
       enable = true;
       settings = {
