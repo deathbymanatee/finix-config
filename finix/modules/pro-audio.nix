@@ -46,7 +46,7 @@ in
       reaper-sws-extension
 
       # wine64 also???
-      winePackages.yabridge
+      wineWow64Packages.yabridge
       yabridgectl
 
       pkgs.easyeffects
