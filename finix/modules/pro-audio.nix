@@ -48,6 +48,7 @@ in
       # wine64 also???
       wineWow64Packages.yabridge
       yabridgectl
+      winetricks
 
       pkgs.easyeffects
       pkgs.calf

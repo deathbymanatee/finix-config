@@ -3,6 +3,7 @@
   <core>
     <gap>0</gap>
     <decoration>client</decoration>
+    <xwaylandPersistence>yes</xwaylandPersistence>
   </core>
   <!-- Thumbnail-based window switcher -->
   <windowSwitcher preview="no" outlines="yes">

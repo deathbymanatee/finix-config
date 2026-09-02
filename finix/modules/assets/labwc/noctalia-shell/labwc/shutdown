@@ -1,9 +1,10 @@
 pkill qpwgraph >/dev/null 2>&1 &
 pkill noctalia >/dev/null 2>&1 &
+clipse -kill >/dev/null 2>&1 &
+pkill wl-paste >/dev/null 2>&1 &
 sleep 0.5; pkill easyeffects >/dev/null 2>&1 &
 sleep 0.5; pkill wireplumber >/dev/null 2>&1 &
 sleep 0.5; pkill qpwgraph >/dev/null 2>&1 &
 pkill qjackctl >/dev/null 2>&1 &
 sleep 0.5; pkill pipewire-pulse >/dev/null 2>&1 &
 sleep 0.5; pkill pipewire >/dev/null 2>&1 &
-clipse -kill >/dev/null 2>&1 &
