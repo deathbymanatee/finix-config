@@ -44,9 +44,6 @@ in
         kdePackages.breeze-gtk
         kdePackages.qttools
         kdePackages.ark
-        kdePackages.okular
-        kdePackages.gwenview
-        vlc
         thunar
 
         # appearance
@@ -65,7 +62,6 @@ in
       services.dbus.packages = with pkgs; [
         thunar
         xfconf
-        vlc
       ];
 
       # gvfs polkit shenanigans
@@ -85,22 +81,22 @@ in
         });
       '';
 
-      # system.activation.scripts.dotfiles = lib.stringAfter [ "users" ] (''
-      #   home=/home/${dots-user}
-      #   assets_dir=$home/.config/finix-config/finix/modules/assets
+      system.activation.scripts.dotfiles = lib.stringAfter [ "users" ] (''
+        home=/home/${dots-user}
+        assets_dir=$home/.config/finix-config/finix/modules/assets
 
-      #   ln -sf -r $assets_dir/labwc/noctalia-shell/labwc $home/.config
-      #   chown ${dots-user} $home/.config/labwc/ -R
+        ln -sf $assets_dir/labwc/noctalia-shell/labwc $home/.config
+        chown ${dots-user} $home/.config/labwc/ -R
 
-      #   ln -sf -r $assets_dir/wallpapers/ $home/Pictures/Wallpapers
-      #   chown ${dots-user} $home/Pictures/Wallpapers/ -R
+        ln -sf $assets_dir/wallpapers $home/Pictures/Wallpapers
+        chown ${dots-user} $home/Pictures/Wallpapers/ -R
 
-      #   ln -sf -r $assets_dir/way-displays/ $home/.config
-      #   chown ${dots-user} $home/.config/way-displays/ -R
+        ln -sf $assets_dir/way-displays/ $home/.config
+        chown ${dots-user} $home/.config/way-displays/ -R
 
-      #   ln -sf -r $assets_dir/labwc/noctalia-shell/noctalia $home/.config
-      #   chown ${dots-user} $home/.config/noctalia/ -R
-      # '');
+        ln -sf $assets_dir/labwc/noctalia-shell/noctalia $home/.config
+        chown ${dots-user} $home/.config/noctalia/ -R
+      '');
 
       # ++ lib.optionalString (config.configs.graphical-wlroots.enableNoctalia) (''
       #   ln -sf -r $assets_dir/noctalia/ $home_dir/.config
@@ -108,8 +104,6 @@ in
       # '');
 
       users.groups.storage = { };
-
-      # TODO xdg.mime.defaultApplications and xdg.mime.addedAssociations
     }
   );
 }

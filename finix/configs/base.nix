@@ -126,6 +126,7 @@ in
         gnupatch
         gnused
         gnutar
+        keepassxc
         pciutils
       ];
   };

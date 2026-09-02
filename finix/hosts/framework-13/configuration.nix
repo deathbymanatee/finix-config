@@ -54,6 +54,7 @@ in
   modules.pipewire.enable = true;
   modules.labwc.enable = true;
   modules.dev-tools.enable = true;
+  modules.desktop-programs.enable = true;
 
   /*
     trying to do nixos-enter 'passwd' will result in 'command passwd not found',
@@ -90,12 +91,6 @@ in
     inxi
     libva-utils
     xterm
-
-    # these are pretty common, maybe make a wrapper?
-    keepassxc
-    librewolf-bin
     impala
-    libreoffice
-    joplin-desktop
   ];
 }

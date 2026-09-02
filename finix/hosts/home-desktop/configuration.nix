@@ -9,7 +9,6 @@ let
   communityModules = with inputs.community-modules.nixosModules; [
     cups
     bootchart
-    home-manager
   ];
 in
 {
@@ -66,18 +65,14 @@ in
     ];
   };
 
-  home-manager.users.ryan =
-    { config, ... }:
-    {
-      home.username = "ryan";
-      home.homeDirectory = "/home/ryan";
-      home.stateVersion = "26.05";
+  # home-manager.users.ryan =
+  #   { config, ... }:
+  #   {
+  #     home.username = "ryan";
+  #     home.homeDirectory = "/home/ryan";
+  #     home.stateVersion = "26.05";
 
-      home.file.".config/test-directory" = {
-        source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/finix-config/finix/modules/assets/test-directory/";
-        recursive = true;
-      };
-    };
+  #   };
 
   configs.base.dotfileManagement.user = "ryan";
 
@@ -94,12 +89,6 @@ in
     libva-utils
     xterm
 
-    keepassxc
-    librewolf-bin
-    libreoffice
-    joplin-desktop
-
-    qbittorrent
     gnupg
     pinentry-all
   ];

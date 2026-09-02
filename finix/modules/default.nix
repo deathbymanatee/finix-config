@@ -1,6 +1,7 @@
 {
   imports = [
     ./custom-packages.nix
+    ./desktop-programs.nix
     ./sway.nix
     ./lxqt.nix
     ./labwc.nix

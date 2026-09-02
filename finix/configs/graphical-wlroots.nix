@@ -102,6 +102,7 @@ in
         gammastep
         libnotify
         wlopm
+        xdg-utils
       ]
       ++ lib.optionals cfg.withNoctalia [ pkgs.noctalia ];
 
@@ -149,6 +150,10 @@ in
     xdg.mime.enable = true;
     xdg.icons.enable = true;
     xdg.autostart.enable = true;
+    xdg.terminal-exec.enable = true;
+    xdg.terminal-exec.settings = {
+      default = [ "foot.desktop" ];
+    };
     xdg.portal.portals = [
       pkgs.xdg-desktop-portal-wlr
       pkgs.xdg-desktop-portal-gtk

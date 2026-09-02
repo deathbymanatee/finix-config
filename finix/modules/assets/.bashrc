@@ -32,6 +32,7 @@ alias mt="maintenance"
 alias mtb="maintenance boot"
 alias rb="rebuild"
 alias rbb="rebuild boot"
+alias x11keepass="env QT_QPA_PLATFORM=xcb keepassxc"
 
 # custom nvim with fhs environment
 alias nvim="nvim-fhs"

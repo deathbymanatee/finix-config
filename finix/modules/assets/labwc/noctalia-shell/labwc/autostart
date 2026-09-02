@@ -1,6 +1,5 @@
 way-displays >/dev/null 2>&1 &
 clipse -listen >/dev/null 2>&1 &
-wl-paste --type text --watch xclip -selection clipboard >/dev/null 2>&1 &
 noctalia >/dev/null 2>&1 &
 gammastep -O 4000 >/dev/null 2>&1 &
 pipewire 2>&1 &
@@ -9,3 +8,4 @@ sleep 0.5; pipewire-pulse 2>&1 &
 sleep 0.5; easyeffects &
 sleep 0.5; qpwgraph &
 sleep 0.5; qjackctl &
+wl-paste --type text --watch xclip -selection clipboard >/dev/null 2>&1 &
