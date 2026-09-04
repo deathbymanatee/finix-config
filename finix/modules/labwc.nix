@@ -29,6 +29,7 @@ in
       thunar = pkgs.thunar.override {
         thunarPlugins = [
           pkgs.thunar-volman
+          pkgs.thunar-media-tags-plugin
           pkgs.thunar-archive-plugin
         ];
       };
@@ -56,6 +57,9 @@ in
         xfconf
         gsettings-desktop-schemas
         fix-gtk-buttons
+
+        glib
+        libmtp
       ];
 
       services.gvfs.enable = true;

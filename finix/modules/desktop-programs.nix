@@ -22,6 +22,7 @@ in
       kdePackages.okular
       vlc
       qbittorrent
+      thunderbird
     ];
   };
 }

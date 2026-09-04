@@ -11,6 +11,42 @@
 }:
 let
   cfg = config.configs.base;
+  keepassxc = pkgs.symlinkJoin {
+    name = "keepassxc-x11-desktop";
+    paths = [ pkgs.keepassxc ];
+    # Use postBuild to overwrite the desktop entry inside this symlink tree
+    postBuild = ''
+      rm -f $out/share/applications/org.keepassxc.KeePassXC.desktop
+      mkdir -p $out/share/applications
+      cat <<EOF > $out/share/applications/org.keepassxc.KeePassXC.desktop
+      [Desktop Entry]
+      Name=KeePassXC
+      GenericName=Password Manager
+      Exec=keepassxc -platform xcb %f
+      Icon=keepassxc
+      Terminal=false
+      Type=Application
+      Version=1.0
+      Categories=Utility;Security;
+      MimeType=application/x-keepass2;
+      StartupWMClass=keepassxc
+      EOF
+    '';
+  };
+  neovim-fhs =
+    {
+      buildFHSEnv,
+      writeShellScript,
+      neovim,
+    }:
+    buildFHSEnv {
+      name = "nvim-fhs";
+      targetPkgs = pkgs: [ neovim ];
+
+      runScript = writeShellScript "nvim-fhs.sh" ''
+        exec ${neovim}/bin/nvim "$@"
+      '';
+    };
 
 in
 {
@@ -89,22 +125,6 @@ in
     environment.systemPackages =
       with pkgs;
       # https://wiki.nixos.org/wiki/Neovim#Troubleshooting
-      let
-        neovim-fhs =
-          {
-            buildFHSEnv,
-            writeShellScript,
-            neovim,
-          }:
-          buildFHSEnv {
-            name = "nvim-fhs";
-            targetPkgs = pkgs: [ neovim ];
-
-            runScript = writeShellScript "nvim-fhs.sh" ''
-              exec ${neovim}/bin/nvim "$@"
-            '';
-          };
-      in
       [
         (pkgs.callPackage neovim-fhs { })
         wget
@@ -128,6 +148,8 @@ in
         gnutar
         keepassxc
         pciutils
+        glib
+        usbutils
       ];
   };
 }

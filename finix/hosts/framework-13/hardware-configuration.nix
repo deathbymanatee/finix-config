@@ -5,7 +5,6 @@
   config,
   lib,
   pkgs,
-  modulesPath,
   ...
 }:
 
@@ -28,14 +27,7 @@
 
   hardware.firmware = with pkgs; [
     linux-firmware
-    ipw2200-firmware
-    rtl8192su-firmware
-    rt5677-firmware
-    rtl8761b-firmware
-    zd1211fw
     alsa-firmware
-    sof-firmware
-    libreelec-dvb-firmware
   ];
 
   fileSystems."/" = {

@@ -64,22 +64,27 @@
     </keybind>
     <keybind key="XF86AudioPlay">
       <action name="Execute">
-        <command>noctalia msg media toggle</command>
+        <command>playerctl play-pause</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPause">
       <action name="Execute">
-        <command>noctalia msg media toggle</command>
+        <command>playerctl play-pause</command>
       </action>
     </keybind>
     <keybind key="XF86AudioNext">
       <action name="Execute">
-        <command>noctalia msg media next</command>
+        <command>playerctl next</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPrev">
       <action name="Execute">
-        <command>noctalia msg media previous</command>
+        <command>playerctl prev</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioStop">
+      <action name="Execute">
+        <command>playerctl stop</command>
       </action>
     </keybind>
     <!-- screenshot keys -->
