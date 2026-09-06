@@ -57,12 +57,14 @@ in
         xfconf
         gsettings-desktop-schemas
         fix-gtk-buttons
-
-        glib
-        libmtp
+        android-tools
       ];
 
       services.gvfs.enable = true;
+      services.udev.packages = [
+        pkgs.libmtp.out
+        (pkgs.callPackage ./android-udev-rules.nix { })
+      ];
       services.dbus.packages = with pkgs; [
         thunar
         xfconf

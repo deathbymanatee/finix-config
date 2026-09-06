@@ -36,6 +36,7 @@ in
   services.cups.enable = true;
   services.bootchart.enable = true;
   services.bootchart.stop.conditions = [ "service/ly/ready" ];
+  services.udev.packages = [ pkgs.android-tools ];
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -60,10 +61,13 @@ in
       "render"
       "docker"
       "storage"
+      "adbusers"
       # comment out if using elogind
       config.services.seatd.group
     ];
   };
+
+  users.groups.adbusers = { };
 
   # home-manager.users.ryan =
   #   { config, ... }:
@@ -81,6 +85,7 @@ in
   modules.steam.enable = true;
   modules.pro-audio.enable = true;
   modules.dev-tools.enable = true;
+  modules.desktop-programs.enable = true;
 
   # lagniappe packages
   environment.systemPackages = with pkgs; [
