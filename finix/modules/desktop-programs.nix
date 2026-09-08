@@ -23,6 +23,7 @@ in
       vlc
       qbittorrent
       thunderbird
+      appimage-run
     ];
   };
 }
