@@ -77,10 +77,13 @@ in
       "docker"
       "storage"
       "vboxusers"
+      "adbusers"
       # comment out if using elogind
       config.services.seatd.group
     ];
   };
+
+  users.groups.adbusers = { };
 
   configs.base.dotfileManagement.user = "ryan";
 
@@ -92,5 +95,7 @@ in
     libva-utils
     xterm
     impala
+
+    android-tools
   ];
 }
