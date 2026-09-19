@@ -24,6 +24,8 @@ in
       qbittorrent
       thunderbird
       appimage-run
+      cheese
+      loupe
     ];
   };
 }

@@ -26,6 +26,8 @@ if [ -n "$PS1" ]; then
   alias -- ls='ls --color=tty'
 fi
 
+eval $(ssh-agent)
+
 alias poweroff="sudo poweroff"
 alias reboot="sudo reboot"
 alias mt="maintenance"

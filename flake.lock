@@ -2,11 +2,11 @@
   "nodes": {
     "community-modules": {
       "locked": {
-        "lastModified": 1788308969,
-        "narHash": "sha256-oLiE1NEKsu83a/eV5JM3CoIkGy9kVEKkQ9Z/QlgLjC0=",
+        "lastModified": 1789495304,
+        "narHash": "sha256-QVzLjx/57OyPC9aFUdJOvXTO6vVgbxRHQjGzu3bwUOY=",
         "owner": "finix-community",
         "repo": "community-modules",
-        "rev": "87e22f81c1cb800be7a07705b69af18f28b7ede6",
+        "rev": "d3e5474e3d40081ef49ffa2c9dcc91aaf7c8a9f5",
         "type": "github"
       },
       "original": {
@@ -17,26 +17,27 @@
     },
     "finix": {
       "locked": {
-        "lastModified": 1788621485,
-        "narHash": "sha256-5PcBJeK8tETK6pk66aR7K+bvk421gnBkefnKtgVATsU=",
-        "owner": "finix-community",
+        "lastModified": 1789831598,
+        "narHash": "sha256-pfOE0fgYhECQDc4bM/UbfnD7IaN03C4e2IETslpcOrA=",
+        "owner": "deathbymanatee",
         "repo": "finix",
-        "rev": "969a84cce88220a4f02a9aa2066dd7d07eab0eea",
+        "rev": "a863957a57e2507ccb758bbfe9f9b677d1be97a9",
         "type": "github"
       },
       "original": {
-        "owner": "finix-community",
+        "owner": "deathbymanatee",
+        "ref": "modules/udev/systemd-udev",
         "repo": "finix",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1788614874,
-        "narHash": "sha256-7QYjT2vHLuX9Z1pdxHXDKCbh1CR3D/2rywB9Tx0MPRg=",
+        "lastModified": 1789684949,
+        "narHash": "sha256-ZKhUe/2IJUq1JhKxKMu8rbkgSGmPP2ZCqlIPn40aGCM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c043004d1c6985732bcc1cbc5a9c9aecbbb4e0f0",
+        "rev": "e554fab72f81915600f3f449b786fd9af40439a5",
         "type": "github"
       },
       "original": {

@@ -69,14 +69,7 @@ in
 
   users.groups.adbusers = { };
 
-  # home-manager.users.ryan =
-  #   { config, ... }:
-  #   {
-  #     home.username = "ryan";
-  #     home.homeDirectory = "/home/ryan";
-  #     home.stateVersion = "26.05";
-
-  #   };
+  providers.firewall.allowedTCPPorts = [ 22 ];
 
   configs.base.dotfileManagement.user = "ryan";
 

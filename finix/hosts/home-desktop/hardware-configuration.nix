@@ -19,7 +19,7 @@
     "dm_crypt"
   ];
 
-  boot.kernelParams = [ ];
+  boot.kernelParams = [ "loglevel=0" ];
   boot.kernelModules = [
     "kvm-amd"
     "snd_seq"
