@@ -17,9 +17,10 @@ in
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      dhcpcd
       flatpak
       docker
+      networkmanager
+      bluetooth
     ]
     ++ communityModules;
 
@@ -37,6 +38,9 @@ in
   services.bootchart.enable = true;
   services.bootchart.stop.conditions = [ "service/ly/ready" ];
   services.udev.packages = [ pkgs.android-tools ];
+  services.dhcpcd.enable = false;
+  services.networkmanager.enable = true;
+  services.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -62,6 +66,7 @@ in
       "docker"
       "storage"
       "adbusers"
+      "networkmanager"
       # comment out if using elogind
       config.services.seatd.group
     ];

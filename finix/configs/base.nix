@@ -92,7 +92,7 @@ in
     services.sysklogd.enable = true;
     services.openssh.enable = true;
     services.rtkit.enable = true;
-    services.dhcpcd.enable = true;
+    services.dhcpcd.enable = lib.mkDefault true;
     services.nftables.enable = true;
     services.chrony.enable = true;
     services.getty.enable = true;
