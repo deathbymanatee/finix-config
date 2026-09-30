@@ -3,9 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    finix.url = "github:deathbymanatee/finix/modules/udev/systemd-udev";
+    # finix.url = "github:deathbymanatee/finix/modules/udev/systemd-udev";
     # finix.url = "git+file:///home/ryan/Projects/Nix/finix-fork";
-    # finix.url = "github:finix-community/finix";
+    finix.url = "github:finix-community/finix";
     community-modules.url = "github:finix-community/community-modules";
   };
 
