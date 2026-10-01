@@ -34,7 +34,6 @@ in
   services.cups.enable = true;
   services.upower.enable = true;
   services.udev.enable = true;
-  services.udev.package = pkgs.callPackage ../../pkgs/eudev { };
   services.flatpak.enable = true;
   services.bootchart.enable = true;
   services.bootchart.stop.conditions = [ "service/ly/ready" ];
